@@ -1,37 +1,65 @@
+######################################################################################
+########################### Presets CMakeList ########################################
+######################################################################################
+
 cmake_minimum_required(VERSION 3.0)
-
-project(ImacGL)
-
 add_definitions(-std=c++11)
 
-set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/CMake)
+######################################################################################
+########################### Configuration project  ####################################
+######################################################################################
+
+project(World IMaker)
+
+message(${PROJECT_NAME})
+
+set(EXECUTABLE_OUTPUT_PATH bin/${CMAKE_BUILD_TYPE})
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 
 set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
 
-#find_package(SDL REQUIRED)
-find_package(SDL2 REQUIRED)
+######################################################################################
+################################## Project files  #####################################
+######################################################################################
+
+file(GLOB_RECURSE SOURCES_FILES src/*)
+file(GLOB_RECURSE HEADER_FILES include/*)
+file(GLOB_RECURSE SHADERS_FILES assets/shaders/*.glsl)
+
+
+
+######################################################################################
+################################## Dependencies  #####################################
+######################################################################################
+
 find_package(OpenGL REQUIRED)
+find_package(SDL2 REQUIRED)
 find_package(GLEW REQUIRED)
 
-include_directories(${SDL2_INCLUDE_DIRS})
+######################################################################################
+###################################### Includes ######################################
+######################################################################################
 
+#### --------------- Necessary in order to run on Apple's laptop ---------------- ####
 if (APPLE)
     include_directories(/usr/local/include)
 endif (APPLE)
 
-# Pour gérer un bug a la fac, a supprimer sur machine perso:
-#set(OPENGL_LIBRARIES /usr/lib/x86_64-linux-gnu/libGL.so.1)
+include_directories(
+        ${SDL2_INCLUDE_DIRS}
+        ${OPENGL_INCLUDE_DIR}
+        ${GLEW_INCLUDE_DIRS}
+        libs/glimac/include
+        libs
+        )
 
-include_directories(${SDL2_INCLUDE_DIRS} ${OPENGL_INCLUDE_DIR} ${GLEW_INCLUDE_DIRS} glimac/include third-party/include)
+set(ALL_LIBRARIES libs/glimac ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES} ${GLEW_LIBRARY})
 
-set(ALL_LIBRARIES glimac ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES} ${GLEW_LIBRARY})
 
-add_subdirectory(glimac)
+######################################################################################
+########################### Declaration of .exe  #####################################
+######################################################################################
 
-file(GLOB TP_DIRECTORIES "TP*")
-
-foreach(TP ${TP_DIRECTORIES})
-    add_subdirectory(${TP})
-endforeach()
+add_executable(${PROJECT_NAME} $(SOURCES_FILES) $(HEADER_FILES) $(SHADERS_FILES))
+target_link_libraries(${PROJECT_NAME} ${ALL_LIBRARIES})
 
