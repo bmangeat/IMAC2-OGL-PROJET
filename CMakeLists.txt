@@ -39,13 +39,13 @@ find_package(GLEW REQUIRED)
 #### --------------- Necessary in order to run on Apple's laptop ---------------- ####
 if (APPLE)
     include_directories(/usr/local/include)
+    set(GLEW_LIBRARY /usr/local/lib/libGLEW.dylib)
 endif (APPLE)
 
 include_directories(
         ${SDL2_INCLUDE_DIRS}
         ${OPENGL_INCLUDE_DIR}
         ${GLEW_INCLUDE_DIRS}
-        #libs/glimac/include
         libs
         )
 
