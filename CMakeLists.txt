@@ -9,9 +9,7 @@ add_definitions(-std=c++11)
 ########################### Configuration project  ####################################
 ######################################################################################
 
-project(World IMaker)
-
-message(${PROJECT_NAME})
+project(WorldIMaker)
 
 set(EXECUTABLE_OUTPUT_PATH bin/${CMAKE_BUILD_TYPE})
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
@@ -22,11 +20,9 @@ set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
 ################################## Project files  #####################################
 ######################################################################################
 
-file(GLOB_RECURSE SOURCES_FILES src/*)
-file(GLOB_RECURSE HEADER_FILES include/*)
+file(GLOB_RECURSE SOURCES_FILES src/*.cpp)
+file(GLOB_RECURSE HEADER_FILES include/*.hpp)
 file(GLOB_RECURSE SHADERS_FILES assets/shaders/*.glsl)
-
-
 
 ######################################################################################
 ################################## Dependencies  #####################################
@@ -53,13 +49,14 @@ include_directories(
         libs
         )
 
-set(ALL_LIBRARIES libs/glimac ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES} ${GLEW_LIBRARY})
+set(ALL_LIBRARIES ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES} ${GLEW_LIBRARY})
+add_subdirectory(libs/glimac)
 
 
 ######################################################################################
 ########################### Declaration of .exe  #####################################
 ######################################################################################
 
-add_executable(${PROJECT_NAME} $(SOURCES_FILES) $(HEADER_FILES) $(SHADERS_FILES))
+add_executable(${PROJECT_NAME} ${SOURCES_FILES} ${HEADER_FILES} ${SHADERS_FILES})
 target_link_libraries(${PROJECT_NAME} ${ALL_LIBRARIES})
 
