@@ -1,6 +1,8 @@
-#include <../include/SDLWindowManager.hpp>
+#include <../libs/glimac/include/SDLWindowManager.hpp>
 #include <GL/glew.h>
 #include <iostream>
+#include "../include/Test.hpp"
+
 
 using namespace glimac;
 
@@ -18,6 +20,9 @@ int main(int argc, char** argv) {
     std::cout << "OpenGL Version : " << glGetString(GL_VERSION) << std::endl;
     std::cout << "GLEW Version : " << glewGetString(GLEW_VERSION) << std::endl;
 
+
+    Hello text;
+    std::cout << "text = " << text.get_text() << std::endl;
     /*********************************
      * HERE SHOULD COME THE INITIALIZATION CODE
      *********************************/

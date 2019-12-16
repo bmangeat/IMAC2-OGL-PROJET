@@ -45,11 +45,11 @@ include_directories(
         ${SDL2_INCLUDE_DIRS}
         ${OPENGL_INCLUDE_DIR}
         ${GLEW_INCLUDE_DIRS}
-        libs/glimac/include
+        #libs/glimac/include
         libs
         )
 
-set(ALL_LIBRARIES ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES} ${GLEW_LIBRARY})
+set(ALL_LIBRARIES glimac ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES} ${GLEW_LIBRARY})
 add_subdirectory(libs/glimac)
 
 
