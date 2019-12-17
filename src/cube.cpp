@@ -18,15 +18,8 @@
         for(size_t j = 0; j < 8; ++j) {
             glimac::ShapeVertex vertex;
             
-            if (j==0) {
-                vertex.texCoords.x = 0;
-                vertex.texCoords.y = 1;
-            }
-            else {
-                vertex.texCoords.x += 1/8;
-                vertex.texCoords.y -= 1/8;
-                std::cout << "coucou" << std::endl;
-            }
+            vertex.texCoords.x = 0;
+            vertex.texCoords.y = 1;
 
             vertex.normal.x = tmp_vertices[j].x;
             vertex.normal.y = tmp_vertices[j].y;
