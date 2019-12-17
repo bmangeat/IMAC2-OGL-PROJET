@@ -1,0 +1,42 @@
+[
+{
+  "directory": "/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/cmake-build-debug",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++   -I/usr/local/include -I/usr/local/Cellar/sdl2/2.0.10/include/SDL2 -F/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/System/Library/Frameworks -I/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=c++11 -o CMakeFiles/WorldIMaker.dir/src/Test.cpp.o -c /Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/src/Test.cpp",
+  "file": "/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/src/Test.cpp"
+},
+{
+  "directory": "/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/cmake-build-debug",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++   -I/usr/local/include -I/usr/local/Cellar/sdl2/2.0.10/include/SDL2 -F/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/System/Library/Frameworks -I/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=c++11 -o CMakeFiles/WorldIMaker.dir/src/main.cpp.o -c /Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/src/main.cpp",
+  "file": "/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/src/main.cpp"
+},
+{
+  "directory": "/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/cmake-build-debug/libs/glimac",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++   -I/usr/local/include -I/usr/local/Cellar/sdl2/2.0.10/include/SDL2 -F/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/System/Library/Frameworks -I/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs -I/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs/glimac/include  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=c++11 -o CMakeFiles/glimac.dir/src/Geometry.cpp.o -c /Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs/glimac/src/Geometry.cpp",
+  "file": "/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs/glimac/src/Geometry.cpp"
+},
+{
+  "directory": "/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/cmake-build-debug/libs/glimac",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++   -I/usr/local/include -I/usr/local/Cellar/sdl2/2.0.10/include/SDL2 -F/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/System/Library/Frameworks -I/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs -I/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs/glimac/include  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=c++11 -o CMakeFiles/glimac.dir/src/Image.cpp.o -c /Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs/glimac/src/Image.cpp",
+  "file": "/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs/glimac/src/Image.cpp"
+},
+{
+  "directory": "/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/cmake-build-debug/libs/glimac",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++   -I/usr/local/include -I/usr/local/Cellar/sdl2/2.0.10/include/SDL2 -F/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/System/Library/Frameworks -I/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs -I/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs/glimac/include  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=c++11 -o CMakeFiles/glimac.dir/src/Program.cpp.o -c /Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs/glimac/src/Program.cpp",
+  "file": "/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs/glimac/src/Program.cpp"
+},
+{
+  "directory": "/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/cmake-build-debug/libs/glimac",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++   -I/usr/local/include -I/usr/local/Cellar/sdl2/2.0.10/include/SDL2 -F/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/System/Library/Frameworks -I/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs -I/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs/glimac/include  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=c++11 -o CMakeFiles/glimac.dir/src/SDLWindowManager.cpp.o -c /Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs/glimac/src/SDLWindowManager.cpp",
+  "file": "/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs/glimac/src/SDLWindowManager.cpp"
+},
+{
+  "directory": "/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/cmake-build-debug/libs/glimac",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++   -I/usr/local/include -I/usr/local/Cellar/sdl2/2.0.10/include/SDL2 -F/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/System/Library/Frameworks -I/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs -I/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs/glimac/include  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=c++11 -o CMakeFiles/glimac.dir/src/Shader.cpp.o -c /Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs/glimac/src/Shader.cpp",
+  "file": "/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs/glimac/src/Shader.cpp"
+},
+{
+  "directory": "/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/cmake-build-debug/libs/glimac",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++   -I/usr/local/include -I/usr/local/Cellar/sdl2/2.0.10/include/SDL2 -F/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/System/Library/Frameworks -I/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs -I/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs/glimac/include  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=c++11 -o CMakeFiles/glimac.dir/src/tiny_obj_loader.cpp.o -c /Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs/glimac/src/tiny_obj_loader.cpp",
+  "file": "/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs/glimac/src/tiny_obj_loader.cpp"
+}
+]
