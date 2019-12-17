@@ -60,3 +60,5 @@ add_subdirectory(libs/glimac)
 add_executable(${PROJECT_NAME} ${SOURCES_FILES} ${HEADER_FILES} ${SHADERS_FILES})
 target_link_libraries(${PROJECT_NAME} ${ALL_LIBRARIES})
 
+#### --------------- Necessary in order to recover the assets folder ---------------- ####
+file(COPY assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
