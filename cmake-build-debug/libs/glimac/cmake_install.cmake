@@ -1,4 +1,4 @@
-# Install script for directory: /Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/libs/glimac
+# Install script for directory: /Users/brice/Documents/IMAC/projet-imaker/IMAC2-OGL-PROJET/libs/glimac
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

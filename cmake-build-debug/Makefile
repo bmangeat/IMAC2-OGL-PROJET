@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = "/Users/brice/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/193.5233.103/CLion.app/Contents/bin/cmake/mac/bin/cmake"
+CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = "/Users/brice/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/193.5233.103/CLion.app/Contents/bin/cmake/mac/bin/cmake" -E remove -f
+RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET
+CMAKE_SOURCE_DIR = /Users/brice/Documents/IMAC/projet-imaker/IMAC2-OGL-PROJET
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/brice/Documents/IMAC/projet-imaker/IMAC2-OGL-PROJET/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-P
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	"/Users/brice/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/193.5233.103/CLion.app/Contents/bin/cmake/mac/bin/cmake" -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	"/Users/brice/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/193.5233.103/CLion.app/Contents/bin/cmake/mac/bin/cmake" -E echo No\ interactive\ CMake\ dialog\ available.
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/cmake-build-debug/CMakeFiles /Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/brice/Documents/IMAC/projet-imaker/IMAC2-OGL-PROJET/cmake-build-debug/CMakeFiles /Users/brice/Documents/IMAC/projet-imaker/IMAC2-OGL-PROJET/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/brice/Documents/IMAC/projet-imaker/IMAC2-OGL-PROJET/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -136,32 +136,45 @@ glimac/fast:
 	$(MAKE) -f libs/glimac/CMakeFiles/glimac.dir/build.make libs/glimac/CMakeFiles/glimac.dir/build
 .PHONY : glimac/fast
 
-src/Test.o: src/Test.cpp.o
+#=============================================================================
+# Target rules for targets named html
 
-.PHONY : src/Test.o
+# Build rule for target.
+html: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 html
+.PHONY : html
+
+# fast build rule for target.
+html/fast:
+	$(MAKE) -f doc/CMakeFiles/html.dir/build.make doc/CMakeFiles/html.dir/build
+.PHONY : html/fast
+
+src/cube.o: src/cube.cpp.o
+
+.PHONY : src/cube.o
 
 # target to build an object file
-src/Test.cpp.o:
-	$(MAKE) -f CMakeFiles/WorldIMaker.dir/build.make CMakeFiles/WorldIMaker.dir/src/Test.cpp.o
-.PHONY : src/Test.cpp.o
+src/cube.cpp.o:
+	$(MAKE) -f CMakeFiles/WorldIMaker.dir/build.make CMakeFiles/WorldIMaker.dir/src/cube.cpp.o
+.PHONY : src/cube.cpp.o
 
-src/Test.i: src/Test.cpp.i
+src/cube.i: src/cube.cpp.i
 
-.PHONY : src/Test.i
+.PHONY : src/cube.i
 
 # target to preprocess a source file
-src/Test.cpp.i:
-	$(MAKE) -f CMakeFiles/WorldIMaker.dir/build.make CMakeFiles/WorldIMaker.dir/src/Test.cpp.i
-.PHONY : src/Test.cpp.i
+src/cube.cpp.i:
+	$(MAKE) -f CMakeFiles/WorldIMaker.dir/build.make CMakeFiles/WorldIMaker.dir/src/cube.cpp.i
+.PHONY : src/cube.cpp.i
 
-src/Test.s: src/Test.cpp.s
+src/cube.s: src/cube.cpp.s
 
-.PHONY : src/Test.s
+.PHONY : src/cube.s
 
 # target to generate assembly for a file
-src/Test.cpp.s:
-	$(MAKE) -f CMakeFiles/WorldIMaker.dir/build.make CMakeFiles/WorldIMaker.dir/src/Test.cpp.s
-.PHONY : src/Test.cpp.s
+src/cube.cpp.s:
+	$(MAKE) -f CMakeFiles/WorldIMaker.dir/build.make CMakeFiles/WorldIMaker.dir/src/cube.cpp.s
+.PHONY : src/cube.cpp.s
 
 src/main.o: src/main.cpp.o
 
@@ -200,9 +213,10 @@ help:
 	@echo "... edit_cache"
 	@echo "... WorldIMaker"
 	@echo "... glimac"
-	@echo "... src/Test.o"
-	@echo "... src/Test.i"
-	@echo "... src/Test.s"
+	@echo "... html"
+	@echo "... src/cube.o"
+	@echo "... src/cube.i"
+	@echo "... src/cube.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

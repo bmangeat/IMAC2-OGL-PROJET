@@ -1,4 +1,4 @@
-# Install script for directory: /Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET
+# Install script for directory: /Users/brice/Documents/IMAC/projet-imaker/IMAC2-OGL-PROJET
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,7 +34,8 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/cmake-build-debug/libs/glimac/cmake_install.cmake")
+  include("/Users/brice/Documents/IMAC/projet-imaker/IMAC2-OGL-PROJET/cmake-build-debug/libs/glimac/cmake_install.cmake")
+  include("/Users/brice/Documents/IMAC/projet-imaker/IMAC2-OGL-PROJET/cmake-build-debug/doc/cmake_install.cmake")
 
 endif()
 
@@ -46,5 +47,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/brice/Documents/IMAC/projet-imaker/IMAC2-OGL-PROJET/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

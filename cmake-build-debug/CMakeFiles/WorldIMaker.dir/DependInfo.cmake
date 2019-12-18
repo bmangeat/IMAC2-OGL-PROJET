@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/src/Test.cpp" "/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/cmake-build-debug/CMakeFiles/WorldIMaker.dir/src/Test.cpp.o"
-  "/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/src/main.cpp" "/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/cmake-build-debug/CMakeFiles/WorldIMaker.dir/src/main.cpp.o"
+  "/Users/brice/Documents/IMAC/projet-imaker/IMAC2-OGL-PROJET/src/cube.cpp" "/Users/brice/Documents/IMAC/projet-imaker/IMAC2-OGL-PROJET/cmake-build-debug/CMakeFiles/WorldIMaker.dir/src/cube.cpp.o"
+  "/Users/brice/Documents/IMAC/projet-imaker/IMAC2-OGL-PROJET/src/main.cpp" "/Users/brice/Documents/IMAC/projet-imaker/IMAC2-OGL-PROJET/cmake-build-debug/CMakeFiles/WorldIMaker.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 
@@ -13,13 +13,14 @@ set(CMAKE_CXX_COMPILER_ID "AppleClang")
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/local/include"
   "/usr/local/Cellar/sdl2/2.0.10/include/SDL2"
-  "/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/OpenGL.framework"
+  "/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/OpenGL.framework"
+  "/usr/local/include/eigen3"
   "../libs"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/Users/brice/Documents/COURS/OpenGL/Voxel_Project/IMAC2-OGL-PROJET/cmake-build-debug/libs/glimac/CMakeFiles/glimac.dir/DependInfo.cmake"
+  "/Users/brice/Documents/IMAC/projet-imaker/IMAC2-OGL-PROJET/cmake-build-debug/libs/glimac/CMakeFiles/glimac.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.
