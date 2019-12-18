@@ -33,11 +33,32 @@ int main(int argc, char** argv) {
 
     //Loading shaders
     FilePath applicationPath(argv[0]);
-    Cube firstCube(applicationPath);
-        glimac::Program program = loadProgram(applicationPath.dirPath() + "../assets/shaders/cubeShader/3D.vs.glsl",
-                                        applicationPath.dirPath() + "../assets/shaders/cubeShader/text3D.fs.glsl");
-        program.use();
 
+    //first position
+        std::vector<glm::vec3> tmp_vertices = { 
+            glm::vec3(-0.5f,0.5f,-0.5f),
+            glm::vec3(0.5f,0.5f,-0.5f),
+            glm::vec3(-0.5f,0.5f,0.5f),
+            glm::vec3(0.5f,0.5f,0.5f),
+
+            glm::vec3(-0.5f,-0.5f,-0.5f),
+            glm::vec3(0.5f,-0.5f,-0.5f),
+            glm::vec3(-0.5f,-0.5f,0.5f),
+            glm::vec3(0.5f,-0.5f,0.5f)
+        };
+
+    //init Cube
+    Cube firstCube(tmp_vertices);
+
+    Cube secondCube(tmp_vertices);
+
+
+    //init program
+    firstCube.setCubeProgram(applicationPath);
+
+    secondCube.setCubeProgram(applicationPath);
+    
+    
     std::cout << "OpenGL Version : " << glGetString(GL_VERSION) << std::endl;
     std::cout << "GLEW Version : " << glewGetString(GLEW_VERSION) << std::endl;
 
@@ -46,9 +67,9 @@ int main(int argc, char** argv) {
      *********************************/
 
     //definition locations variables uniformes
-    GLint uMVPMatrix = glGetUniformLocation(program.getGLId(), "uMVPMatrix");
-    GLint uMVMatrix = glGetUniformLocation(program.getGLId(), "uMVMatrix");
-    GLint uNormalMatrix = glGetUniformLocation(program.getGLId(), "uNormalMatrix");
+    GLint uMVPMatrix = glGetUniformLocation(firstCube.CubeProgram.getGLId(), "uMVPMatrix");
+    GLint uMVMatrix = glGetUniformLocation(firstCube.CubeProgram.getGLId(), "uMVMatrix");
+    GLint uNormalMatrix = glGetUniformLocation(firstCube.CubeProgram.getGLId(), "uNormalMatrix");
 
     // GPU checks depth
     glEnable(GL_DEPTH_TEST);
@@ -107,6 +128,26 @@ int main(int argc, char** argv) {
                     if (e.key.keysym.sym == SDLK_d) {
                         camera.moveLeft(1.f);
                     }
+
+                    // To deplace
+                    if (e.key.keysym.sym == SDLK_g) {
+                        firstCube.moveUp(1.f);
+                    }
+                    if (e.key.keysym.sym == SDLK_b) {
+                        firstCube.moveUp(-1.f);
+                    }
+                    if (e.key.keysym.sym == SDLK_v) {
+                        firstCube.moveLeft(-1.f);
+                    }
+                    if (e.key.keysym.sym == SDLK_n) {
+                        firstCube.moveLeft(1.f);
+                    }
+                    if (e.key.keysym.sym == SDLK_f) {
+                        firstCube.moveDepth(-1.f);
+                    }
+                    if (e.key.keysym.sym == SDLK_h) {
+                        firstCube.moveDepth(1.f);
+                    }
                     break;
 
                 case SDL_KEYUP:
@@ -124,20 +165,21 @@ int main(int argc, char** argv) {
 
         MVMatrix = camera.getViewMatrix();
 
-        //Cube
-
         //MVMatrix = rotate(MVMatrix, windowManager.getTime(), vec3(0, 1, 0));
         glUniformMatrix4fv(uMVMatrix, 1, GL_FALSE, value_ptr(MVMatrix));
         glUniformMatrix4fv(uNormalMatrix, 1, GL_FALSE, value_ptr(transpose(inverse(MVMatrix))));
         glUniformMatrix4fv(uMVPMatrix, 1, GL_FALSE, value_ptr(ProjMatrix * MVMatrix));
 
+        firstCube.actualizeVertex();
         firstCube.drawCube();
+        secondCube.drawCube();
+        
 
         // Update the display
         windowManager.swapBuffers();
     }
     
     firstCube.deleteBuffer();
-
+    
     return EXIT_SUCCESS;
 }

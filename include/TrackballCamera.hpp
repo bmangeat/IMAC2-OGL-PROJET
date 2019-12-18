@@ -1,5 +1,7 @@
 #include <GL/glew.h>
 #include "../libs/glimac/include/glm.hpp"
+#include "../libs/glimac/include/Program.hpp"
+#include "../libs/glimac/include/FilePath.hpp"
 
 class TrackballCamera 
 {
@@ -8,6 +10,9 @@ class TrackballCamera
         float m_sDistance; //To move on the honrizontal axis
         float m_fAngleX; // Angle around the xAxis (rotation up/down)
         float m_fAngleY; // Angle around the yAxis (rotation right/left)
+        GLint uMVPMatrix;
+        GLint uMVMatrix;
+        GLint uNormalMatrix;
 
     public:
         // TrackballCamera(float fDistance, float fAgnleX, float fAngleY) :
@@ -16,46 +21,24 @@ class TrackballCamera
         //     m_fAngleY(fAngleY)
         //     {};
 
-        TrackballCamera() :
-            m_fDistance(5.f),
-            m_fAngleX(0.f),
-            m_fAngleY(0.f)
-            {};
+        TrackballCamera();
 
-        float get_fDistance(){
-            return this->m_fDistance;
-        }
+        float get_fDistance();
         
-        float get_fAgnleX(){
-            return this->m_fAngleX;
-        }
+        float get_fAgnleX();
 
-        float get_fAgnleY(){
-            return this->m_fAngleY;
-        }
+        float get_fAgnleY();
 
-        void moveFront(float delta) {
-            this->m_fDistance += -delta;
-        }
+        void moveFront(float delta);
 
-        void moveLeft(float delta) {
-            this->m_sDistance += -delta;
-        }
+        void moveLeft(float delta);
 
-        void rotateLeft(float degrees) {
-            this->m_fAngleY += degrees;
-        }
+        void rotateLeft(float degrees);
         
-        void rotateUp(float degrees) {
-            this->m_fAngleX += degrees;
-        }
+        void rotateUp(float degrees);
 
-        glm::mat4 getViewMatrix() const {
-            glm::mat4 ViewMatrix;  // Build normally a Id Matrix...
-            ViewMatrix = glm::translate(ViewMatrix,glm::vec3(this->m_sDistance,0.f,-this->m_fDistance));
-            ViewMatrix = glm::rotate(ViewMatrix, glm::radians(this->m_fAngleX), glm::vec3(1.f,0.f,0.f));
-            ViewMatrix = glm::rotate(ViewMatrix, glm::radians(this->m_fAngleY), glm::vec3(0.f,1.f,0.f));
-            return ViewMatrix;
-        }
+        glm::mat4 getViewMatrix() const;
+
+        ~TrackballCamera();
 
 };
