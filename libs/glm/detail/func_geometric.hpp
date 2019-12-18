@@ -47,7 +47,7 @@ namespace glm
 	/// 
 	/// @tparam genType Floating-point vector types.
 	/// 
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/length.xml">GLSL length man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/length.xml">GLSL length man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.5 Geometric Functions</a>
 	template <typename genType> 
 	GLM_FUNC_DECL typename genType::value_type length(
@@ -57,7 +57,7 @@ namespace glm
 	///
 	/// @tparam genType Floating-point vector types.
 	/// 
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/distance.xml">GLSL distance man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/distance.xml">GLSL distance man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.5 Geometric Functions</a>
 	template <typename genType> 
 	GLM_FUNC_DECL typename genType::value_type distance(
@@ -68,7 +68,7 @@ namespace glm
 	///
 	/// @tparam genType Floating-point vector types.
 	/// 
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/dot.xml">GLSL dot man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/dot.xml">GLSL dot man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.5 Geometric Functions</a>
 	template <typename T, precision P, template <typename, precision> class vecType>
 	GLM_FUNC_DECL T dot(
@@ -79,7 +79,7 @@ namespace glm
 	///
 	/// @tparam genType Floating-point vector types.
 	/// 
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/dot.xml">GLSL dot man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/dot.xml">GLSL dot man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.5 Geometric Functions</a>
 	template <typename genType>
 	GLM_FUNC_DECL genType dot(
@@ -90,7 +90,7 @@ namespace glm
 	///
 	/// @tparam valType Floating-point scalar types.
 	/// 
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/cross.xml">GLSL cross man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/cross.xml">GLSL cross man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.5 Geometric Functions</a>
 	template <typename T, precision P>
 	GLM_FUNC_DECL detail::tvec3<T, P> cross(
@@ -99,7 +99,7 @@ namespace glm
 
 	/// Returns a vector in the same direction as x but with length of 1.
 	/// 
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/normalize.xml">GLSL normalize man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/normalize.xml">GLSL normalize man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.5 Geometric Functions</a>
 	template <typename genType>
 	GLM_FUNC_DECL genType normalize(
@@ -109,7 +109,7 @@ namespace glm
 	///
 	/// @tparam genType Floating-point vector types.
 	/// 
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/faceforward.xml">GLSL faceforward man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/faceforward.xml">GLSL faceforward man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.5 Geometric Functions</a>
 	template <typename genType>
 	GLM_FUNC_DECL genType faceforward(
@@ -122,7 +122,7 @@ namespace glm
 	///
 	/// @tparam genType Floating-point vector types.
 	/// 
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/reflect.xml">GLSL reflect man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/reflect.xml">GLSL reflect man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.5 Geometric Functions</a>
 	template <typename genType>
 	GLM_FUNC_DECL genType reflect(
@@ -135,7 +135,7 @@ namespace glm
 	///
 	/// @tparam genType Floating-point vector types.
 	/// 
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/refract.xml">GLSL refract man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/refract.xml">GLSL refract man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.5 Geometric Functions</a>
 	template <typename T, precision P, template <typename, precision> class vecType>
 	GLM_FUNC_DECL vecType<T, P> refract(

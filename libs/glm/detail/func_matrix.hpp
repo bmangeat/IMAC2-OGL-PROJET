@@ -124,7 +124,7 @@ namespace detail
 	/// 
 	/// @tparam matType Floating-point matrix types.
 	///
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/matrixCompMult.xml">GLSL matrixCompMult man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/matrixCompMult.xml">GLSL matrixCompMult man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.6 Matrix Functions</a>
 	template <typename T, precision P, template <typename, precision> class matType>
 	GLM_FUNC_DECL matType<T, P> matrixCompMult(matType<T, P> const & x, matType<T, P> const & y);
@@ -135,7 +135,7 @@ namespace detail
 	/// 
 	/// @tparam matType Floating-point matrix types.
 	///
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/outerProduct.xml">GLSL outerProduct man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/outerProduct.xml">GLSL outerProduct man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.6 Matrix Functions</a>
 	/// 
 	/// @todo Clarify the declaration to specify that matType doesn't have to be provided when used.
@@ -146,7 +146,7 @@ namespace detail
 	/// 
 	/// @tparam matType Floating-point matrix types.
 	///
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/transpose.xml">GLSL transpose man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/transpose.xml">GLSL transpose man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.6 Matrix Functions</a>
 #	if((GLM_COMPILER & GLM_COMPILER_VC) && (GLM_COMPILER >= GLM_COMPILER_VC11))
 		template <typename T, precision P, template <typename, precision> class matType>
@@ -157,7 +157,7 @@ namespace detail
 	/// 
 	/// @tparam valType Floating-point scalar types.
 	///
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/determinant.xml">GLSL determinant man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/determinant.xml">GLSL determinant man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.6 Matrix Functions</a>	
 	template <typename T, precision P, template <typename, precision> class matType>
 	GLM_FUNC_DECL T determinant(matType<T, P> const & m);
@@ -166,7 +166,7 @@ namespace detail
 	/// 
 	/// @tparam valType Floating-point scalar types.
 	///
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/inverse.xml">GLSL inverse man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/inverse.xml">GLSL inverse man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.6 Matrix Functions</a>	 
 	template <typename T, precision P, template <typename, precision> class matType>
 	GLM_FUNC_DECL matType<T, P> inverse(matType<T, P> const & m);

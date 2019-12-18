@@ -49,7 +49,7 @@ namespace glm
 	///
 	/// @tparam genType Floating-point scalar or vector types.
 	///
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/radians.xml">GLSL radians man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/radians.xml">GLSL radians man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.1 Angle and Trigonometry Functions</a>
 	template <typename genType> 
 	GLM_FUNC_DECL genType radians(genType const & degrees);
@@ -58,7 +58,7 @@ namespace glm
 	///
 	/// @tparam genType Floating-point scalar or vector types.
 	/// 
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/degrees.xml">GLSL degrees man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/degrees.xml">GLSL degrees man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.1 Angle and Trigonometry Functions</a>
 	template <typename genType> 
 	GLM_FUNC_DECL genType degrees(genType const & radians);
@@ -68,7 +68,7 @@ namespace glm
 	/// 
 	/// @tparam genType Floating-point scalar or vector types.
 	///
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/sin.xml">GLSL sin man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/sin.xml">GLSL sin man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.1 Angle and Trigonometry Functions</a>
 	template <typename genType> 
 	GLM_FUNC_DECL genType sin(genType const & angle);
@@ -78,7 +78,7 @@ namespace glm
 	/// 
 	/// @tparam genType Floating-point scalar or vector types.
 	///
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/cos.xml">GLSL cos man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/cos.xml">GLSL cos man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.1 Angle and Trigonometry Functions</a>
 	template <typename genType> 
 	GLM_FUNC_DECL genType cos(genType const & angle);
@@ -87,7 +87,7 @@ namespace glm
 	///
 	/// @tparam genType Floating-point scalar or vector types.
 	/// 
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/tan.xml">GLSL tan man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/tan.xml">GLSL tan man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.1 Angle and Trigonometry Functions</a>
 	template <typename genType> 
 	GLM_FUNC_DECL genType tan(genType const & angle); 
@@ -98,7 +98,7 @@ namespace glm
 	///
 	/// @tparam genType Floating-point scalar or vector types.
 	/// 
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/asin.xml">GLSL asin man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/asin.xml">GLSL asin man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.1 Angle and Trigonometry Functions</a>
 	template <typename genType> 
 	GLM_FUNC_DECL genType asin(genType const & x);
@@ -109,7 +109,7 @@ namespace glm
 	///
 	/// @tparam genType Floating-point scalar or vector types.
 	/// 
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/acos.xml">GLSL acos man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/acos.xml">GLSL acos man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.1 Angle and Trigonometry Functions</a>
 	template <typename genType> 
 	GLM_FUNC_DECL genType acos(genType const & x);
@@ -122,7 +122,7 @@ namespace glm
 	///
 	/// @tparam genType Floating-point scalar or vector types.
 	/// 
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/atan.xml">GLSL atan man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/atan.xml">GLSL atan man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.1 Angle and Trigonometry Functions</a>
 	template <typename genType> 
 	GLM_FUNC_DECL genType atan(genType const & y, genType const & x);
@@ -132,7 +132,7 @@ namespace glm
 	///
 	/// @tparam genType Floating-point scalar or vector types.
 	/// 
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/atan.xml">GLSL atan man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/atan.xml">GLSL atan man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.1 Angle and Trigonometry Functions</a>
 	template <typename genType> 
 	GLM_FUNC_DECL genType atan(genType const & y_over_x);
@@ -141,7 +141,7 @@ namespace glm
 	///
 	/// @tparam genType Floating-point scalar or vector types.
 	/// 
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/sinh.xml">GLSL sinh man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/sinh.xml">GLSL sinh man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.1 Angle and Trigonometry Functions</a>
 	template <typename genType> 
 	GLM_FUNC_DECL genType sinh(genType const & angle);
@@ -150,7 +150,7 @@ namespace glm
 	///
 	/// @tparam genType Floating-point scalar or vector types.
 	/// 
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/cosh.xml">GLSL cosh man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/cosh.xml">GLSL cosh man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.1 Angle and Trigonometry Functions</a>
 	template <typename genType> 
 	GLM_FUNC_DECL genType cosh(genType const & angle);
@@ -159,7 +159,7 @@ namespace glm
 	///
 	/// @tparam genType Floating-point scalar or vector types.
 	/// 
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/tanh.xml">GLSL tanh man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/tanh.xml">GLSL tanh man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.1 Angle and Trigonometry Functions</a>
 	template <typename genType> 
 	GLM_FUNC_DECL genType tanh(genType const & angle);
@@ -168,7 +168,7 @@ namespace glm
 	///
 	/// @tparam genType Floating-point scalar or vector types.
 	/// 
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/asinh.xml">GLSL asinh man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/asinh.xml">GLSL asinh man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.1 Angle and Trigonometry Functions</a>
 	template <typename genType> 
 	GLM_FUNC_DECL genType asinh(genType const & x);
@@ -178,7 +178,7 @@ namespace glm
 	///
 	/// @tparam genType Floating-point scalar or vector types.
 	/// 
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/acosh.xml">GLSL acosh man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/acosh.xml">GLSL acosh man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.1 Angle and Trigonometry Functions</a>
 	template <typename genType> 
 	GLM_FUNC_DECL genType acosh(genType const & x);
@@ -188,7 +188,7 @@ namespace glm
 	///
 	/// @tparam genType Floating-point scalar or vector types.
 	///
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/atanh.xml">GLSL atanh man page</a>
+	/// @see <a href="http://www.opengl.org/sdk/doc/manglsl/xhtml/atanh.xml">GLSL atanh man page</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.1 Angle and Trigonometry Functions</a>
 	template <typename genType> 
 	GLM_FUNC_DECL genType atanh(genType const & x);

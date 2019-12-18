@@ -12,9 +12,9 @@ add_definitions(-std=c++11)
 project(WorldIMaker)
 
 set(EXECUTABLE_OUTPUT_PATH bin/${CMAKE_BUILD_TYPE})
-set(CMAKE_CXX_FLAGS_DEBUG "-g")
+set(CMAKE_CXX_FLAGS_DEBUG "-g -Wall")
 
-set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 ######################################################################################
 ################################## Project files  #####################################
@@ -31,6 +31,7 @@ file(GLOB_RECURSE SHADERS_FILES assets/shaders/*.glsl)
 find_package(OpenGL REQUIRED)
 find_package(SDL2 REQUIRED)
 find_package(GLEW REQUIRED)
+find_package(Eigen3 REQUIRED)
 
 ######################################################################################
 ###################################### Includes ######################################
@@ -46,11 +47,16 @@ include_directories(
         ${SDL2_INCLUDE_DIRS}
         ${OPENGL_INCLUDE_DIR}
         ${GLEW_INCLUDE_DIRS}
+        ${EIGEN3_INCLUDE_DIRS}
         libs
-        )
+)
+
 
 set(ALL_LIBRARIES glimac ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES} ${GLEW_LIBRARY})
+
+#### --------- Necessary in order to access to CMakeList of glimac and doc --------- ####
 add_subdirectory(libs/glimac)
+add_subdirectory(doc)
 
 
 ######################################################################################
