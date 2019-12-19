@@ -1,6 +1,8 @@
 #include "../include/cube.hpp"
 
+    Cube::Cube() {};
     Cube::Cube(const Cube&) {};
+
 
     Cube::Cube(std::vector<glm::vec3> tmp_vertices) {
 
@@ -207,13 +209,38 @@
         delete this;
     }
 
+    //Draw 3 first cubes
+    
+    void CubeLayer(std::vector<Cube> &Layer) {
+        std::vector<glm::vec3> tmp_vertices = { 
+        glm::vec3(-0.5f,0.5f,-0.5f),
+        glm::vec3(0.5f,0.5f,-0.5f),
+        glm::vec3(-0.5f,0.5f,0.5f),
+        glm::vec3(0.5f,0.5f,0.5f),
+
+        glm::vec3(-0.5f,-0.5f,-0.5f),
+        glm::vec3(0.5f,-0.5f,-0.5f),
+        glm::vec3(-0.5f,-0.5f,0.5f),
+        glm::vec3(0.5f,-0.5f,0.5f)
+        };
 
 
-    void firstLayer(std::vector<Cube> Layer) {
-        Layer[0].actualizeVertex();
-        Layer[0].drawCube();
-        Layer[1].actualizeVertex();
-        Layer[1].drawCube();
-        Layer[2].actualizeVertex();
-        Layer[2].drawCube();
+
+        Cube firstCube(tmp_vertices);
+        Layer.push_back(firstCube);
+        std::cout << "sa mère ta gueule lol" << std::endl;
+        firstCube.moveLeft(1.0);
+        Layer.push_back(firstCube);
+        std::cout << "sa mère ta gueule lol" << std::endl;
+        firstCube.moveLeft(1.0);
+        Layer.push_back(firstCube);
+        std::cout << "sa mère ta gueule lol" << std::endl;
+    }
+    
+
+    void firstLayerDraw(std::vector<Cube> &Layer) {
+        for (int i=0; i < Layer.size(); i++) {
+            Layer[i].actualizeVertex();
+            Layer[i].drawCube();
+        }
     }

@@ -19,22 +19,40 @@ class Cube {
 
     public:
         glimac::Program CubeProgram;
+
+        //constructor 
+        Cube(); //problème : dans le main, on peut déclarer "Cube monCube" mais pas "Cube monCube()" 
         Cube(const Cube&);
 	    Cube& operator =(const Cube&);
 
         Cube(std::vector<glm::vec3> tmp_vertices);
+
+        //Bind Vao, Vbo & IBO Again when the vertices change
         void actualizeVertex();
+
+        //Creation Program use to link main.cpp to the shaders
         void setCubeProgram(glimac::FilePath applicationPath);
+
+        //public attribute --> Impossible to pass in private because of it's definition in glimac
         glimac::Program getCubeProgram();
+
+        //Bind Vao Vbo and draw the cube
         void drawCube();
+
         void deleteBuffer();
+
+        //To move the cube in the space
         void moveLeft(float delta);
         void moveUp(float delta);
         void moveDepth(float delta);
+        
+        //Destructor
         ~Cube();
 
+        //Check and change the status of the selection in order to use the cursor
         bool getSelect();
         void changeSelect();
 };
 
-    void firstLayer(std::vector<Cube> Layer);
+    void CubeLayer(std::vector<Cube> &Layer);
+    void firstLayerDraw(std::vector<Cube> &Layer);

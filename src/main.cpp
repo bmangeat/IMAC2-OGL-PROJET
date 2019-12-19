@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
     // Initialize glew for OpenGL3+ support
     GLenum glewInitError = glewInit();
     if(GLEW_OK != glewInitError) {
-        std::cerr << glewGetErrorString(glewInitError) << std::endl;
+        cerr << glewGetErrorString(glewInitError) << endl;
         return EXIT_FAILURE;
     }
 
@@ -34,42 +34,46 @@ int main(int argc, char** argv) {
     //Loading shaders
     FilePath applicationPath(argv[0]);
 
-    //first position
-        std::vector<glm::vec3> tmp_vertices = { 
-            glm::vec3(-0.5f,0.5f,-0.5f),
-            glm::vec3(0.5f,0.5f,-0.5f),
-            glm::vec3(-0.5f,0.5f,0.5f),
-            glm::vec3(0.5f,0.5f,0.5f),
+    //////////// LE PROBLEME EST ICI
 
-            glm::vec3(-0.5f,-0.5f,-0.5f),
-            glm::vec3(0.5f,-0.5f,-0.5f),
-            glm::vec3(-0.5f,-0.5f,0.5f),
-            glm::vec3(0.5f,-0.5f,0.5f)
-        };
+    //Declaration d'un vecteur de cube
+    vector<Cube> Layer;
+    cout << Layer.size() << endl;
 
-    //init Cube
-    Cube firstCube(tmp_vertices);
+    //déclaration de 2 cubes
+    Cube test;
+    Cube test2;
+    cout << " avant ajout test" << endl;
 
-    Cube secondCube(tmp_vertices);
+    //Le premier push back se passe bien
+    Layer.push_back(test);
+    cout << "taille après 1 push back" << Layer.size() << endl;
 
+    cout << "avant ajout test2" << endl;
+    //celui là ne se passe pas... Le compilo renvoie une erreur de segmentation et pourtant un vector est dynamique :'(
+    Layer.push_back(test2);
+
+    cout << "taille après 1 push back" << Layer.size() << endl;
+
+    //Pb du push back
+    //CubeLayer(Layer);
+    
 
     //init program
-    firstCube.setCubeProgram(applicationPath);
-
-    secondCube.setCubeProgram(applicationPath);
+    Layer[0].setCubeProgram(applicationPath);
     
     
-    std::cout << "OpenGL Version : " << glGetString(GL_VERSION) << std::endl;
-    std::cout << "GLEW Version : " << glewGetString(GLEW_VERSION) << std::endl;
+    cout << "OpenGL Version : " << glGetString(GL_VERSION) << endl;
+    cout << "GLEW Version : " << glewGetString(GLEW_VERSION) << endl;
 
     /*********************************
      * HERE SHOULD COME THE INITIALIZATION CODE
      *********************************/
 
     //definition locations variables uniformes
-    GLint uMVPMatrix = glGetUniformLocation(firstCube.CubeProgram.getGLId(), "uMVPMatrix");
-    GLint uMVMatrix = glGetUniformLocation(firstCube.CubeProgram.getGLId(), "uMVMatrix");
-    GLint uNormalMatrix = glGetUniformLocation(firstCube.CubeProgram.getGLId(), "uNormalMatrix");
+    GLint uMVPMatrix = glGetUniformLocation(Layer[0].CubeProgram.getGLId(), "uMVPMatrix");
+    GLint uMVMatrix = glGetUniformLocation(Layer[0].CubeProgram.getGLId(), "uMVMatrix");
+    GLint uNormalMatrix = glGetUniformLocation(Layer[0].CubeProgram.getGLId(), "uNormalMatrix");
 
     // GPU checks depth
     glEnable(GL_DEPTH_TEST);
@@ -131,27 +135,27 @@ int main(int argc, char** argv) {
 
                     // To deplace
                     if (e.key.keysym.sym == SDLK_g) {
-                        firstCube.moveUp(1.f);
+                        Layer[0].moveUp(1.f);
                     }
                     if (e.key.keysym.sym == SDLK_b) {
-                        firstCube.moveUp(-1.f);
+                        Layer[0].moveUp(-1.f);
                     }
                     if (e.key.keysym.sym == SDLK_v) {
-                        firstCube.moveLeft(-1.f);
+                        Layer[0].moveLeft(-1.f);
                     }
                     if (e.key.keysym.sym == SDLK_n) {
-                        firstCube.moveLeft(1.f);
+                        Layer[0].moveLeft(1.f);
                     }
                     if (e.key.keysym.sym == SDLK_f) {
-                        firstCube.moveDepth(-1.f);
+                        Layer[0].moveDepth(-1.f);
                     }
                     if (e.key.keysym.sym == SDLK_h) {
-                        firstCube.moveDepth(1.f);
+                        Layer[0].moveDepth(1.f);
                     }
                     break;
 
                 case SDL_KEYUP:
-                    //std::cout << "touche levée (code = "<< e.key.keysym.sym << ")" << std::endl;
+                    //cout << "touche levée (code = "<< e.key.keysym.sym << ")" << endl;
                     break;
             }
         }
@@ -170,16 +174,13 @@ int main(int argc, char** argv) {
         glUniformMatrix4fv(uNormalMatrix, 1, GL_FALSE, value_ptr(transpose(inverse(MVMatrix))));
         glUniformMatrix4fv(uMVPMatrix, 1, GL_FALSE, value_ptr(ProjMatrix * MVMatrix));
 
-        firstCube.actualizeVertex();
-        firstCube.drawCube();
-        secondCube.drawCube();
+        //Lié aux pb de push back
+        //firstLayerDraw(Layer);
         
 
         // Update the display
         windowManager.swapBuffers();
     }
-    
-    firstCube.deleteBuffer();
     
     return EXIT_SUCCESS;
 }
