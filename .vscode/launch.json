@@ -8,7 +8,7 @@
             "name": "(gdb) Lancer",
             "type": "cppdbg",
             "request": "launch",
-            "program": "entrer le nom du programme, par exemple ${workspaceFolder}/a.out",
+            "program": "../OPENGL_build/bin/WorlIMaker",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

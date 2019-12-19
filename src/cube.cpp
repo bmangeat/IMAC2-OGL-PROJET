@@ -1,12 +1,20 @@
 #include "../include/cube.hpp"
 
-    Cube::Cube() {};
-    Cube::Cube(const Cube&) {};
 
-
-    Cube::Cube(std::vector<glm::vec3> tmp_vertices) {
+    Cube::Cube() {
 
         //Set vertices coordinates
+        std::vector<glm::vec3> tmp_vertices = { 
+        glm::vec3(-0.5f,0.5f,-0.5f),
+        glm::vec3(0.5f,0.5f,-0.5f),
+        glm::vec3(-0.5f,0.5f,0.5f),
+        glm::vec3(0.5f,0.5f,0.5f),
+
+        glm::vec3(-0.5f,-0.5f,-0.5f),
+        glm::vec3(0.5f,-0.5f,-0.5f),
+        glm::vec3(-0.5f,-0.5f,0.5f),
+        glm::vec3(0.5f,-0.5f,0.5f)
+        };
 
         for(size_t j = 0; j < 8; ++j) {
             glimac::ShapeVertex vertex;
@@ -179,6 +187,8 @@
     void Cube::drawCube() {
         //rebinder vao
         glBindVertexArray(this->vao);
+        //biding ibo
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ibo);
         glDrawElements(GL_TRIANGLES, 12*3, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
     }
@@ -198,6 +208,7 @@
     void Cube::moveLeft(float delta) {
         for (int i=0; i < this->vertices.size(); i++)
             this->vertices[i].position.x += delta;
+        std::cout << "j''ai bougé" << std::endl;
     }
 
     void Cube::moveDepth(float delta) {
@@ -205,41 +216,36 @@
             this->vertices[i].position.y += delta;
     }
 
-    Cube::~Cube() {
-        delete this;
-    }
+    Cube::~Cube() {}
 
     //Draw 3 first cubes
     
-    void CubeLayer(std::vector<Cube> &Layer) {
-        std::vector<glm::vec3> tmp_vertices = { 
-        glm::vec3(-0.5f,0.5f,-0.5f),
-        glm::vec3(0.5f,0.5f,-0.5f),
-        glm::vec3(-0.5f,0.5f,0.5f),
-        glm::vec3(0.5f,0.5f,0.5f),
+    void CubeLayer(std::vector<Cube>& Layer, glimac::FilePath applicationPath) {
 
-        glm::vec3(-0.5f,-0.5f,-0.5f),
-        glm::vec3(0.5f,-0.5f,-0.5f),
-        glm::vec3(-0.5f,-0.5f,0.5f),
-        glm::vec3(0.5f,-0.5f,0.5f)
-        };
-
-
-
-        Cube firstCube(tmp_vertices);
+        Cube firstCube;
         Layer.push_back(firstCube);
-        std::cout << "sa mère ta gueule lol" << std::endl;
-        firstCube.moveLeft(1.0);
+        firstCube.moveLeft(-1.5);
         Layer.push_back(firstCube);
-        std::cout << "sa mère ta gueule lol" << std::endl;
-        firstCube.moveLeft(1.0);
+        firstCube.moveLeft(3);
         Layer.push_back(firstCube);
-        std::cout << "sa mère ta gueule lol" << std::endl;
-    }
-    
 
-    void firstLayerDraw(std::vector<Cube> &Layer) {
         for (int i=0; i < Layer.size(); i++) {
+            Layer[i].setCubeProgram(applicationPath);
+        }
+    }
+
+    void firstLayerDraw(std::vector<Cube> &Layer, glm::mat4 MVMatrix, glm::mat4 ProjMatrix) {
+        for (int i=0; i < Layer.size(); i++) {
+            Layer[i].CubeProgram.use();
+
+            GLint uMVPMatrix = glGetUniformLocation(Layer[i].CubeProgram.getGLId(), "uMVPMatrix");
+            GLint uMVMatrix = glGetUniformLocation(Layer[i].CubeProgram.getGLId(), "uMVMatrix");
+            GLint uNormalMatrix = glGetUniformLocation(Layer[i].CubeProgram.getGLId(), "uNormalMatrix");
+
+            glUniformMatrix4fv(uMVMatrix, 1, GL_FALSE, glm::value_ptr(MVMatrix));
+            glUniformMatrix4fv(uNormalMatrix, 1, GL_FALSE, glm::value_ptr(glm::transpose(glm::inverse(MVMatrix))));
+            glUniformMatrix4fv(uMVPMatrix, 1, GL_FALSE, glm::value_ptr(ProjMatrix * MVMatrix));
+
             Layer[i].actualizeVertex();
             Layer[i].drawCube();
         }

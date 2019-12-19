@@ -33,34 +33,26 @@ int main(int argc, char** argv) {
 
     //Loading shaders
     FilePath applicationPath(argv[0]);
+    // Program program = loadProgram(applicationPath.dirPath() + "../assets/shaders/3D.vs.glsl",
+    //                                 applicationPath.dirPath() + "../assets/shaders/cubeShader/cubeTexture.fs.glsl");
+    // program.use();
 
     //////////// LE PROBLEME EST ICI
 
     //Declaration d'un vecteur de cube
     vector<Cube> Layer;
-    cout << Layer.size() << endl;
+
+    Cube monCube;
+    monCube.setCubeProgram(applicationPath);
 
     //déclaration de 2 cubes
-    Cube test;
-    Cube test2;
-    cout << " avant ajout test" << endl;
-
-    //Le premier push back se passe bien
-    Layer.push_back(test);
-    cout << "taille après 1 push back" << Layer.size() << endl;
-
-    cout << "avant ajout test2" << endl;
-    //celui là ne se passe pas... Le compilo renvoie une erreur de segmentation et pourtant un vector est dynamique :'(
-    Layer.push_back(test2);
-
-    cout << "taille après 1 push back" << Layer.size() << endl;
 
     //Pb du push back
-    //CubeLayer(Layer);
-    
+    CubeLayer(Layer,applicationPath);
+    cout << Layer.size()<< endl;
 
     //init program
-    Layer[0].setCubeProgram(applicationPath);
+    //Layer[0].setCubeProgram(applicationPath);
     
     
     cout << "OpenGL Version : " << glGetString(GL_VERSION) << endl;
@@ -71,9 +63,9 @@ int main(int argc, char** argv) {
      *********************************/
 
     //definition locations variables uniformes
-    GLint uMVPMatrix = glGetUniformLocation(Layer[0].CubeProgram.getGLId(), "uMVPMatrix");
-    GLint uMVMatrix = glGetUniformLocation(Layer[0].CubeProgram.getGLId(), "uMVMatrix");
-    GLint uNormalMatrix = glGetUniformLocation(Layer[0].CubeProgram.getGLId(), "uNormalMatrix");
+    GLint uMVPMatrix = glGetUniformLocation(monCube.CubeProgram.getGLId(), "uMVPMatrix");
+    GLint uMVMatrix = glGetUniformLocation(monCube.CubeProgram.getGLId(), "uMVMatrix");
+    GLint uNormalMatrix = glGetUniformLocation(monCube.CubeProgram.getGLId(), "uNormalMatrix");
 
     // GPU checks depth
     glEnable(GL_DEPTH_TEST);
@@ -139,6 +131,7 @@ int main(int argc, char** argv) {
                     }
                     if (e.key.keysym.sym == SDLK_b) {
                         Layer[0].moveUp(-1.f);
+                        
                     }
                     if (e.key.keysym.sym == SDLK_v) {
                         Layer[0].moveLeft(-1.f);
@@ -174,9 +167,11 @@ int main(int argc, char** argv) {
         glUniformMatrix4fv(uNormalMatrix, 1, GL_FALSE, value_ptr(transpose(inverse(MVMatrix))));
         glUniformMatrix4fv(uMVPMatrix, 1, GL_FALSE, value_ptr(ProjMatrix * MVMatrix));
 
+            // monCube.actualizeVertex();
+            // monCube.drawCube();
+
         //Lié aux pb de push back
-        //firstLayerDraw(Layer);
-        
+        firstLayerDraw(Layer, MVMatrix, ProjMatrix);
 
         // Update the display
         windowManager.swapBuffers();

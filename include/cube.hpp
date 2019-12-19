@@ -21,11 +21,10 @@ class Cube {
         glimac::Program CubeProgram;
 
         //constructor 
-        Cube(); //problème : dans le main, on peut déclarer "Cube monCube" mais pas "Cube monCube()" 
-        Cube(const Cube&);
-	    Cube& operator =(const Cube&);
+         Cube(const Cube&) = default;
+	    // Cube& operator =(const Cube&);
 
-        Cube(std::vector<glm::vec3> tmp_vertices);
+        Cube();
 
         //Bind Vao, Vbo & IBO Again when the vertices change
         void actualizeVertex();
@@ -54,5 +53,5 @@ class Cube {
         void changeSelect();
 };
 
-    void CubeLayer(std::vector<Cube> &Layer);
-    void firstLayerDraw(std::vector<Cube> &Layer);
+    void CubeLayer(std::vector<Cube> &Layer, glimac::FilePath applicationPath);
+    void firstLayerDraw(std::vector<Cube> &Layer, glm::mat4 MVMatrix, glm::mat4 ProjMatrix);
