@@ -180,7 +180,7 @@
 
     void Cube::setCubeProgram(glimac::FilePath applicationPath) {
         this->CubeProgram = loadProgram(applicationPath.dirPath() + "../assets/shaders/3D.vs.glsl",
-                                        applicationPath.dirPath() + "../assets/shaders/cubeShader/cubeTexture.fs.glsl");
+                                        applicationPath.dirPath() + "../assets/shaders/cubeShader/normal.fs.glsl");
         this->CubeProgram.use();
     }
        

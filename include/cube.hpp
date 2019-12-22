@@ -8,6 +8,7 @@
 #include <string>
 #include <iostream>
 #include <cmath>
+#include <GL/glew.h>
 
 class Cube {
     private:

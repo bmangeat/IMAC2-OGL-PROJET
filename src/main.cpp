@@ -10,6 +10,7 @@
 #include "../include/TrackballCamera.hpp"
 
 #include "../include/cube.hpp"
+#include "../include/light.hpp"
 
 
 using namespace glimac;
