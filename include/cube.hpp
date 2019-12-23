@@ -4,6 +4,7 @@
 #include "../libs/glimac/include/Program.hpp"
 #include "../libs/glimac/include/FilePath.hpp"
 #include "../libs/glimac/include/common.hpp"
+#include "./light.hpp"
 #include <vector>
 #include <string>
 #include <iostream>
@@ -22,7 +23,7 @@ class Cube {
         glimac::Program CubeProgram;
 
         //constructor 
-         Cube(const Cube&) = default;
+        Cube(const Cube&) = default;
 	    // Cube& operator =(const Cube&);
 
         Cube();
@@ -55,4 +56,4 @@ class Cube {
 };
 
     void CubeLayer(std::vector<Cube> &Layer, glimac::FilePath applicationPath);
-    void firstLayerDraw(std::vector<Cube> &Layer, glm::mat4 MVMatrix, glm::mat4 ProjMatrix);
+    void firstLayerDraw(std::vector<Cube> &Layer, glm::mat4 MVMatrix, glm::mat4 ProjMatrix, Light Sun, glm::mat4 ViewMatrix);

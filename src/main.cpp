@@ -31,26 +31,24 @@ int main(int argc, char** argv) {
     //Creation TrackballCamera
     TrackballCamera camera = TrackballCamera();
     
+    // Test light
+    vec3 Kd = vec3(linearRand (0.0,1.0),linearRand (0.0,1.0),linearRand (0.0,1.0));
+    vec3 Ks = vec3(linearRand (0.0,1.0),linearRand (0.0,1.0),linearRand (0.0,1.0));
+    float Shininess = linearRand (0.0,1.0);
+    vec3 LightDir= vec3(5.0,10.0,-5.0);
+    vec3 LightIntensity = vec3(1.0,1.0,1.0);
+    Light testLight(Kd, Ks, Shininess, LightDir, LightIntensity);
 
     //Loading shaders
     FilePath applicationPath(argv[0]);
-    // Program program = loadProgram(applicationPath.dirPath() + "../assets/shaders/3D.vs.glsl",
-    //                                 applicationPath.dirPath() + "../assets/shaders/cubeShader/cubeTexture.fs.glsl");
-    // program.use();
-
-    //////////// LE PROBLEME EST ICI
 
     //Declaration d'un vecteur de cube
     vector<Cube> Layer;
-
-    Cube monCube;
-    monCube.setCubeProgram(applicationPath);
 
     //déclaration de 2 cubes
 
     //Pb du push back
     CubeLayer(Layer,applicationPath);
-    cout << Layer.size()<< endl;
 
     //init program
     //Layer[0].setCubeProgram(applicationPath);
@@ -64,10 +62,12 @@ int main(int argc, char** argv) {
      *********************************/
 
     //definition locations variables uniformes
-    GLint uMVPMatrix = glGetUniformLocation(monCube.CubeProgram.getGLId(), "uMVPMatrix");
-    GLint uMVMatrix = glGetUniformLocation(monCube.CubeProgram.getGLId(), "uMVMatrix");
-    GLint uNormalMatrix = glGetUniformLocation(monCube.CubeProgram.getGLId(), "uNormalMatrix");
+    GLint uMVPMatrix = glGetUniformLocation(Layer[0].CubeProgram.getGLId(), "uMVPMatrix");
+    GLint uMVMatrix = glGetUniformLocation(Layer[0].CubeProgram.getGLId(), "uMVMatrix");
+    GLint uNormalMatrix = glGetUniformLocation(Layer[0].CubeProgram.getGLId(), "uNormalMatrix");
+    testLight.lightInitUniVariable(Layer[0].CubeProgram);
 
+    
     // GPU checks depth
     glEnable(GL_DEPTH_TEST);
 
@@ -162,17 +162,9 @@ int main(int argc, char** argv) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         MVMatrix = camera.getViewMatrix();
-
-        //MVMatrix = rotate(MVMatrix, windowManager.getTime(), vec3(0, 1, 0));
-        glUniformMatrix4fv(uMVMatrix, 1, GL_FALSE, value_ptr(MVMatrix));
-        glUniformMatrix4fv(uNormalMatrix, 1, GL_FALSE, value_ptr(transpose(inverse(MVMatrix))));
-        glUniformMatrix4fv(uMVPMatrix, 1, GL_FALSE, value_ptr(ProjMatrix * MVMatrix));
-
-            // monCube.actualizeVertex();
-            // monCube.drawCube();
-
+        // testLight.lightApplication(camera.getViewMatrix());
         //Lié aux pb de push back
-        firstLayerDraw(Layer, MVMatrix, ProjMatrix);
+        firstLayerDraw(Layer, MVMatrix, ProjMatrix, testLight, camera.getViewMatrix());
 
         // Update the display
         windowManager.swapBuffers();

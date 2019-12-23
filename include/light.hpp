@@ -3,6 +3,8 @@
 #include "../libs/glimac/include/glm.hpp"
 #include "../libs/glimac/include/Program.hpp"
 #include "../libs/glimac/include/FilePath.hpp"
+#include "../libs/glimac/include/SDLWindowManager.hpp"
+#include "../libs/glimac/include/FilePath.hpp"
 #include "../libs/glimac/include/common.hpp"
 #include <vector>
 #include <string>
@@ -35,7 +37,8 @@ class Light {
         void moveUp(float delta);
         void moveDepth(float delta);
         //Apply light on the elements of the scene
-        void lightApplication(glimac::Program sceneProgram);
+        void lightInitUniVariable(glimac::Program sceneProgram);
+        void lightApplication(glm::mat4 ViewMatrix);
         ~Light();
 
 };

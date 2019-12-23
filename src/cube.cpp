@@ -180,8 +180,9 @@
 
     void Cube::setCubeProgram(glimac::FilePath applicationPath) {
         this->CubeProgram = loadProgram(applicationPath.dirPath() + "../assets/shaders/3D.vs.glsl",
-                                        applicationPath.dirPath() + "../assets/shaders/cubeShader/normal.fs.glsl");
+                                        applicationPath.dirPath() + "../assets/shaders/lightShader/cubeLighted.fs.glsl");
         this->CubeProgram.use();
+        
     }
        
     void Cube::drawCube() {
@@ -208,7 +209,6 @@
     void Cube::moveLeft(float delta) {
         for (int i=0; i < this->vertices.size(); i++)
             this->vertices[i].position.x += delta;
-        std::cout << "j''ai bougé" << std::endl;
     }
 
     void Cube::moveDepth(float delta) {
@@ -234,14 +234,14 @@
         }
     }
 
-    void firstLayerDraw(std::vector<Cube> &Layer, glm::mat4 MVMatrix, glm::mat4 ProjMatrix) {
+    void firstLayerDraw(std::vector<Cube> &Layer, glm::mat4 MVMatrix, glm::mat4 ProjMatrix, Light Sun, glm::mat4 ViewMatrix) {
         for (int i=0; i < Layer.size(); i++) {
             Layer[i].CubeProgram.use();
 
             GLint uMVPMatrix = glGetUniformLocation(Layer[i].CubeProgram.getGLId(), "uMVPMatrix");
             GLint uMVMatrix = glGetUniformLocation(Layer[i].CubeProgram.getGLId(), "uMVMatrix");
             GLint uNormalMatrix = glGetUniformLocation(Layer[i].CubeProgram.getGLId(), "uNormalMatrix");
-
+            Sun.lightApplication(ViewMatrix);
             glUniformMatrix4fv(uMVMatrix, 1, GL_FALSE, glm::value_ptr(MVMatrix));
             glUniformMatrix4fv(uNormalMatrix, 1, GL_FALSE, glm::value_ptr(glm::transpose(glm::inverse(MVMatrix))));
             glUniformMatrix4fv(uMVPMatrix, 1, GL_FALSE, glm::value_ptr(ProjMatrix * MVMatrix));
