@@ -1,0 +1,6 @@
+# Lines starting with `#` are comments.
+# Ignore files called 'file.ext'
+.DS_Store
+
+# Ignoring directories
+cmake-build-debug/
