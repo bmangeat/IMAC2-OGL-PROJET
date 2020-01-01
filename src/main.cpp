@@ -1,13 +1,17 @@
-#include <../libs/glimac/include/SDLWindowManager.hpp>
+#include <glimac/include/SDLWindowManager.hpp>
 #include <GL/glew.h>
 #include <iostream>
-#include <../libs/glimac/include/Program.hpp>
-#include <../libs/glimac/include/FilePath.hpp>
-#include "../libs/glimac/include/glm.hpp"
-#include "../libs/glimac/include/common.hpp"
-#include "../libs/glimac/include/Image.hpp"
+#include <glimac/include/Program.hpp>
+#include <glimac/include/FilePath.hpp>
+#include <glimac/include/glm.hpp>
+#include <glimac/include/common.hpp>
+#include <glimac/include/Image.hpp>
 #include <vector>
 #include "../include/TrackballCamera.hpp"
+
+#include <imgui/include/imgui.h>
+
+
 
 #include "../include/cube.hpp"
 #include "../include/light.hpp"

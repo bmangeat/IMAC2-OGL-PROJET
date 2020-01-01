@@ -48,14 +48,17 @@ include_directories(
         ${OPENGL_INCLUDE_DIR}
         ${GLEW_INCLUDE_DIRS}
         ${EIGEN3_INCLUDE_DIRS}
+        libs/glimac/include
+        libs/imgui/include
         libs
 )
 
 
-set(ALL_LIBRARIES glimac ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES} ${GLEW_LIBRARY})
+set(ALL_LIBRARIES imgui glimac ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES} ${GLEW_LIBRARY})
 
 #### --------- Necessary in order to access to CMakeList of glimac and doc --------- ####
 add_subdirectory(libs/glimac)
+add_subdirectory(libs/imgui)
 add_subdirectory(doc)
 
 

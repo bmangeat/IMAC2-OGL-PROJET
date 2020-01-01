@@ -40,7 +40,7 @@
 #define GLM_GTX_compatibility
 
 // Dependency:
-#include "../glm.hpp"  
+#include "../glm.hpp"
 #include "../gtc/quaternion.hpp"
 
 #if(defined(GLM_MESSAGES) && !defined(GLM_EXT_INCLUDED))
