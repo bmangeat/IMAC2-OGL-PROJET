@@ -31,27 +31,56 @@ void Interface::CreateInterface(SDL_Window *window) const {
     ImGui::NewFrame();
 }
 
-void Interface::DrawInterface() const {
+void Interface::DrawInterface(SDL_Window *window) const {
 
     static float f = 0.0f;
     static int counter = 0;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
 
-    ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
+    // Create a window called "Editor" and append into it.
+    if (ImGui::Begin("Editor")) {
 
-    ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
+        // Append a menu bar with several features
+        if (ImGui::BeginMenuBar()) {
+            if (ImGui::BeginMenu("File")) {
+                if (ImGui::MenuItem("Open..", "Ctrl+O")) {
+
+                    // TODO : Open save fonctionnality
+
+                }
+                if (ImGui::MenuItem("Save", "Ctrl+S")) {
+
+                    // TODO : Save our world fonctionnality
+
+                }
+                if (ImGui::MenuItem("Close", "Ctrl+W")) {
+
+                    // TODO : Close the windows
+
+                    SDL_DestroyWindow(window);
+
+                }
+                ImGui::EndMenu();
+            }
+            ImGui::EndMenuBar();
+        }
+        ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
 
 
-    ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-    ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
+        ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+        ImGui::ColorEdit3("clear color", (float *) &clear_color); // Edit 3 floats representing a color
 
-    if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-        counter++;
-    ImGui::SameLine();
-    ImGui::Text("counter = %d", counter);
+        if (ImGui::Button(
+                "Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+            counter++;
+        ImGui::SameLine();
+        ImGui::Text("counter = %d", counter);
 
-    ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
+                    1000.0f / ImGui::GetIO().Framerate,
+                    ImGui::GetIO().Framerate);
+    }
     ImGui::End();
 }
 

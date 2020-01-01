@@ -14,7 +14,6 @@
 #include <imgui/include/imgui_impl_sdl.h>
 
 
-
 #include "../include/cube.hpp"
 #include "../include/Interface.h"
 #include "../include/light.hpp"
@@ -24,26 +23,30 @@ using namespace glimac;
 using namespace glm;
 using namespace std;
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     // Initialize SDL and open a window
     SDLWindowManager windowManager(800, 600, "GLImac");
 
     // Initialize glew for OpenGL3+ support
     GLenum glewInitError = glewInit();
-    if(GLEW_OK != glewInitError) {
+    if (GLEW_OK != glewInitError) {
         cerr << glewGetErrorString(glewInitError) << endl;
         return EXIT_FAILURE;
     }
 
+
     //Creation TrackballCamera
     TrackballCamera camera = TrackballCamera();
-    
+
+    // Declaration of ImGui Interface
+    Interface imGuiInterface(windowManager.window, &windowManager.openglContext);
+
     // Test light
-    vec3 Kd = vec3(linearRand (0.0,1.0),linearRand (0.0,1.0),linearRand (0.0,1.0));
-    vec3 Ks = vec3(linearRand (0.0,1.0),linearRand (0.0,1.0),linearRand (0.0,1.0));
-    float Shininess = linearRand (0.0,1.0);
-    vec3 LightDir= vec3(5.0,10.0,-5.0);
-    vec3 LightIntensity = vec3(1.0,1.0,1.0);
+    vec3 Kd = vec3(linearRand(0.0, 1.0), linearRand(0.0, 1.0), linearRand(0.0, 1.0));
+    vec3 Ks = vec3(linearRand(0.0, 1.0), linearRand(0.0, 1.0), linearRand(0.0, 1.0));
+    float Shininess = linearRand(0.0, 1.0);
+    vec3 LightDir = vec3(5.0, 10.0, -5.0);
+    vec3 LightIntensity = vec3(1.0, 1.0, 1.0);
     Light testLight(Kd, Ks, Shininess, LightDir, LightIntensity);
 
     //Loading shaders
@@ -55,12 +58,12 @@ int main(int argc, char** argv) {
     //déclaration de 2 cubes
 
     //Pb du push back
-    CubeLayer(Layer,applicationPath);
+    CubeLayer(Layer, applicationPath);
 
     //init program
     //Layer[0].setCubeProgram(applicationPath);
-    
-    
+
+
     cout << "OpenGL Version : " << glGetString(GL_VERSION) << endl;
     cout << "GLEW Version : " << glewGetString(GLEW_VERSION) << endl;
 
@@ -69,20 +72,17 @@ int main(int argc, char** argv) {
      *********************************/
 
 
-    // Interface Imgui implemented
-    Interface imGuiInterface(windowManager.window, &windowManager.openglContext);
-
     //definition locations variables uniformes
     GLint uMVPMatrix = glGetUniformLocation(Layer[0].CubeProgram.getGLId(), "uMVPMatrix");
     GLint uMVMatrix = glGetUniformLocation(Layer[0].CubeProgram.getGLId(), "uMVMatrix");
     GLint uNormalMatrix = glGetUniformLocation(Layer[0].CubeProgram.getGLId(), "uNormalMatrix");
     testLight.lightInitUniVariable(Layer[0].CubeProgram);
 
-    
+
     // GPU checks depth
     glEnable(GL_DEPTH_TEST);
 
-    mat4 ProjMatrix = perspective(radians(70.f),800.f/600.f,0.1f, 100.f);
+    mat4 ProjMatrix = perspective(radians(70.f), 800.f / 600.f, 0.1f, 100.f);
 
     mat4 MVMatrix = camera.getViewMatrix();
 
@@ -93,30 +93,30 @@ int main(int argc, char** argv) {
 
     // Application loop:
     bool done = false;
-    while(!done) {
+    while (!done) {
         // Event loop:
         SDL_Event e;
-            while(windowManager.pollEvent(e)) {
+        while (windowManager.pollEvent(e)) {
 
-            switch(e.type) {
+            switch (e.type) {
 
                 case SDL_QUIT:
                     done = true; // Leave the loop after this iteration
                     break;
 
 
-                /* Clic souris */
+                    /* Clic souris */
                 case SDL_MOUSEBUTTONDOWN:
                     mouseY = e.button.y;
                     mouseX = e.button.x;
                     mouseDown = true;
                     break;
-                
+
                 case SDL_MOUSEBUTTONUP:
                     mouseDown = false;
                     break;
-            
-                case SDL_MOUSEMOTION:                
+
+                case SDL_MOUSEMOTION:
                     if (mouseDown) {
                         camera.rotateUp(e.motion.yrel);
                         camera.rotateLeft(e.motion.xrel);
@@ -143,7 +143,7 @@ int main(int argc, char** argv) {
                     }
                     if (e.key.keysym.sym == SDLK_b) {
                         Layer[0].moveUp(-1.f);
-                        
+
                     }
                     if (e.key.keysym.sym == SDLK_v) {
                         Layer[0].moveLeft(-1.f);
@@ -178,13 +178,12 @@ int main(int argc, char** argv) {
         firstLayerDraw(Layer, MVMatrix, ProjMatrix, testLight, camera.getViewMatrix());
 
         imGuiInterface.CreateInterface(windowManager.window);
-        imGuiInterface.DrawInterface();
+        imGuiInterface.DrawInterface(windowManager.window);
         imGuiInterface.RenderInterface();
 
 
         // Update the display
         windowManager.swapBuffers();
-
 
 
     }

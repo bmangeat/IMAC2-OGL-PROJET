@@ -16,7 +16,7 @@ public:
 
     void CreateInterface(SDL_Window* window) const;
 
-    void DrawInterface() const;
+    void DrawInterface(SDL_Window* window) const;
 
     void RenderInterface() const;
 
