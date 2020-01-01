@@ -63,7 +63,7 @@ add_subdirectory(doc)
 ########################### Declaration of .exe  #####################################
 ######################################################################################
 
-add_executable(${PROJECT_NAME} ${SOURCES_FILES} ${HEADER_FILES} ${SHADERS_FILES})
+add_executable(${PROJECT_NAME} ${SOURCES_FILES} ${HEADER_FILES} ${SHADERS_FILES} include/Interpolation.h src/Interpolation.cpp)
 target_link_libraries(${PROJECT_NAME} ${ALL_LIBRARIES})
 
 #### --------------- Necessary in order to recover the assets folder ---------------- ####
