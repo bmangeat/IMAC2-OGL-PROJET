@@ -94,8 +94,10 @@ int main(int argc, char** argv) {
     Eigen::VectorXd weightControlPoint = Eigen::VectorXd::LinSpaced(3, 0,3) ;
 
 
-    Interpolation RBF;
-    std::cout << RBF.computeWeight(controlPoint, weightControlPoint) << std::endl;
+    Interpolation RBF(3);
+    RBF.computeWeight();
+
+    //std::cout << RBF.computeWeight(controlPoint, weightControlPoint) << std::endl;
 
     // <------------ FIN TEST
 
