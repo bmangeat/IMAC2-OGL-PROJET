@@ -82,26 +82,6 @@ int main(int argc, char** argv) {
 
     mat4 NormalMatrix = transpose(inverse(MVMatrix));
 
-
-    // TEST ---------->>
-
-    std::vector<glm::vec3> controlPoint;
-
-    controlPoint.push_back(glm::vec3(1,2,3));
-    controlPoint.push_back(glm::vec3(3,3,3));
-    controlPoint.push_back(glm::vec3(1,1,1));
-
-    Eigen::VectorXd weightControlPoint = Eigen::VectorXd::LinSpaced(3, 0,3) ;
-
-
-    Interpolation RBF(3);
-    RBF.computeWeight();
-
-    //std::cout << RBF.computeWeight(controlPoint, weightControlPoint) << std::endl;
-
-    // <------------ FIN TEST
-
-
     int mouseX, mouseY;
     bool mouseDown;
 

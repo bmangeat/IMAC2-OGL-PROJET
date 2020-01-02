@@ -6,7 +6,6 @@
 
 #include <random>
 #include <chrono>
-#include <functional>
 
 
 Interpolation::Interpolation(size_t numberControlPoint)
@@ -14,44 +13,47 @@ Interpolation::Interpolation(size_t numberControlPoint)
 }
 
 double Interpolation::phiDistance(glm::vec3 a, glm::vec3 b) {
-    return glm::distance(a, b);
+    return abs(glm::distance(a, b));
 }
 
 double Interpolation::phiQuad(glm::vec3 a, glm::vec3 b) {
-    return sqrt(1 + pow(glm::distance(a, b), 2));
+    return abs(sqrt(1 + pow(glm::distance(a, b), 2)));
 }
 
 double Interpolation::phiInvQuad(glm::vec3 a, glm::vec3 b) {
-    return 1 / (1 + pow(glm::distance(a, b), 2));
+    return abs(1 / (1 + pow(glm::distance(a, b), 2)));
 }
 
 double Interpolation::phiGauss(glm::vec3 a, glm::vec3 b) {
-    return exp(-pow(glm::distance(a, b), 2));
+    return abs(exp(-pow(glm::distance(a, b), 2)));
 }
 
-Eigen::VectorXd Interpolation::computeWeight() {
+Eigen::VectorXd Interpolation::computeOmegas() {
     controlPoints = generateControlPoint();
     weightControlPoint = generateWeightControlPoint();
 
-
-
-    Eigen::MatrixXd phiDistance = Eigen::MatrixXd::Zero(controlPoints.size(), controlPoints.size());
+    Eigen::MatrixXd phiMatrix = Eigen::MatrixXd::Zero(controlPoints.size(), controlPoints.size());
 
     // Parse our matrix in order to fill with distance between two control points
     for (size_t i = 0; i < controlPoints.size(); ++i) {
         for (size_t j = 0; j < controlPoints.size(); ++j) {
-            phiDistance(i, j) = phiGauss(controlPoints[i], controlPoints[j]);
+            phiMatrix(i, j) = phiDistance(controlPoints[i], controlPoints[j]);
         }
     }
 
-    return phiDistance.inverse() * weightControlPoint;
+    return phiMatrix.inverse() * weightControlPoint;
 }
 
 double Interpolation::evaluatePoint(glm::vec3 x) {
 
-    // TODO : Using computeWeight in order to determinate weight for 1 point thank to this equation uy = SOM ( ωi * φ(|y − xi|)
+    // ux is the weight on the point X
+    double ux = 0.f;
+    Eigen::VectorXd omegas = computeOmegas();
+    for (int i = 0; i < controlPoints.size(); ++i) {
+        ux = omegas(i) * phiDistance(x,controlPoints[i]);
+    }
 
-    return 0;
+    return ux;
 }
 
 std::vector<glm::vec3> Interpolation::generateControlPoint() {
@@ -78,19 +80,16 @@ std::vector<glm::vec3> Interpolation::generateControlPoint() {
 Eigen::VectorXd Interpolation::generateWeightControlPoint() {
 
     Eigen::VectorXd weightControlPointVec(_numberControlPoint);
-    std::cout << "Taille de mon vecteur : " << weightControlPointVec.size() << std::endl;
     // select seed from time
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 
     std::ranlux24_base ranlux24Generator(seed);
 
-    std::uniform_int_distribution<int> uniformIntDistribution(0, 5);
+    std::uniform_int_distribution<int> uniformIntDistribution(-5, 5);
     for (size_t i = 0; i < _numberControlPoint; ++i) {
 
         weightControlPointVec(i) = double(uniformIntDistribution(ranlux24Generator));
     }
-
-
 
     return weightControlPointVec;
 }

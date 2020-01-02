@@ -6,7 +6,7 @@
 #include <vector>
 #include <glimac/include/glm.hpp>
 
-class Interpolation{
+class Interpolation {
 
 
 public:
@@ -16,6 +16,38 @@ public:
     */
     Interpolation(size_t numberControlPoint);
 
+    //! Calculate ω from our control points
+    /*!
+         Also generate control's points and co.
+    */
+    Eigen::VectorXd computeOmegas();
+
+    //! Rate the cordonnate with RBF Function
+    /*!
+      \param vec3 X Match with cube's coordonate . This function will return the weight corresponding to the cube
+    */
+    double evaluatePoint(glm::vec3 x);
+
+
+private:
+
+    //! Number of control's points
+    /*!
+      Variable can store the number of control's points desired
+    */
+    size_t _numberControlPoint;
+
+    //! Vector of control's points
+    /*!
+      Store all control's points generated
+    */
+    std::vector<glm::vec3> controlPoints;
+
+    //! Vector of (control) point's weight
+    /*!
+      Store all (control) point's weight generated
+    */
+    Eigen::VectorXd weightControlPoint;
 
     //! Radial function : φ(d) = d
     /*!
@@ -45,21 +77,10 @@ public:
     */
     double phiGauss(glm::vec3 a, glm::vec3 b);
 
-    //! Calculate ω from our control points
-    /*!
-      \param controlPoint Vector of points created randomly
-      \param weightControlPoint Vector from Eigen also created randomly and contain weight of controlPoint
-    */
-    Eigen::VectorXd computeWeight();
-
-
+    //! Generation function : Control's points
     std::vector<glm::vec3> generateControlPoint();
-private:
-    size_t _numberControlPoint;
-    std::vector<glm::vec3> controlPoints;
-    Eigen::VectorXd weightControlPoint;
 
-    double evaluatePoint(glm::vec3 x);
-
+    //! Generation function : (Control's) Weight's points
     Eigen::VectorXd generateWeightControlPoint();
+
 };
