@@ -11,6 +11,8 @@
 
 #include "../include/cube.hpp"
 #include "../include/light.hpp"
+#include "../include/cursor.hpp"
+#include "../include/Grid.hpp"
 
 
 using namespace glimac;
@@ -41,17 +43,10 @@ int main(int argc, char** argv) {
 
     //Loading shaders
     FilePath applicationPath(argv[0]);
+        Program tmp_program = loadProgram(applicationPath.dirPath() + "../assets/shaders/3D.vs.glsl",
+                                        applicationPath.dirPath() + "../assets/shaders/lightShader/cubeLighted.fs.glsl");
+        tmp_program.use();
 
-    //Declaration d'un vecteur de cube
-    vector<Cube> Layer;
-
-    //déclaration de 2 cubes
-
-    //Pb du push back
-    CubeLayer(Layer,applicationPath);
-
-    //init program
-    //Layer[0].setCubeProgram(applicationPath);
     
     
     cout << "OpenGL Version : " << glGetString(GL_VERSION) << endl;
@@ -62,11 +57,17 @@ int main(int argc, char** argv) {
      *********************************/
 
     //definition locations variables uniformes
-    GLint uMVPMatrix = glGetUniformLocation(Layer[0].CubeProgram.getGLId(), "uMVPMatrix");
-    GLint uMVMatrix = glGetUniformLocation(Layer[0].CubeProgram.getGLId(), "uMVMatrix");
-    GLint uNormalMatrix = glGetUniformLocation(Layer[0].CubeProgram.getGLId(), "uNormalMatrix");
-    testLight.lightInitUniVariable(Layer[0].CubeProgram);
+    GLint uMVPMatrix = glGetUniformLocation(tmp_program.getGLId(), "uMVPMatrix");
+    GLint uMVMatrix = glGetUniformLocation(tmp_program.getGLId(), "uMVMatrix");
+    GLint uNormalMatrix = glGetUniformLocation(tmp_program.getGLId(), "uNormalMatrix");
+    testLight.lightInitUniVariable(tmp_program);
 
+
+    //Creation Grid
+    Grid worldGrid;
+    
+    //Creation Cursor
+    Cursor worldCursor(applicationPath);
     
     // GPU checks depth
     glEnable(GL_DEPTH_TEST);
@@ -77,9 +78,6 @@ int main(int argc, char** argv) {
 
     mat4 NormalMatrix = transpose(inverse(MVMatrix));
 
-    int mouseX, mouseY;
-    bool mouseDown;
-
     // Application loop:
     bool done = false;
     while(!done) {
@@ -87,72 +85,16 @@ int main(int argc, char** argv) {
         SDL_Event e;
             while(windowManager.pollEvent(e)) {
 
-            switch(e.type) {
+                switch(e.type) {
 
-                case SDL_QUIT:
-                    done = true; // Leave the loop after this iteration
-                    break;
+                    case SDL_QUIT:
+                        done = true; // Leave the loop after this iteration
+                        break;
+                }
 
-
-                /* Clic souris */
-                case SDL_MOUSEBUTTONDOWN:
-                    mouseY = e.button.y;
-                    mouseX = e.button.x;
-                    mouseDown = true;
-                    break;
-                
-                case SDL_MOUSEBUTTONUP:
-                    mouseDown = false;
-                    break;
-            
-                case SDL_MOUSEMOTION:                
-                    if (mouseDown) {
-                        camera.rotateUp(e.motion.yrel);
-                        camera.rotateLeft(e.motion.xrel);
-                    }
-                    break;
-
-                case SDL_KEYDOWN:
-                    if (e.key.keysym.sym == SDLK_z) {
-                        camera.moveFront(5.f);
-                    }
-                    if (e.key.keysym.sym == SDLK_s) {
-                        camera.moveFront(-5.f);
-                    }
-                    if (e.key.keysym.sym == SDLK_q) {
-                        camera.moveLeft(-1.f);
-                    }
-                    if (e.key.keysym.sym == SDLK_d) {
-                        camera.moveLeft(1.f);
-                    }
-
-                    // To deplace
-                    if (e.key.keysym.sym == SDLK_g) {
-                        Layer[0].moveUp(1.f);
-                    }
-                    if (e.key.keysym.sym == SDLK_b) {
-                        Layer[0].moveUp(-1.f);
-                        
-                    }
-                    if (e.key.keysym.sym == SDLK_v) {
-                        Layer[0].moveLeft(-1.f);
-                    }
-                    if (e.key.keysym.sym == SDLK_n) {
-                        Layer[0].moveLeft(1.f);
-                    }
-                    if (e.key.keysym.sym == SDLK_f) {
-                        Layer[0].moveDepth(-1.f);
-                    }
-                    if (e.key.keysym.sym == SDLK_h) {
-                        Layer[0].moveDepth(1.f);
-                    }
-                    break;
-
-                case SDL_KEYUP:
-                    //cout << "touche levée (code = "<< e.key.keysym.sym << ")" << endl;
-                    break;
+                manageView(camera, e);
+                manageCursorPos(worldCursor,e);
             }
-        }
 
         /*********************************
          * HERE SHOULD COME THE RENDERING CODE
@@ -164,8 +106,9 @@ int main(int argc, char** argv) {
         MVMatrix = camera.getViewMatrix();
         // testLight.lightApplication(camera.getViewMatrix());
         //Lié aux pb de push back
-        firstLayerDraw(Layer, MVMatrix, ProjMatrix, testLight, camera.getViewMatrix());
-
+        testLight.lightApplication(camera.getViewMatrix());
+        DrawAllCube(worldGrid.getVectorCube(), MVMatrix, ProjMatrix, camera.getViewMatrix());
+        
         // Update the display
         windowManager.swapBuffers();
     }

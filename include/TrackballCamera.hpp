@@ -2,6 +2,7 @@
 #include "../libs/glimac/include/glm.hpp"
 #include "../libs/glimac/include/Program.hpp"
 #include "../libs/glimac/include/FilePath.hpp"
+#include <../libs/glimac/include/SDLWindowManager.hpp>
 
 class TrackballCamera 
 {
@@ -43,4 +44,4 @@ class TrackballCamera
 
 };
 
-void manageView();
+void manageView(TrackballCamera camera, SDL_Event e);

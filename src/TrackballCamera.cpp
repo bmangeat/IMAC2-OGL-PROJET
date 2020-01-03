@@ -49,4 +49,45 @@
         return ViewMatrix;
     }
 
-    TrackballCamera::~TrackballCamera() {};
+    TrackballCamera::~TrackballCamera() {}
+
+    void manageView(TrackballCamera camera, SDL_Event e) {
+
+        int mouseX, mouseY;
+        bool mouseDown;
+            switch(e.type) {
+
+                /* Clic souris */
+                case SDL_MOUSEBUTTONDOWN:
+                    mouseY = e.button.y;
+                    mouseX = e.button.x;
+                    mouseDown = true;
+                    break;
+                
+                case SDL_MOUSEBUTTONUP:
+                    mouseDown = false;
+                    break;
+            
+                case SDL_MOUSEMOTION:                
+                    if (mouseDown) {
+                        camera.rotateUp(e.motion.yrel);
+                        camera.rotateLeft(e.motion.xrel);
+                    }
+                    break;
+
+                case SDL_KEYDOWN:
+                    if (e.key.keysym.sym == SDLK_z) {
+                        camera.moveFront(5.f);
+                    }
+                    if (e.key.keysym.sym == SDLK_s) {
+                        camera.moveFront(-5.f);
+                    }
+                    if (e.key.keysym.sym == SDLK_q) {
+                        camera.moveLeft(-1.f);
+                    }
+                    if (e.key.keysym.sym == SDLK_d) {
+                        camera.moveLeft(1.f);
+                    }
+                    break;
+            }
+    }
