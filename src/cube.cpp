@@ -1,13 +1,14 @@
 #include "../include/cube.hpp"
 
 
-    Cube::Cube(glm::vec3 cursorPos) {
+    Cube::Cube(glm::vec3 cursorPos, glm::vec3 color) {
         //Set vertices coordinates with the position of the curosr
         float x = cursorPos.x;
         float y = cursorPos.y;
         float z = cursorPos.z;
 
         this->center = cursorPos;
+        this->cubeColor = color;
 
         std::vector<glm::vec3> tmp_vertices = { 
         glm::vec3(x-0.5f, y+0.5f, z-0.5f),
@@ -109,6 +110,10 @@
         glBindVertexArray(0);
     }
 
+    const glm::vec3 &Cube::getColor() {
+        return this->cubeColor;
+    }
+
        
     void Cube::drawCube() {
         //rebinder vao
@@ -146,9 +151,11 @@
     const void DrawAllCube(std::vector<Cube> &stockCube, glm::mat4 MVMatrix, glm::mat4 ProjMatrix, glm::mat4 ViewMatrix, glimac::Program m_Program) {
         m_Program.use();
         for (int i=0; i < stockCube.size(); i++) {
+            GLint uColor = glGetUniformLocation(m_Program.getGLId(), "uColor");
             GLint uMVPMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVPMatrix");
             GLint uMVMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVMatrix");
             GLint uNormalMatrix = glGetUniformLocation(m_Program.getGLId(), "uNormalMatrix");
+            glUniform3fv(uColor, 1, glm::value_ptr(stockCube[i].getColor()));
             glUniformMatrix4fv(uMVMatrix, 1, GL_FALSE, glm::value_ptr(MVMatrix));
             glUniformMatrix4fv(uNormalMatrix, 1, GL_FALSE, glm::value_ptr(glm::transpose(glm::inverse(MVMatrix))));
             glUniformMatrix4fv(uMVPMatrix, 1, GL_FALSE, glm::value_ptr(ProjMatrix * MVMatrix));

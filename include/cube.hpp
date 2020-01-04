@@ -22,15 +22,19 @@ class Cube {
         GLuint vbo;
         GLuint ibo;
 
+        //couleur
+        glm::vec3 cubeColor;
+
     public:
         //constructor 
         Cube(const Cube&) = default;
 	    // Cube& operator =(const Cube&);
 
-        Cube(glm::vec3 cursorPos);
+        Cube(glm::vec3 cursorPos, glm::vec3 color);
 
+        const glm::vec3 &getColor();
 
-        //Bind Vao Vbo and draw the cube
+        
         void drawCube();
 
         void deleteBuffer();
@@ -39,17 +43,11 @@ class Cube {
         void moveLeft(float delta);
         void moveUp(float delta);
         void moveDepth(float delta);
+
         
         //Destructor
         ~Cube();
-
-        //Check and change the status of the selection in order to use the cursor
-        bool getSelect();
-        void changeSelect();
 };
-
-    // void CubeLayer(std::vector<Cube> &Layer, glimac::FilePath applicationPath);
-    // void firstLayerDraw(std::vector<Cube> &Layer, glm::mat4 MVMatrix, glm::mat4 ProjMatrix, Light Sun, glm::mat4 ViewMatrix);
 
     //Draw all existing cubes stocked in the attribute stockCube of Grid Class
     const void DrawAllCube(std::vector<Cube> &stockCube, glm::mat4 MVMatrix, glm::mat4 ProjMatrix, glm::mat4 ViewMatrix, glimac::Program m_Program);

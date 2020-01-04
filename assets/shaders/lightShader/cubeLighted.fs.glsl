@@ -14,7 +14,7 @@ uniform float uShininess;
 //Working in the view space = product(vec3, ViewMatrix)
 uniform vec3 uLightDir_vs; //wi =  normalize (uLightDir_vs)
 uniform vec3 uLightIntensity; //Li
-// uniform vec3 uColor;
+uniform vec3 uColor;
 // uniform sampler2D uTexture;
 
 vec3 blinnPhong(vec3 uKd,vec3 uKs, float uShininess, vec3 uLightDir_vs, vec3 uLightIntensity) {
@@ -27,5 +27,5 @@ vec3 blinnPhong(vec3 uKd,vec3 uKs, float uShininess, vec3 uLightDir_vs, vec3 uLi
 
 void main() {
   // fFragColor = blinnPhong( uKd, uKs, uShininess, uLightDir_vs, uLightIntensity);
-  fFragColor = vec3(0.3,0.8,0.5);
+  fFragColor = uColor;
 }

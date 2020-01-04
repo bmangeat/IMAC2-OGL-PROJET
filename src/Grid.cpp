@@ -7,17 +7,17 @@
         return this->stockCube;
     }
 
-    void Grid::contenu() {
-        std::cout << this->g_location << std::endl;
+    std::vector<glm::vec3> &Grid::getVectorColor() {
+        return this->stockColor;
     }
 
-    void Grid::AddCube(const glm::vec3 &position) {
+    void Grid::AddCube(const glm::vec3 &position, const glm::vec3 &color) {
             int x=static_cast<int>(position.x) + 10;
             int y=static_cast<int>(position.y) + 10 ;
             int z=static_cast<int>(position.z) + 5;
             if (this->g_location[x][y][z] == 0)
             {
-                Cube newCube(position);
+                Cube newCube(position,color);
                 this->stockCube.push_back(newCube);
                 this->g_location[x][y][z] = this->stockCube.size();
             }

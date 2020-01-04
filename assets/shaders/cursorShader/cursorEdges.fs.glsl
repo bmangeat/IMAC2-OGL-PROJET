@@ -6,10 +6,11 @@ in vec3 vNormal_vs;
 
 out vec3 fFragColor;
 
-uniform bool uSelect;
+uniform int uSelect;
 
 void main() {
-  if (!uSelect)
+  if (uSelect == 0)
     fFragColor = vec3(1.0,0.5,0.5);
-  else fFragColor = vec3(0.5,0.5,1.0);
+  if (uSelect ==1 )
+    fFragColor = vec3(0.5,0.5,1.0);
 }

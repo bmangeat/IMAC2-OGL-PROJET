@@ -17,7 +17,7 @@ class Cursor {
         GLuint vbo;
         GLuint ibo; 
         bool cursorDisplay = true;
-        bool select =  false;
+        int select =  false;
         GLuint uSelect;
 
     public:
@@ -34,7 +34,7 @@ class Cursor {
         void moveDepth(float delta);
 
         //To check the state of bool select
-        const bool getSelect();
+        const int &getSelect();
         
         //To modify bool cursorDisplay
         void changeDisplay();
