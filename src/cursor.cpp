@@ -1,12 +1,12 @@
 #include "../include/cursor.hpp"
 
     Cursor::Cursor(glimac::FilePath applicationPath) {
-        //Definition du programme
-        this->CursorProgram = loadProgram(applicationPath.dirPath() + "../assets/shaders/3D.vs.glsl",
-                                        applicationPath.dirPath() + "../assets/shaders/cursorShader/cursorEdges.fs.glsl");
+        // //Definition du programme
+        // this->CursorProgram = loadProgram(applicationPath.dirPath() + "../assets/shaders/3D.vs.glsl",
+        //                                 applicationPath.dirPath() + "../assets/shaders/cursorShader/cursorEdges.fs.glsl");
 
-        this->uSelect = glGetUniformLocation(CursorProgram.getGLId(), "uSelect");
-        glUniform1i( this->uSelect, this->select);
+        // this->uSelect = glGetUniformLocation(CursorProgram.getGLId(), "uSelect");
+        // glUniform1i(this->uSelect, this->select);
 
         float x = this->c_position.x;
         float y = this->c_position.y;
@@ -170,7 +170,7 @@
         this->c_position.y +=delta;
     }
 
-    const bool Cursor::getSelect() {
+    const int &Cursor::getSelect() {
         return this->select;
     }
 
@@ -200,12 +200,14 @@
 
     void Cursor::selectCase(glimac::Program m_Program) {
         this->uSelect = glGetUniformLocation(m_Program.getGLId(), "uSelect");
-        if (this->select == true) {
-            this->select = false;
+        if (this->select == 1) {
+            this->select = 0;
+            std::cout << "false = " << this->select << std::endl;
             glUniform1i( this->uSelect,  this->select);
         }
         else {
-            this->select = true;
+            this->select = 1;
+            std::cout << "true = " << this->select << std::endl;
             glUniform1i( this->uSelect,  this->select);
         }
     }

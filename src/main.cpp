@@ -96,11 +96,10 @@ int main(int argc, char** argv) {
 
     //Creation Grid
     Grid worldGrid;
-    worldGrid.contenu();
-    worldGrid.AddCube(vec3(0,0,0));
-    worldGrid.AddCube(vec3(-2,0,0));
-    worldGrid.AddCube(vec3(2,0,0));
-    worldGrid.AddCube(vec3(0,2,0));
+    worldGrid.AddCube(vec3(0,0,0), vec3(0.1,0.2,0.4));
+    worldGrid.AddCube(vec3(-2,0,0), vec3(0.8,0.4,0.7));
+    worldGrid.AddCube(vec3(2,0,0),vec3(0.7,0.9,0.3));
+    worldGrid.AddCube(vec3(0,2,0), vec3(0.4,0.8,0.5));
 
     cout << worldGrid.getVectorCube().size() << endl;
 
@@ -121,6 +120,7 @@ int main(int argc, char** argv) {
     int mouseX, mouseY;
     bool mouseScrollDown;
     bool mouseLeftDown;
+    glm::vec3 attribColor;
 
     // Application loop:
     bool done = false;
@@ -196,6 +196,16 @@ int main(int argc, char** argv) {
                         if (e.key.keysym.sym == SDLK_z) {
                             worldCursor.moveDepth(1.f);
                         }
+                        if (e.key.keysym.sym == SDLK_r) {
+                            attribColor = worldGrid.getVectorColor()[0];
+                        }
+                        if (e.key.keysym.sym == SDLK_g) {
+                            attribColor = worldGrid.getVectorColor()[1];
+                        }
+                        if (e.key.keysym.sym == SDLK_b) {
+                            attribColor = worldGrid.getVectorColor()[2];
+                        }
+
 
                         //Tool to create and delete a cube
 
@@ -206,8 +216,8 @@ int main(int argc, char** argv) {
                         //     cout << "je suis là" << endl;
                         // }
                         if (e.key.keysym.sym == SDLK_SPACE) {
-                            if (worldCursor.getSelect()) {
-                                worldGrid.AddCube(worldCursor.getCursorPosition());
+                            if (worldCursor.getSelect() == 1) {
+                                worldGrid.AddCube(worldCursor.getCursorPosition(),attribColor);
                             }
                             cout << "je suis là" << endl;
                         }
