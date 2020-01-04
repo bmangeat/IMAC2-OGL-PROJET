@@ -4,13 +4,14 @@
 #include "./cube.hpp"
 #include "../libs/glimac/include/glm.hpp"
 #include "../libs/glimac/include/Program.hpp"
+#include "../libs/glimac/include/FilePath.hpp"
 
 
 class Grid {
     
     private:
         //Determine a fixed size to the world ( Width*Depth*Height = 20*20*10)
-        int g_location[20][20][10] = {-1};
+        int g_location[20][20][10] = {0};
         std::vector<Cube> stockCube;
         GLuint vao;
         GLuint vbo;
@@ -20,6 +21,7 @@ class Grid {
     public:
         Grid(const Grid&) = default;
         Grid();
+        void contenu();
 
         //To get the reference to the vector<Cube> attribute
         std::vector<Cube> &getVectorCube();

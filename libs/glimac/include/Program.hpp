@@ -7,13 +7,15 @@
 namespace glimac {
 
 class Program {
+
 public:
 	Program(): m_nGLId(glCreateProgram()) {
 	}
 
 	~Program() {
-		glDeleteProgram(m_nGLId);
+		//glDeleteProgram(m_nGLId);
 	}
+	
 
 	Program(Program&& rvalue): m_nGLId(rvalue.m_nGLId) {
 		rvalue.m_nGLId = 0;

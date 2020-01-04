@@ -23,19 +23,12 @@ class Cube {
         GLuint ibo;
 
     public:
-        glimac::Program CubeProgram;
-
         //constructor 
         Cube(const Cube&) = default;
 	    // Cube& operator =(const Cube&);
 
         Cube(glm::vec3 cursorPos);
 
-        //Creation Program use to link main.cpp to the shaders
-        void setCubeProgram(glimac::FilePath applicationPath);
-
-        //public attribute --> Impossible to pass in private because of it's definition in glimac
-        glimac::Program getCubeProgram();
 
         //Bind Vao Vbo and draw the cube
         void drawCube();
@@ -59,4 +52,4 @@ class Cube {
     // void firstLayerDraw(std::vector<Cube> &Layer, glm::mat4 MVMatrix, glm::mat4 ProjMatrix, Light Sun, glm::mat4 ViewMatrix);
 
     //Draw all existing cubes stocked in the attribute stockCube of Grid Class
-    const void DrawAllCube(std::vector<Cube> &stockCube, glm::mat4 MVMatrix, glm::mat4 ProjMatrix, glm::mat4 ViewMatrix);
+    const void DrawAllCube(std::vector<Cube> &stockCube, glm::mat4 MVMatrix, glm::mat4 ProjMatrix, glm::mat4 ViewMatrix, glimac::Program m_Program);

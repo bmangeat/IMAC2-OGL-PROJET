@@ -26,5 +26,6 @@ vec3 blinnPhong(vec3 uKd,vec3 uKs, float uShininess, vec3 uLightDir_vs, vec3 uLi
 
 
 void main() {
-  fFragColor = blinnPhong(uKd, uKs, uShininess, uLightDir_vs, uLightIntensity);
+  // fFragColor = blinnPhong( uKd, uKs, uShininess, uLightDir_vs, uLightIntensity);
+  fFragColor = vec3(0.3,0.8,0.5);
 }

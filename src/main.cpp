@@ -14,10 +14,41 @@
 #include "../include/cursor.hpp"
 #include "../include/Grid.hpp"
 
-
 using namespace glimac;
 using namespace glm;
 using namespace std;
+
+struct SceneProgram {
+    Program m_Program;
+
+    GLint uMVPMatrix;
+    GLint uMVMatrix;
+    GLint uNormalMatrix;
+
+    SceneProgram(const FilePath& applicationPath):
+        m_Program(loadProgram(applicationPath.dirPath() + "../assets/shaders/3D.vs.glsl",
+                              applicationPath.dirPath() + "../assets/shaders/lightShader/cubeLighted.fs.glsl")) {
+        uMVPMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVPMatrix");
+        uMVMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVMatrix");
+        uNormalMatrix = glGetUniformLocation(m_Program.getGLId(), "uNormalMatrix");
+    }
+};
+
+struct CursorProgram {
+    Program m_Program;
+
+    GLint uMVPMatrix;
+    GLint uMVMatrix;
+    GLint uNormalMatrix;
+
+    CursorProgram(const FilePath& applicationPath):
+        m_Program(loadProgram(applicationPath.dirPath() + "../assets/shaders/3D.vs.glsl",
+                              applicationPath.dirPath() + "../assets/shaders/cursorShader/cursorEdges.fs.glsl")) {
+        uMVPMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVPMatrix");
+        uMVMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVMatrix");
+        uNormalMatrix = glGetUniformLocation(m_Program.getGLId(), "uNormalMatrix");
+    }
+};
 
 int main(int argc, char** argv) {
     // Initialize SDL and open a window
@@ -33,22 +64,21 @@ int main(int argc, char** argv) {
     //Creation TrackballCamera
     TrackballCamera camera = TrackballCamera();
     
-    // Test light
-    vec3 Kd = vec3(linearRand (0.0,1.0),linearRand (0.0,1.0),linearRand (0.0,1.0));
-    vec3 Ks = vec3(linearRand (0.0,1.0),linearRand (0.0,1.0),linearRand (0.0,1.0));
-    float Shininess = linearRand (0.0,1.0);
-    vec3 LightDir= vec3(5.0,10.0,-5.0);
-    vec3 LightIntensity = vec3(1.0,1.0,1.0);
-    Light testLight(Kd, Ks, Shininess, LightDir, LightIntensity);
+
 
     //Loading shaders
     FilePath applicationPath(argv[0]);
-        Program tmp_program = loadProgram(applicationPath.dirPath() + "../assets/shaders/3D.vs.glsl",
-                                        applicationPath.dirPath() + "../assets/shaders/lightShader/cubeLighted.fs.glsl");
-        tmp_program.use();
+    SceneProgram SceneProgram(applicationPath);
+    CursorProgram CursorProgram(applicationPath);
 
-    
-    
+    // Test light
+    vec3 Kd = vec3(linearRand (0.0,1.0),linearRand (0.0,1.0),linearRand (0.0,1.0));
+    vec3 Ks = vec3(linearRand (0.0,1.0),linearRand (0.0,1.0),linearRand (0.0,1.0));
+    float Shininess = linearRand (0.0,10.0);
+    vec3 LightDir= vec3(1.0,1.0,1.0);
+    vec3 LightIntensity = vec3(0.50,0.50,0.50);
+    Light testLight(Kd, Ks, Shininess, LightDir, LightIntensity);
+
     cout << "OpenGL Version : " << glGetString(GL_VERSION) << endl;
     cout << "GLEW Version : " << glewGetString(GLEW_VERSION) << endl;
 
@@ -57,15 +87,18 @@ int main(int argc, char** argv) {
      *********************************/
 
     //definition locations variables uniformes
-    GLint uMVPMatrix = glGetUniformLocation(tmp_program.getGLId(), "uMVPMatrix");
-    GLint uMVMatrix = glGetUniformLocation(tmp_program.getGLId(), "uMVMatrix");
-    GLint uNormalMatrix = glGetUniformLocation(tmp_program.getGLId(), "uNormalMatrix");
-    testLight.lightInitUniVariable(tmp_program);
-
+    testLight.lightInitUniVariable(SceneProgram.m_Program);
 
     //Creation Grid
     Grid worldGrid;
-    
+    worldGrid.contenu();
+    worldGrid.AddCube(vec3(0,0,0));
+    worldGrid.AddCube(vec3(-2,0,0));
+    worldGrid.AddCube(vec3(2,0,0));
+    worldGrid.AddCube(vec3(0,2,0));
+
+    cout << worldGrid.getVectorCube().size() << endl;
+
     //Creation Cursor
     Cursor worldCursor(applicationPath);
     
@@ -77,6 +110,12 @@ int main(int argc, char** argv) {
     mat4 MVMatrix = camera.getViewMatrix();
 
     mat4 NormalMatrix = transpose(inverse(MVMatrix));
+
+    mat4 ViewMatrix = camera.getViewMatrix();
+
+    int mouseX, mouseY;
+    bool mouseScrollDown;
+    bool mouseLeftDown;
 
     // Application loop:
     bool done = false;
@@ -90,10 +129,89 @@ int main(int argc, char** argv) {
                     case SDL_QUIT:
                         done = true; // Leave the loop after this iteration
                         break;
-                }
+                
+                    /* Clic souris */
+                    case SDL_MOUSEBUTTONDOWN:
+                        mouseY = e.button.y;
+                        mouseX = e.button.x;
+                        if (e.button.button == SDL_BUTTON_LEFT)
+                            mouseLeftDown = true;
+                        if ( e.button.button == SDL_BUTTON_MIDDLE)
+                            mouseScrollDown = true;
+                        if ( e.button.button == SDL_BUTTON_RIGHT) {
+                            worldCursor.selectCase(CursorProgram.m_Program);
+                        }
+                        break;
+                    
+                    case SDL_MOUSEBUTTONUP:
+                        mouseLeftDown = false;
+                        mouseScrollDown = false;
+                        break;
+                
+                    case SDL_MOUSEMOTION:
+                        if (mouseLeftDown) {
+                            camera.moveLeft(e.motion.xrel);
+                            camera.moveUp(e.motion.yrel);
+                        }                
+                        if (mouseScrollDown) {
+                            camera.rotateUp(e.motion.yrel);
+                            camera.rotateLeft(e.motion.xrel);
+                        }
+                        break;
 
-                manageView(camera, e);
-                manageCursorPos(worldCursor,e);
+                    case SDL_MOUSEWHEEL:
+                    
+                        if(e.wheel.y > 0) // scroll up
+                        {
+                            camera.moveFront(5.f);
+                        }
+                        else if(e.wheel.y < 0) // scroll down
+                        {
+                            camera.moveFront(-5.f);
+                        }
+                    break;
+
+                    case SDL_KEYDOWN:
+                        //Cursor moves
+                        if (e.key.keysym.sym == SDLK_a) {
+                            worldCursor.moveUp(1.f);
+                        }
+                        if (e.key.keysym.sym == SDLK_e) {
+                            worldCursor.moveUp(-1.f);
+                        }
+                        if (e.key.keysym.sym == SDLK_q) {
+                            worldCursor.moveLeft(-1.f);
+                        }
+                        if (e.key.keysym.sym == SDLK_d) {
+                            worldCursor.moveLeft(1.f);
+                        }
+                        if (e.key.keysym.sym == SDLK_s) {
+                            worldCursor.moveDepth(-1.f);
+                        }
+                        if (e.key.keysym.sym == SDLK_z) {
+                            worldCursor.moveDepth(1.f);
+                        }
+
+                        //Tool to create and delete a cube
+
+                        //Select a case
+                        // if (e.key.keysym.sym == SDLK_RCTRL) {
+                        //     cout << "je suis là" << endl;
+                        //     worldCursor.selectCase();
+                        //     cout << "je suis là" << endl;
+                        // }
+                        if (e.key.keysym.sym == SDLK_SPACE) {
+                            if (worldCursor.getSelect()) {
+                                worldGrid.AddCube(worldCursor.getCursorPosition());
+                            }
+                            cout << "je suis là" << endl;
+                        }
+
+                        
+
+                    break;
+
+                }
             }
 
         /*********************************
@@ -104,10 +222,15 @@ int main(int argc, char** argv) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         MVMatrix = camera.getViewMatrix();
-        // testLight.lightApplication(camera.getViewMatrix());
-        //Lié aux pb de push back
-        testLight.lightApplication(camera.getViewMatrix());
-        DrawAllCube(worldGrid.getVectorCube(), MVMatrix, ProjMatrix, camera.getViewMatrix());
+        testLight.lightApplication(ViewMatrix);
+        SceneProgram.m_Program.use();
+        //worldCursor.CursorProgram.use();
+        CursorProgram.m_Program.use();
+        worldCursor.actualizeVertex();
+        worldCursor.drawCursor( MVMatrix, ProjMatrix, CursorProgram.m_Program);
+
+        SceneProgram.m_Program.use();
+        DrawAllCube(worldGrid.getVectorCube(), MVMatrix, ProjMatrix, camera.getViewMatrix(), SceneProgram.m_Program);
         
         // Update the display
         windowManager.swapBuffers();

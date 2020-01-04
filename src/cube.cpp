@@ -2,7 +2,6 @@
 
 
     Cube::Cube(glm::vec3 cursorPos) {
-
         //Set vertices coordinates with the position of the curosr
         float x = cursorPos.x;
         float y = cursorPos.y;
@@ -43,7 +42,7 @@
         //Binding this->vbo
         glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
 
-        glBufferData(GL_ARRAY_BUFFER, (this->vertices.size()+1) * sizeof(glimac::ShapeVertex), this->vertices.data(), GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, this->vertices.size() * sizeof(glimac::ShapeVertex), this->vertices.data(), GL_STATIC_DRAW);
 
         //débinder
         glBindBuffer(GL_ARRAY_BUFFER,0);
@@ -110,11 +109,6 @@
         glBindVertexArray(0);
     }
 
-    void Cube::setCubeProgram(glimac::FilePath applicationPath) {
-        this->CubeProgram = loadProgram(applicationPath.dirPath() + "../assets/shaders/3D.vs.glsl",
-                                        applicationPath.dirPath() + "../assets/shaders/lightShader/cubeLighted.fs.glsl");
-        this->CubeProgram.use();
-    }
        
     void Cube::drawCube() {
         //rebinder vao
@@ -149,13 +143,12 @@
 
     Cube::~Cube() {}
 
-    const void DrawAllCube(std::vector<Cube> &stockCube, glm::mat4 MVMatrix, glm::mat4 ProjMatrix, glm::mat4 ViewMatrix) {
+    const void DrawAllCube(std::vector<Cube> &stockCube, glm::mat4 MVMatrix, glm::mat4 ProjMatrix, glm::mat4 ViewMatrix, glimac::Program m_Program) {
+        m_Program.use();
         for (int i=0; i < stockCube.size(); i++) {
-            stockCube[i].CubeProgram.use();
-
-            GLint uMVPMatrix = glGetUniformLocation(stockCube[i].CubeProgram.getGLId(), "uMVPMatrix");
-            GLint uMVMatrix = glGetUniformLocation(stockCube[i].CubeProgram.getGLId(), "uMVMatrix");
-            GLint uNormalMatrix = glGetUniformLocation(stockCube[i].CubeProgram.getGLId(), "uNormalMatrix");
+            GLint uMVPMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVPMatrix");
+            GLint uMVMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVMatrix");
+            GLint uNormalMatrix = glGetUniformLocation(m_Program.getGLId(), "uNormalMatrix");
             glUniformMatrix4fv(uMVMatrix, 1, GL_FALSE, glm::value_ptr(MVMatrix));
             glUniformMatrix4fv(uNormalMatrix, 1, GL_FALSE, glm::value_ptr(glm::transpose(glm::inverse(MVMatrix))));
             glUniformMatrix4fv(uMVPMatrix, 1, GL_FALSE, glm::value_ptr(ProjMatrix * MVMatrix));
