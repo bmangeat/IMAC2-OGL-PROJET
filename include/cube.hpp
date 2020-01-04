@@ -4,7 +4,6 @@
 #include "../libs/glimac/include/Program.hpp"
 #include "../libs/glimac/include/FilePath.hpp"
 #include "../libs/glimac/include/common.hpp"
-#include "./light.hpp"
 #include <vector>
 #include <string>
 #include <iostream>
@@ -12,30 +11,24 @@
 #include <GL/glew.h>
 
 class Cube {
+
     private:
         std::vector<glimac::ShapeVertex> vertices;
+        //To stock the position given by the cursor when we create the cube
+        glm::vec3 center;
+
+        //To draw the Cube
         GLuint vao;
         GLuint vbo;
         GLuint ibo;
-        bool select = false;
 
     public:
-        glimac::Program CubeProgram;
-
         //constructor 
         Cube(const Cube&) = default;
 	    // Cube& operator =(const Cube&);
 
-        Cube();
+        Cube(glm::vec3 cursorPos);
 
-        //Bind Vao, Vbo & IBO Again when the vertices change
-        void actualizeVertex();
-
-        //Creation Program use to link main.cpp to the shaders
-        void setCubeProgram(glimac::FilePath applicationPath);
-
-        //public attribute --> Impossible to pass in private because of it's definition in glimac
-        glimac::Program getCubeProgram();
 
         //Bind Vao Vbo and draw the cube
         void drawCube();
@@ -55,5 +48,8 @@ class Cube {
         void changeSelect();
 };
 
-    void CubeLayer(std::vector<Cube> &Layer, glimac::FilePath applicationPath);
-    void firstLayerDraw(std::vector<Cube> &Layer, glm::mat4 MVMatrix, glm::mat4 ProjMatrix, Light Sun, glm::mat4 ViewMatrix);
+    // void CubeLayer(std::vector<Cube> &Layer, glimac::FilePath applicationPath);
+    // void firstLayerDraw(std::vector<Cube> &Layer, glm::mat4 MVMatrix, glm::mat4 ProjMatrix, Light Sun, glm::mat4 ViewMatrix);
+
+    //Draw all existing cubes stocked in the attribute stockCube of Grid Class
+    const void DrawAllCube(std::vector<Cube> &stockCube, glm::mat4 MVMatrix, glm::mat4 ProjMatrix, glm::mat4 ViewMatrix, glimac::Program m_Program);

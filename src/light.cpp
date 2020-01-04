@@ -13,7 +13,8 @@
       l_LightDir(LightDir),
       l_LightIntensity(LightIntensity) 
 
-      {}
+      {
+      }
 
     void Light::moveUp(float delta) {
         this->l_LightDir.x += delta;
@@ -27,12 +28,13 @@
         this->l_LightDir.y += delta;
     }
 
-    void Light::lightInitUniVariable(glimac::Program sceneProgram) {
-        this->l_uKd = glGetUniformLocation(sceneProgram.getGLId(), "uKd");
-        this->l_uKs = glGetUniformLocation(sceneProgram.getGLId(), "uKs");
-        this->l_uShininess = glGetUniformLocation(sceneProgram.getGLId(), "uShininess");
-        this->l_uLightDir_vs = glGetUniformLocation(sceneProgram.getGLId(), "uLightDir_vs");
-        this->l_uLightIntensity = glGetUniformLocation(sceneProgram.getGLId(), "uLightIntensity");
+    void Light::lightInitUniVariable(glimac::Program m_Program) {
+        m_Program.use();
+        this->l_uKd = glGetUniformLocation(m_Program.getGLId(), "uKd");
+        this->l_uKs = glGetUniformLocation(m_Program.getGLId(), "uKs");
+        this->l_uShininess = glGetUniformLocation(m_Program.getGLId(), "uShininess");
+        this->l_uLightDir_vs = glGetUniformLocation(m_Program.getGLId(), "uLightDir_vs");
+        this->l_uLightIntensity = glGetUniformLocation(m_Program.getGLId(), "uLightIntensity");
     }
     
     void Light::lightApplication(glm::mat4 ViewMatrix) {
