@@ -4,26 +4,15 @@
 #include "../libs/glimac/include/Program.hpp"
 #include "../libs/glimac/include/FilePath.hpp"
 #include "../libs/glimac/include/common.hpp"
-#include <vector>
-#include <string>
 #include <iostream>
-#include <cmath>
+#include <vector>
 #include <GL/glew.h>
+#include "forme3D.hpp"
 
-class Cube {
-
+class Cube : public forme3D
+{
     private:
-        std::vector<glimac::ShapeVertex> vertices;
-        //To stock the position given by the cursor when we create the cube
-        glm::vec3 center;
-
-        //To draw the Cube
-        GLuint vao;
-        GLuint vbo;
-        GLuint ibo;
-
-        //couleur
-        glm::vec3 cubeColor;
+        //Pour la future texture si on y arrive
 
     public:
         //constructor 
@@ -31,19 +20,9 @@ class Cube {
 	    // Cube& operator =(const Cube&);
 
         Cube(glm::vec3 cursorPos, glm::vec3 color);
-
-        const glm::vec3 &getColor();
-
         
-        void drawCube();
-
-        void deleteBuffer();
-
-        //To move the cube in the space
-        void moveLeft(float delta);
-        void moveUp(float delta);
-        void moveDepth(float delta);
-
+        //Redefinition
+        void draw();
         
         //Destructor
         ~Cube();

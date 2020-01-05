@@ -14,7 +14,7 @@
 #include "../include/Interpolation.h"
 #include <Eigen/Dense>
 
-
+#include "../include/forme3D.hpp"
 #include "../include/light.hpp"
 #include "../include/cursor.hpp"
 #include "../include/Grid.hpp"
@@ -104,7 +104,7 @@ int main(int argc, char** argv) {
     cout << worldGrid.getVectorCube().size() << endl;
 
     //Creation Cursor
-    Cursor worldCursor(applicationPath);
+    Cursor worldCursor();
     
     // GPU checks depth
     glEnable(GL_DEPTH_TEST);
@@ -242,7 +242,7 @@ int main(int argc, char** argv) {
         //worldCursor.CursorProgram.use();
         CursorProgram.m_Program.use();
         worldCursor.actualizeVertex();
-        worldCursor.drawCursor( MVMatrix, ProjMatrix, CursorProgram.m_Program);
+        worldCursor.draw( MVMatrix, ProjMatrix, CursorProgram.m_Program);
 
         SceneProgram.m_Program.use();
         DrawAllCube(worldGrid.getVectorCube(), MVMatrix, ProjMatrix, camera.getViewMatrix(), SceneProgram.m_Program);
