@@ -101,15 +101,17 @@ int main(int argc, char** argv) {
     //Creation Grid
     Grid worldGrid;
 
-    Interpolation RBF(3);
-    RBF.generateCubes(worldGrid);
 
-/*    worldGrid.AddCube(vec3(0,0,0), vec3(0.1,0.2,0.4));
+
+    worldGrid.AddCube(vec3(0,0,0), vec3(0.1,0.2,0.4));
     worldGrid.AddCube(vec3(-2,0,0), vec3(0.8,0.4,0.7));
     worldGrid.AddCube(vec3(2,0,0),vec3(0.7,0.9,0.3));
-    worldGrid.AddCube(vec3(0,2,0), vec3(0.4,0.8,0.5));*/
+    worldGrid.AddCube(vec3(0,2,0), vec3(0.4,0.8,0.5));
 
-   // cout << worldGrid.getVectorCube().size() << endl;
+    // RBF Générator
+ /*   Interpolation RBF(3);
+    RBF.generateCubes(worldGrid);
+*/
 
     //Creation Cursor
     Cursor worldCursor(applicationPath);

@@ -32,6 +32,7 @@ Eigen::VectorXd Interpolation::computeOmegas() {
     controlPoints = generateControlPoint();
     weightControlPoint = generateWeightControlPoint();
 
+
     Eigen::MatrixXd phiMatrix = Eigen::MatrixXd::Zero(controlPoints.size(), controlPoints.size());
 
     // Parse our matrix in order to fill with distance between two control points
@@ -41,6 +42,7 @@ Eigen::VectorXd Interpolation::computeOmegas() {
         }
     }
 
+
     return phiMatrix.inverse() * weightControlPoint;
 }
 
@@ -48,9 +50,8 @@ double Interpolation::evaluatePoint(glm::vec3 x) {
 
     // ux is the weight on the point X
     double ux = 0.f;
-    Eigen::VectorXd omegas = computeOmegas();
     for (int i = 0; i < controlPoints.size(); ++i) {
-        ux = omegas(i) * phiDistance(x, controlPoints[i]);
+        ux += omegas(i) * phiDistance(x, controlPoints[i]);
     }
 
     return ux;
@@ -85,28 +86,46 @@ Eigen::VectorXd Interpolation::generateWeightControlPoint() {
 
     std::ranlux24_base ranlux24Generator(seed);
 
-    std::uniform_int_distribution<int> uniformIntDistribution(-5, 5);
-    for (size_t i = 0; i < _numberControlPoint; ++i) {
 
+    std::uniform_int_distribution<int> uniformIntDistribution(-10, 10);
+    for (size_t i = 0; i < _numberControlPoint; ++i) {
         weightControlPointVec(i) = double(uniformIntDistribution(ranlux24Generator));
     }
+
 
     return weightControlPointVec;
 }
 
-void Interpolation::generateCubes(Grid& grid) {
+glm::vec3 Interpolation::generateColor() {
 
-    glm::vec3 colorCube(0.8, 0.7, 0.4);
-    computeOmegas();
-    for (int i = 0; i < 20; ++i) {
-        for (int j = 0; j < 20; ++j) {
-            for (int k = 0; k < 10; ++k) {
+    // select seed from time
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+
+    std::ranlux24_base ranlux24Generator(seed);
+
+    std::uniform_real_distribution<double> uniformDoubleDistribution(0, 1);
+
+    glm::vec3 color(uniformDoubleDistribution(ranlux24Generator),
+                    uniformDoubleDistribution(ranlux24Generator),
+                    uniformDoubleDistribution(ranlux24Generator));
+
+
+    return color;
+}
+
+void Interpolation::generateCubes(Grid &grid) {
+    omegas = computeOmegas();
+    refreshGrid(grid);
+
+    for (int i = -9; i < 10; ++i) {
+        for (int j = -9; j < 10; ++j) {
+            for (int k = -4; k < 5; ++k) {
                 glm::vec3 currentPoint(i, j, k);
                 double weightPoint = evaluatePoint(currentPoint);
+                std::cout << weightPoint << std::endl;
 
-                if( weightPoint >= 0) {
-                    std::cout << currentPoint << std::endl;
-                    //grid.AddCube(currentPoint, colorCube);
+                if (weightPoint >= 0) {
+                    grid.AddCube(currentPoint, generateColor());
                 }
             }
         }
@@ -114,6 +133,21 @@ void Interpolation::generateCubes(Grid& grid) {
     }
 
 }
+
+void Interpolation::refreshGrid(Grid &grid) {
+
+    for (int i = -9; i < 10; ++i) {
+        for (int j = -9; j < 10; ++j) {
+            for (int k = -4; k < 5; ++k) {
+                grid.deleteCube(glm::vec3(i,j,k));
+            }
+        }
+
+    }
+
+}
+
+
 
 
 

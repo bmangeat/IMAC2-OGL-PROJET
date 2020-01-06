@@ -39,6 +39,7 @@ private:
       Variable can store the number of control's points desired
     */
     size_t _numberControlPoint;
+    Eigen::VectorXd omegas;
 
     //! Vector of control's points
     /*!
@@ -85,5 +86,11 @@ private:
 
     //! Generation function : (Control's) Weight's points
     Eigen::VectorXd generateWeightControlPoint();
+
+    //! Generation function : Colors points
+    glm::vec3 generateColor();
+
+    void refreshGrid(Grid& grid);
+
 
 };
