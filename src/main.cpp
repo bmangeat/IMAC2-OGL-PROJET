@@ -72,7 +72,7 @@ int main(int argc, char** argv) {
 
 
     // Declaration of ImGui Interface
-    Interface imGuiInterface(windowManager.window, &windowManager.openglContext);
+    //Interface imGuiInterface(windowManager.window, &windowManager.openglContext);
 
 
     //Loading shaders
@@ -100,15 +100,20 @@ int main(int argc, char** argv) {
 
     //Creation Grid
     Grid worldGrid;
-    worldGrid.AddCube(vec3(0,0,0), vec3(0.1,0.2,0.4));
+
+    Interpolation RBF(3);
+    RBF.generateCubes(worldGrid);
+
+/*    worldGrid.AddCube(vec3(0,0,0), vec3(0.1,0.2,0.4));
     worldGrid.AddCube(vec3(-2,0,0), vec3(0.8,0.4,0.7));
     worldGrid.AddCube(vec3(2,0,0),vec3(0.7,0.9,0.3));
-    worldGrid.AddCube(vec3(0,2,0), vec3(0.4,0.8,0.5));
+    worldGrid.AddCube(vec3(0,2,0), vec3(0.4,0.8,0.5));*/
 
-    cout << worldGrid.getVectorCube().size() << endl;
+   // cout << worldGrid.getVectorCube().size() << endl;
 
     //Creation Cursor
     Cursor worldCursor(applicationPath);
+
 
 
     
@@ -253,9 +258,9 @@ int main(int argc, char** argv) {
         SceneProgram.m_Program.use();
         DrawAllCube(worldGrid.getVectorCube(), MVMatrix, ProjMatrix, camera.getViewMatrix(), SceneProgram.m_Program);
 
-        imGuiInterface.CreateInterface(windowManager.window);
-        imGuiInterface.DrawInterface(windowManager.window, worldCursor, worldGrid, attribColor);
-        imGuiInterface.RenderInterface();
+        //imGuiInterface.CreateInterface(windowManager.window);
+        //imGuiInterface.DrawInterface(windowManager.window, worldCursor, worldGrid, attribColor);
+        //imGuiInterface.RenderInterface();
         // Update the display
         windowManager.swapBuffers();
     }

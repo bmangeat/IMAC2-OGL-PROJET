@@ -50,7 +50,7 @@ double Interpolation::evaluatePoint(glm::vec3 x) {
     double ux = 0.f;
     Eigen::VectorXd omegas = computeOmegas();
     for (int i = 0; i < controlPoints.size(); ++i) {
-        ux = omegas(i) * phiDistance(x,controlPoints[i]);
+        ux = omegas(i) * phiDistance(x, controlPoints[i]);
     }
 
     return ux;
@@ -95,11 +95,24 @@ Eigen::VectorXd Interpolation::generateWeightControlPoint() {
 }
 
 void Interpolation::generateCubes(Grid grid) {
+    grid.AddCube(glm::vec3(0,0,0), glm::vec3(0.1,0.2,0.4));
+    /*glm::vec3 colorCube(0.8, 0.7, 0.4);
     computeOmegas();
-    for (int i = 0; i < grid.getVectorCube().size() ; ++i) {
-        //evaluatePoint(grid.getVectorCube()[i].)
-    }
-    grid.getVectorCube(); //  std::vector<Cube>
+    grid.AddCube(glm::vec3(0,0,0),colorCube);
+    for (int i = 0; i < 21; ++i) {
+        for (int j = 0; j < 21; ++j) {
+            for (int k = 0; k < 11; ++k) {
+                glm::vec3 currentPoint(i, j, k);
+                double weightPoint = evaluatePoint(currentPoint);
+
+                if( weightPoint >= 0) {
+                    //std::cout << currentPoint << std::endl;
+                    //grid.AddCube(currentPoint, colorCube);
+                }
+            }
+        }
+
+    }*/
 
 }
 
