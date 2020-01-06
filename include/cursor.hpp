@@ -16,7 +16,6 @@ class Cursor : public forme3D
         bool cursorDisplay = true;
         bool select =  false;
         glm::vec3 noSelectedColor;
-        GLuint uSelect;
 
     public:
         Cursor(const Cursor&) = default; 
@@ -25,10 +24,8 @@ class Cursor : public forme3D
         //Redefinition of motherClass
         void setVertices();
 
-        const glm::vec3 &getCursorPosition();
-
         //To check the state of bool select
-        const int &getSelect();
+        const bool &getSelect();
         
         //To modify bool cursorDisplay
         void changeDisplay();
@@ -40,7 +37,7 @@ class Cursor : public forme3D
         void draw(glm::mat4 MVMatrix, glm::mat4 ProjMatrix, glimac::Program curProg) ;
         
         //Modify the status of the attribute "select"
-        void selectCase(glimac::Program m_Program);
+        void selectCase();
 
         ~Cursor() {} ;
 };

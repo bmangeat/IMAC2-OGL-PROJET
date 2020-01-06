@@ -4,8 +4,8 @@
     {
         this->setCenter(glm::vec3(0,0,0));
         this->setVertices();
-        this->setColor(glm::vec3(0.2,0.2,0.8));
-        this->noSelectedColor = glm::vec3(0.8,0.2,0.2);
+        this->setColor(glm::vec3(0.1,0.0,0.0));
+        this->noSelectedColor = glm::vec3(1.0,0.0,0.0);
 
         //Tableau d'indices
         this->f_index = {
@@ -54,13 +54,18 @@
         }
     }
 
-    const int &Cursor::getSelect() {
+    const bool &Cursor::getSelect() {
         return this->select;
     }
 
 
     void Cursor::draw( glm::mat4 MVMatrix, glm::mat4 ProjMatrix, glimac::Program curProg){
+        curProg.use();
         if (this->cursorDisplay == true) {
+            GLint uColor = glGetUniformLocation(curProg.getGLId(), "uColor");
+            if (this->select == true)
+                glUniform3fv(uColor,1, glm::value_ptr(this->getColor()));
+            else glUniform3fv(uColor,1,glm::value_ptr(this->noSelectedColor));
             GLint uMVPMatrix = glGetUniformLocation(curProg.getGLId(), "uMVPMatrix");
             GLint uMVMatrix = glGetUniformLocation(curProg.getGLId(), "uMVMatrix");
             GLint uNormalMatrix = glGetUniformLocation(curProg.getGLId(), "uNormalMatrix");
@@ -79,17 +84,14 @@
         else this->cursorDisplay = true;
     }
 
-    void Cursor::selectCase(glimac::Program m_Program) {
-        this->uSelect = glGetUniformLocation(m_Program.getGLId(), "uSelect");
+    void Cursor::selectCase() {
         if (this->select == true) {
             this->select = false;
             std::cout << "false = " << this->select << std::endl;
-            glUniform1i( this->uSelect,  this->select);
         }
         else {
             this->select = true;
             std::cout << "true = " << this->select << std::endl;
-            glUniform1i( this->uSelect,  this->select);
         }
     }
 

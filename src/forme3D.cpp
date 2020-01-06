@@ -164,26 +164,31 @@ void forme3D::bindVaoIbo()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->f_ibo);
 };
 
-void forme3D::moveUp(float delta)
+void forme3D::moveDepth(float delta)
 {
     for (int i = 0; i < this->f_vertices.size(); i++)
     {
         this->f_vertices[i].position.z += delta;
     }
+    std::cout << "moveDepth axe z" << std::endl;
     this->f_center.z += delta;
 }
 
 void forme3D::moveLeft(float delta)
 {
     for (int i = 0; i < this->f_vertices.size(); i++)
+    {
         this->f_vertices[i].position.x += delta;
+    }
     this->f_center.x += delta;
 }
 
-void forme3D::moveDepth(float delta)
+void forme3D::moveUp(float delta)
 {
     for (int i = 0; i < this->f_vertices.size(); i++)
+    {
         this->f_vertices[i].position.y += delta;
+    }
     this->f_center.y += delta;
 }
 

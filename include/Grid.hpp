@@ -31,12 +31,14 @@ class Grid {
         void AddCube(const glm::vec3 &position, const glm::vec3 &color);
         void deleteCube(const glm::vec3 &position);
 
+        void outofWorld(const glm::vec3 &position);
+
         //Modify the bool gridDisplay
         //void displayGrid();
 
         //To draw the grill if the bool Griddisplay is true
         //void drawGrid();
 
-        ~Grid() = default;
+        ~Grid();
         
 };

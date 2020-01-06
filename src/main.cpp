@@ -100,7 +100,7 @@ int main(int argc, char** argv) {
     worldGrid.AddCube(vec3(2,0,0),vec3(0.7,0.9,0.3));
     worldGrid.AddCube(vec3(0,2,0), vec3(0.4,0.8,0.5));
 
-    cout << worldGrid.getVectorCube().size() << endl;
+    cout << "Taille stockCube = " << worldGrid.getVectorCube().size() << endl;
 
     //Creation Cursor
     Cursor worldCursor;
@@ -143,7 +143,7 @@ int main(int argc, char** argv) {
                         if ( e.button.button == SDL_BUTTON_MIDDLE)
                             mouseScrollDown = true;
                         if ( e.button.button == SDL_BUTTON_RIGHT) {
-                            worldCursor.selectCase(CursorProgram.m_Program);
+                            worldCursor.selectCase();
                         }
                         break;
                     
@@ -177,10 +177,10 @@ int main(int argc, char** argv) {
 
                     case SDL_KEYDOWN:
                         //Cursor moves
-                        if (e.key.keysym.sym == SDLK_a) {
+                        if (e.key.keysym.sym == SDLK_z) {
                             worldCursor.moveUp(1.f);
                         }
-                        if (e.key.keysym.sym == SDLK_e) {
+                        if (e.key.keysym.sym == SDLK_s) {
                             worldCursor.moveUp(-1.f);
                         }
                         if (e.key.keysym.sym == SDLK_q) {
@@ -189,10 +189,10 @@ int main(int argc, char** argv) {
                         if (e.key.keysym.sym == SDLK_d) {
                             worldCursor.moveLeft(1.f);
                         }
-                        if (e.key.keysym.sym == SDLK_s) {
+                        if (e.key.keysym.sym == SDLK_e) {
                             worldCursor.moveDepth(-1.f);
                         }
-                        if (e.key.keysym.sym == SDLK_z) {
+                        if (e.key.keysym.sym == SDLK_a) {
                             worldCursor.moveDepth(1.f);
                         }
                         if (e.key.keysym.sym == SDLK_r) {
@@ -204,21 +204,16 @@ int main(int argc, char** argv) {
                         if (e.key.keysym.sym == SDLK_b) {
                             attribColor = worldGrid.getVectorColor()[2];
                         }
+                        cout <<"position curseur " << worldCursor.getCenter() << endl;
 
 
                         //Tool to create and delete a cube
-
-                        //Select a case
-                        // if (e.key.keysym.sym == SDLK_RCTRL) {
-                        //     cout << "je suis là" << endl;
-                        //     worldCursor.selectCase();
-                        //     cout << "je suis là" << endl;
-                        // }
                         if (e.key.keysym.sym == SDLK_SPACE) {
-                            if (worldCursor.getSelect() == 1) {
+                            if (worldCursor.getSelect() == true) {
                                 worldGrid.AddCube(worldCursor.getCenter(),attribColor);
+                                cout << "select = " << worldCursor.getSelect() << endl;
+                                cout << worldGrid.getVectorColor().size() << endl;
                             }
-                            cout << "je suis là" << endl;
                         }
 
                         
@@ -239,16 +234,15 @@ int main(int argc, char** argv) {
         testLight.lightApplication(ViewMatrix);
         SceneProgram.m_Program.use();
         //worldCursor.CursorProgram.use();
-        CursorProgram.m_Program.use();
         worldCursor.actualizeVertex();
         worldCursor.draw( MVMatrix, ProjMatrix, CursorProgram.m_Program);
 
-        SceneProgram.m_Program.use();
         DrawAllCube(worldGrid.getVectorCube(), MVMatrix, ProjMatrix, camera.getViewMatrix(), SceneProgram.m_Program);
         
         // Update the display
         windowManager.swapBuffers();
     }
+    worldCursor.deleteBuffer();
     
     return EXIT_SUCCESS;
 }
