@@ -8,6 +8,7 @@
 #include "../libs/glimac/include/Image.hpp"
 #include <vector>
 #include "../include/TrackballCamera.hpp"
+#include "../include/Interface.hpp"
 
 #include "../include/cube.hpp"
 
@@ -68,7 +69,10 @@ int main(int argc, char** argv) {
 
     //Creation TrackballCamera
     TrackballCamera camera = TrackballCamera();
-    
+
+
+    // Declaration of ImGui Interface
+    Interface imGuiInterface(windowManager.window, &windowManager.openglContext);
 
 
     //Loading shaders
@@ -105,6 +109,8 @@ int main(int argc, char** argv) {
 
     //Creation Cursor
     Cursor worldCursor(applicationPath);
+
+
     
     // GPU checks depth
     glEnable(GL_DEPTH_TEST);
@@ -246,7 +252,10 @@ int main(int argc, char** argv) {
 
         SceneProgram.m_Program.use();
         DrawAllCube(worldGrid.getVectorCube(), MVMatrix, ProjMatrix, camera.getViewMatrix(), SceneProgram.m_Program);
-        
+
+        imGuiInterface.CreateInterface(windowManager.window);
+        imGuiInterface.DrawInterface(windowManager.window, worldCursor, worldGrid, attribColor);
+        imGuiInterface.RenderInterface();
         // Update the display
         windowManager.swapBuffers();
     }
