@@ -33,6 +33,7 @@ class Cube {
         Cube(glm::vec3 cursorPos, glm::vec3 color);
 
         const glm::vec3 &getColor();
+        const glm::vec3 &getPos();
 
         
         void drawCube();
