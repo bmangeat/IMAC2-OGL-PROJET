@@ -29,7 +29,7 @@ public:
     */
     double evaluatePoint(glm::vec3 x);
 
-    void generateCubes(Grid grid);
+    void generateCubes(Grid& grid);
 
 
 private:

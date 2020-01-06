@@ -94,25 +94,24 @@ Eigen::VectorXd Interpolation::generateWeightControlPoint() {
     return weightControlPointVec;
 }
 
-void Interpolation::generateCubes(Grid grid) {
-    grid.AddCube(glm::vec3(0,0,0), glm::vec3(0.1,0.2,0.4));
-    /*glm::vec3 colorCube(0.8, 0.7, 0.4);
+void Interpolation::generateCubes(Grid& grid) {
+
+    glm::vec3 colorCube(0.8, 0.7, 0.4);
     computeOmegas();
-    grid.AddCube(glm::vec3(0,0,0),colorCube);
-    for (int i = 0; i < 21; ++i) {
-        for (int j = 0; j < 21; ++j) {
-            for (int k = 0; k < 11; ++k) {
+    for (int i = 0; i < 20; ++i) {
+        for (int j = 0; j < 20; ++j) {
+            for (int k = 0; k < 10; ++k) {
                 glm::vec3 currentPoint(i, j, k);
                 double weightPoint = evaluatePoint(currentPoint);
 
                 if( weightPoint >= 0) {
-                    //std::cout << currentPoint << std::endl;
+                    std::cout << currentPoint << std::endl;
                     //grid.AddCube(currentPoint, colorCube);
                 }
             }
         }
 
-    }*/
+    }
 
 }
 
