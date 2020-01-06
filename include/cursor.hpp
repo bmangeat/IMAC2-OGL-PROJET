@@ -42,5 +42,5 @@ class Cursor : public forme3D
         //Modify the status of the attribute "select"
         void selectCase(glimac::Program m_Program);
 
-        ~Cursor() override = default;
+        ~Cursor() {} ;
 };

@@ -17,15 +17,15 @@ class Cube : public forme3D
     public:
         //constructor 
         Cube(const Cube&) = default;
-	    // Cube& operator =(const Cube&);
+	    Cube &operator=(const Cube&);
 
         Cube(glm::vec3 cursorPos, glm::vec3 color);
         
         //Redefinition
-        void draw() override;
+        void draw();
         
         //Destructor
-        ~Cube() override = default;
+        ~Cube() {};
 };
 
     //Draw all existing cubes stocked in the attribute stockCube of Grid Class

@@ -216,7 +216,7 @@ int main(int argc, char** argv) {
                         // }
                         if (e.key.keysym.sym == SDLK_SPACE) {
                             if (worldCursor.getSelect() == 1) {
-                                worldGrid.AddCube(worldCursor.getCursorPosition(),attribColor);
+                                worldGrid.AddCube(worldCursor.getCenter(),attribColor);
                             }
                             cout << "je suis là" << endl;
                         }

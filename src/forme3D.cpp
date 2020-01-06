@@ -1,7 +1,5 @@
 #include "../include/forme3D.hpp"
 
-forme3D::forme3D() {};
-
 void forme3D::initializeBuffers()
 {
     //this->f_vbo creation

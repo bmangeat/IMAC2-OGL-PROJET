@@ -23,7 +23,6 @@ class Grid {
     public:
         Grid(const Grid&) = default;
         Grid();
-        void contenu();
 
         //To get the reference to the vector<Cube> attribute
         std::vector<Cube> &getVectorCube();

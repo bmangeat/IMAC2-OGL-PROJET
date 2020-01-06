@@ -1,6 +1,6 @@
 #include "../include/cursor.hpp"
 
-    Cursor::Cursor() : forme3D()
+    Cursor::Cursor()
     {
         this->setCenter(glm::vec3(0,0,0));
         this->setVertices();

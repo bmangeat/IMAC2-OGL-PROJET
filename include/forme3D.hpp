@@ -22,8 +22,8 @@ class forme3D {
     public :
         //constructor
         forme3D(const forme3D&) = default;
-        //forme3D &operator=(const forme3D&);
-        forme3D();
+        forme3D &operator=(const forme3D&);
+        forme3D() {};
         const glm::vec3 &getCenter();
         const glm::vec3 &getColor();
         void initializeBuffers();
@@ -40,7 +40,7 @@ class forme3D {
         void moveDepth(float delta);
 
         //Abstract function to draw the 3D forme
-        virtual void draw();
+        virtual void draw() {};
 
         //DeleteBuffer
         void deleteBuffer();

@@ -1,7 +1,7 @@
 #include "../include/cube.hpp"
 
 
-    Cube::Cube(glm::vec3 cursorPos, glm::vec3 color) : forme3D()
+    Cube::Cube(glm::vec3 cursorPos, glm::vec3 color)
     {
         this->setCenter(cursorPos);
 
