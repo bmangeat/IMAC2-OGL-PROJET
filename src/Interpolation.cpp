@@ -94,6 +94,15 @@ Eigen::VectorXd Interpolation::generateWeightControlPoint() {
     return weightControlPointVec;
 }
 
+void Interpolation::generateCubes(Grid grid) {
+    computeOmegas();
+    for (int i = 0; i < grid.getVectorCube().size() ; ++i) {
+        //evaluatePoint(grid.getVectorCube()[i].)
+    }
+    grid.getVectorCube(); //  std::vector<Cube>
+
+}
+
 
 
 

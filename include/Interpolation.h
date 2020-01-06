@@ -5,6 +5,7 @@
 #include <Eigen/Dense>
 #include <vector>
 #include <glimac/include/glm.hpp>
+#include "Grid.hpp"
 
 class Interpolation {
 
@@ -27,6 +28,8 @@ public:
       \param vec3 X Match with cube's coordonate . This function will return the weight corresponding to the cube
     */
     double evaluatePoint(glm::vec3 x);
+
+    void generateCubes(Grid grid);
 
 
 private:
