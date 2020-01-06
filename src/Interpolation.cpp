@@ -122,7 +122,6 @@ void Interpolation::generateCubes(Grid &grid) {
             for (int k = -4; k < 5; ++k) {
                 glm::vec3 currentPoint(i, j, k);
                 double weightPoint = evaluatePoint(currentPoint);
-                std::cout << weightPoint << std::endl;
 
                 if (weightPoint >= 0) {
                     grid.AddCube(currentPoint, generateColor());

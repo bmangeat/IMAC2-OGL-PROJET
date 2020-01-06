@@ -109,9 +109,8 @@ int main(int argc, char** argv) {
     worldGrid.AddCube(vec3(0,2,0), vec3(0.4,0.8,0.5));
 
     // RBF Générator
- /*   Interpolation RBF(3);
+    Interpolation RBF(3);
     RBF.generateCubes(worldGrid);
-*/
 
     //Creation Cursor
     Cursor worldCursor(applicationPath);
