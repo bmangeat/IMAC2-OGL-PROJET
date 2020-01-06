@@ -9,12 +9,11 @@
 #include <vector>
 #include "../include/TrackballCamera.hpp"
 
-#include "../include/cube.hpp"
-
 #include "../include/Interpolation.h"
 #include <Eigen/Dense>
 
 #include "../include/forme3D.hpp"
+#include "../include/cube.hpp"
 #include "../include/light.hpp"
 #include "../include/cursor.hpp"
 #include "../include/Grid.hpp"
@@ -104,7 +103,7 @@ int main(int argc, char** argv) {
     cout << worldGrid.getVectorCube().size() << endl;
 
     //Creation Cursor
-    Cursor worldCursor();
+    Cursor worldCursor;
     
     // GPU checks depth
     glEnable(GL_DEPTH_TEST);

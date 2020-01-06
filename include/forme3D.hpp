@@ -22,11 +22,9 @@ class forme3D {
     public :
         //constructor
         forme3D(const forme3D&) = default;
-        forme3D &operator=(const forme3D&);
-        forme3D() {};
+        //forme3D &operator=(const forme3D&);
+        forme3D();
         const glm::vec3 &getCenter();
-        const GLint& getVao();
-        const GLint& getIbo();
         const glm::vec3 &getColor();
         void initializeBuffers();
         void actualizeVertex();

@@ -1,5 +1,7 @@
 #include "../include/forme3D.hpp"
 
+forme3D::forme3D() {};
+
 void forme3D::initializeBuffers()
 {
     //this->f_vbo creation
@@ -104,16 +106,6 @@ void forme3D::actualizeVertex()
 const glm::vec3 &forme3D::getCenter()
 {
     return this->f_center;
-}
-
-const GLint &forme3D::getVao()
-{
-    return this->f_vao;
-}
-
-const GLint &forme3D::getIbo()
-{
-    return this->f_ibo;
 }
 
 const glm::vec3 &forme3D::getColor()

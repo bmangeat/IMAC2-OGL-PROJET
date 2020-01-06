@@ -1,6 +1,7 @@
 #include "../include/cursor.hpp"
 
-    Cursor::Cursor() : forme3D() {
+    Cursor::Cursor() : forme3D()
+    {
         this->setCenter(glm::vec3(0,0,0));
         this->setVertices();
         this->setColor(glm::vec3(0.2,0.2,0.8));
@@ -91,6 +92,4 @@
             glUniform1i( this->uSelect,  this->select);
         }
     }
-
-    Cursor::~Cursor() {};
 

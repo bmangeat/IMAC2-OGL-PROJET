@@ -1,7 +1,6 @@
 #include "../include/Grid.hpp"
 
-    Grid::Grid() {
-    }
+    Grid::Grid() {};
 
     std::vector<Cube> &Grid::getVectorCube() {
         return this->stockCube;
@@ -43,5 +42,3 @@
             }
             else std::cout<< "Il n'y a pas de cube" << std::endl;
     }
-
-    Grid::~Grid() {}

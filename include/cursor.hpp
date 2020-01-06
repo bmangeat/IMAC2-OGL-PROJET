@@ -4,7 +4,7 @@
 #include "../libs/glimac/include/common.hpp"
 #include "../libs/glimac/include/Program.hpp"
 #include <../libs/glimac/include/SDLWindowManager.hpp>
-#include "forme3D.hpp"
+#include "./forme3D.hpp"
 #include <GL/glew.h>
 #include <vector>
 #include <iostream>
@@ -37,10 +37,10 @@ class Cursor : public forme3D
         //const void displayCursor();
 
         //To draw the cursor, function used in displayCursro()
-        void draw(glm::mat4 MVMatrix, glm::mat4 ProjMatrix, glimac::Program curProg);
+        void draw(glm::mat4 MVMatrix, glm::mat4 ProjMatrix, glimac::Program curProg) ;
         
         //Modify the status of the attribute "select"
         void selectCase(glimac::Program m_Program);
 
-        ~Cursor();
+        ~Cursor() override = default;
 };

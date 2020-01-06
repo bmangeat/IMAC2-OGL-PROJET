@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include "./forme3D.hpp"
 #include "./cube.hpp"
 #include "../libs/glimac/include/glm.hpp"
 #include "../libs/glimac/include/Program.hpp"
@@ -37,6 +38,6 @@ class Grid {
         //To draw the grill if the bool Griddisplay is true
         //void drawGrid();
 
-        ~Grid();
+        ~Grid() = default;
         
 };

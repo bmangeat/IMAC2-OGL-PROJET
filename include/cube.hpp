@@ -7,7 +7,7 @@
 #include <iostream>
 #include <vector>
 #include <GL/glew.h>
-#include "forme3D.hpp"
+#include "./forme3D.hpp"
 
 class Cube : public forme3D
 {
@@ -22,10 +22,10 @@ class Cube : public forme3D
         Cube(glm::vec3 cursorPos, glm::vec3 color);
         
         //Redefinition
-        void draw();
+        void draw() override;
         
         //Destructor
-        ~Cube();
+        ~Cube() override = default;
 };
 
     //Draw all existing cubes stocked in the attribute stockCube of Grid Class
