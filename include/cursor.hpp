@@ -30,9 +30,6 @@ class Cursor : public forme3D
         //To modify bool cursorDisplay
         void changeDisplay();
         
-        //To display the cursor on the screen
-        //const void displayCursor();
-
         //To draw the cursor, function used in displayCursro()
         void draw(glm::mat4 MVMatrix, glm::mat4 ProjMatrix, glimac::Program curProg) ;
         

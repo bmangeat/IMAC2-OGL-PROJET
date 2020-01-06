@@ -95,10 +95,10 @@ int main(int argc, char** argv) {
 
     //Creation Grid
     Grid worldGrid;
-    worldGrid.AddCube(vec3(0,0,0), vec3(0.1,0.2,0.4));
-    worldGrid.AddCube(vec3(-2,0,0), vec3(0.8,0.4,0.7));
-    worldGrid.AddCube(vec3(2,0,0),vec3(0.7,0.9,0.3));
-    worldGrid.AddCube(vec3(0,2,0), vec3(0.4,0.8,0.5));
+    // worldGrid.AddCube(vec3(0,0,0), vec3(0.1,0.2,0.4));
+    // worldGrid.AddCube(vec3(-2,0,0), vec3(0.8,0.4,0.7));
+    // worldGrid.AddCube(vec3(2,0,0),vec3(0.7,0.9,0.3));
+    // worldGrid.AddCube(vec3(0,2,0), vec3(0.4,0.8,0.5));
 
     cout << "Taille stockCube = " << worldGrid.getVectorCube().size() << endl;
 
@@ -215,9 +215,6 @@ int main(int argc, char** argv) {
                                 cout << worldGrid.getVectorColor().size() << endl;
                             }
                         }
-
-                        
-
                     break;
 
                 }
@@ -231,13 +228,15 @@ int main(int argc, char** argv) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         MVMatrix = camera.getViewMatrix();
-        testLight.lightApplication(ViewMatrix);
-        SceneProgram.m_Program.use();
+        
+        
         //worldCursor.CursorProgram.use();
         worldCursor.actualizeVertex();
         worldCursor.draw( MVMatrix, ProjMatrix, CursorProgram.m_Program);
 
+        SceneProgram.m_Program.use();
         DrawAllCube(worldGrid.getVectorCube(), MVMatrix, ProjMatrix, camera.getViewMatrix(), SceneProgram.m_Program);
+        testLight.lightApplication(ViewMatrix);
         
         // Update the display
         windowManager.swapBuffers();

@@ -4,8 +4,8 @@
     {
         this->setCenter(glm::vec3(0,0,0));
         this->setVertices();
-        this->setColor(glm::vec3(0.1,0.0,0.0));
-        this->noSelectedColor = glm::vec3(1.0,0.0,0.0);
+        this->setColor(glm::vec3(0.8,0.3,0.2));
+        this->noSelectedColor = glm::vec3(0.2,0.5,0.7);
 
         //Tableau d'indices
         this->f_index = {
