@@ -66,7 +66,7 @@ add_subdirectory(doc)
 ########################### Declaration of .exe  #####################################
 ######################################################################################
 
-add_executable(${PROJECT_NAME} ${SOURCES_FILES} ${HEADER_FILES} ${SHADERS_FILES} include/Save.hpp src/Save.cpp)
+add_executable(${PROJECT_NAME} ${SOURCES_FILES} ${HEADER_FILES} ${SHADERS_FILES} include/Save.hpp src/Save.cpp include/homeDoxygen.hpp)
 target_link_libraries(${PROJECT_NAME} ${ALL_LIBRARIES})
 
 #### --------------- Necessary in order to recover the assets folder ---------------- ####
