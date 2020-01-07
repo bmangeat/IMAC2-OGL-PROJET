@@ -111,7 +111,6 @@ int main(int argc, char **argv) {
 
     // RBF Générator
     Interpolation RBF(3);
-    RBF.generateCubes(worldGrid);
 
     //Creation Cursor
     Cursor worldCursor(applicationPath);
@@ -221,8 +220,13 @@ int main(int argc, char **argv) {
                         Save save;
                         std::string test = "myScene";
                         save.saveScene(test, worldGrid.getVectorCube());
+                    }
+                    if (e.key.keysym.sym == SDLK_j) {
+                        // RBF Générator
+                        RBF.generateCubes(worldGrid);
 
                     }
+
                     if (e.key.keysym.sym == SDLK_l) {
                         Save save;
                         std::string test = "myScene";
