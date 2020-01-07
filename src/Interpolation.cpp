@@ -115,7 +115,7 @@ glm::vec3 Interpolation::generateColor() {
 
 void Interpolation::generateCubes(Grid &grid) {
     omegas = computeOmegas();
-    refreshGrid(grid);
+    grid.refreshGrid();
 
     for (int i = -9; i < 10; ++i) {
         for (int j = -9; j < 10; ++j) {
@@ -126,19 +126,6 @@ void Interpolation::generateCubes(Grid &grid) {
                 if (weightPoint >= 0) {
                     grid.AddCube(currentPoint, generateColor());
                 }
-            }
-        }
-
-    }
-
-}
-
-void Interpolation::refreshGrid(Grid &grid) {
-
-    for (int i = -9; i < 10; ++i) {
-        for (int j = -9; j < 10; ++j) {
-            for (int k = -4; k < 5; ++k) {
-                grid.deleteCube(glm::vec3(i,j,k));
             }
         }
 

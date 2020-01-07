@@ -15,7 +15,7 @@ Interface::Interface(SDL_Window *window, SDL_GLContext *context)
     ImGui::CreateContext();
     ImGui::StyleColorsDark();
 
-    ImGui_ImplSDL2_InitForOpenGL(window, context);
+    ImGui_ImplSDL2_InitForOpenGL(window, &context);
     ImGui_ImplOpenGL3_Init(glsl_version);
 }
 

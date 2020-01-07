@@ -6,8 +6,10 @@
 
 #include <string>
 #include "cube.hpp"
+#include "Grid.hpp"
 
 class Save{
+public:
     Save() = default;
     ~Save() = default;
 
@@ -18,12 +20,13 @@ class Save{
       \param vectorCube Get all color's cubes created in our scene
 
     */
-    void saveScene(std::string &nameFile, std::vector<Cube> vectorCube, std::vector<glm::vec3> vectorColor);
+    void saveScene(std::string &nameFile, std::vector<Cube> vectorCube);
 
     //! Load the queen
     /*!
       \param fpath Send path of your file in your computer
     */
-    void loadScene(std::string &nameFile);
+    void loadScene(std::string &nameFile, Grid& Grid);
+
 };
 

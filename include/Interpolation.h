@@ -90,7 +90,4 @@ private:
     //! Generation function : Colors points
     glm::vec3 generateColor();
 
-    void refreshGrid(Grid& grid);
-
-
 };
