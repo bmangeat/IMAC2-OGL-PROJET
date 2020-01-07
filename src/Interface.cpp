@@ -31,7 +31,7 @@ void Interface::CreateInterface(SDL_Window *window) const {
     ImGui::NewFrame();
 }
 
-void Interface::DrawInterface(SDL_Window *window, Cursor worldCursor, Grid worldGrid, glm::vec3 attribColor) const {
+void Interface::DrawInterface(SDL_Window *window, Cursor &worldCursor, Grid &worldGrid, glm::vec3 attribColor) const {
 
 
     static bool popup_save = false;

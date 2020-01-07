@@ -29,6 +29,10 @@ public:
     */
     double evaluatePoint(glm::vec3 x);
 
+    //! Generate cubes thanks to RBF
+    /*!
+      \param vec3 X Match with cube's coordonate . This function will return the weight corresponding to the cube
+    */
     void generateCubes(Grid& grid);
 
 

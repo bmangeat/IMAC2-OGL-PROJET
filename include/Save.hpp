@@ -26,7 +26,7 @@ public:
     /*!
       \param fpath Send path of your file in your computer
     */
-    void loadScene(std::string &nameFile, Grid& Grid);
+    void loadScene(std::string &nameFile, Grid &Grid);
 
 };
 
