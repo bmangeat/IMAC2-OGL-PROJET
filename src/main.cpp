@@ -95,10 +95,11 @@ int main(int argc, char** argv) {
 
     //Creation Grid
     Grid worldGrid;
-    // worldGrid.AddCube(vec3(0,0,0), vec3(0.1,0.2,0.4));
-    // worldGrid.AddCube(vec3(-2,0,0), vec3(0.8,0.4,0.7));
-    // worldGrid.AddCube(vec3(2,0,0),vec3(0.7,0.9,0.3));
-    // worldGrid.AddCube(vec3(0,2,0), vec3(0.4,0.8,0.5));
+    worldGrid.AddCube(vec3(0,2,0), vec3(0.4,0.8,0.5));
+    worldGrid.AddCube(vec3(0,0,0), vec3(0.1,0.2,0.4));
+    worldGrid.AddCube(vec3(-2,0,0), vec3(0.8,0.4,0.7));
+    worldGrid.AddCube(vec3(2,0,0),vec3(0.7,0.9,0.3));
+    
 
     cout << "Taille stockCube = " << worldGrid.getVectorCube().size() << endl;
 
@@ -204,15 +205,15 @@ int main(int argc, char** argv) {
                         if (e.key.keysym.sym == SDLK_b) {
                             attribColor = worldGrid.getVectorColor()[2];
                         }
-                        cout <<"position curseur " << worldCursor.getCenter() << endl;
+                        // cout <<"position curseur " << worldCursor.getCenter() << endl;
 
 
                         //Tool to create and delete a cube
                         if (e.key.keysym.sym == SDLK_SPACE) {
                             if (worldCursor.getSelect() == true) {
                                 worldGrid.AddCube(worldCursor.getCenter(),attribColor);
-                                cout << "select = " << worldCursor.getSelect() << endl;
-                                cout << worldGrid.getVectorColor().size() << endl;
+                                // cout << "select = " << worldCursor.getSelect() << endl;
+                                // cout << "new size = " << worldGrid.getVectorCube().size() << endl;
                             }
                         }
                     break;
@@ -226,17 +227,18 @@ int main(int argc, char** argv) {
 
         //Clear the window
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClearColor(0.2,0.2,0.2,0.5);
 
         MVMatrix = camera.getViewMatrix();
         
-        
-        //worldCursor.CursorProgram.use();
-        worldCursor.actualizeVertex();
-        worldCursor.draw( MVMatrix, ProjMatrix, CursorProgram.m_Program);
 
         SceneProgram.m_Program.use();
         DrawAllCube(worldGrid.getVectorCube(), MVMatrix, ProjMatrix, camera.getViewMatrix(), SceneProgram.m_Program);
         testLight.lightApplication(ViewMatrix);
+
+        //worldCursor.CursorProgram.use();
+        worldCursor.actualizeVertex();
+        worldCursor.draw( MVMatrix, ProjMatrix, CursorProgram.m_Program);
         
         // Update the display
         windowManager.swapBuffers();

@@ -13,6 +13,7 @@
 class Cursor : public forme3D
 {
     private:
+        glm::vec3 c_position;
         bool cursorDisplay = true;
         bool select =  false;
         glm::vec3 noSelectedColor;

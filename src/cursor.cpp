@@ -61,6 +61,7 @@
 
     void Cursor::draw( glm::mat4 MVMatrix, glm::mat4 ProjMatrix, glimac::Program curProg){
         curProg.use();
+        glDisable(GL_DEPTH_TEST);
         if (this->cursorDisplay == true) {
             GLint uColor = glGetUniformLocation(curProg.getGLId(), "uColor");
             if (this->select == true)
@@ -74,6 +75,7 @@
             glUniformMatrix4fv(uMVPMatrix, 1, GL_FALSE, glm::value_ptr(ProjMatrix * MVMatrix));
             this->bindVaoIbo();
             glDrawElements(GL_LINES, 12*2, GL_UNSIGNED_INT, 0);
+            glEnable(GL_DEPTH_TEST);
             glBindVertexArray(0);
         }
     }

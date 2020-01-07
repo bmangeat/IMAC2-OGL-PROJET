@@ -1,11 +1,6 @@
 #include "../include/cube.hpp"
 
 
-    Cube &Cube::operator=(const Cube& m_cube) const {
-        Cube result(m_cube);
-        return result;
-    }
-
     Cube::Cube(glm::vec3 cursorPos, glm::vec3 color)
     {
         this->setCenter(cursorPos);
