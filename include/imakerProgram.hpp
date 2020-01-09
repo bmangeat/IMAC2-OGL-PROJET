@@ -2,16 +2,16 @@
 #include <../libs/glimac/include/Program.hpp>
 #include <../libs/glimac/include/FilePath.hpp>
 
-struct dirLightProgram {
+struct DirLightProgram {
     glimac::Program m_Program;
 
     GLint uMVPMatrix;
     GLint uMVMatrix;
     GLint uNormalMatrix;
 
-    dirLightProgram(const glimac::FilePath& applicationPath):
+    DirLightProgram(const glimac::FilePath& applicationPath):
         m_Program(loadProgram(applicationPath.dirPath() + "../assets/shaders/3D.vs.glsl",
-                              applicationPath.dirPath() + "../assets/shaders/lightShader/cubeLighteddir.fs.glsl")) {
+                              applicationPath.dirPath() + "../assets/shaders/lightShader/dirLight.fs.glsl")) {
         uMVPMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVPMatrix");
         uMVMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVMatrix");
         uNormalMatrix = glGetUniformLocation(m_Program.getGLId(), "uNormalMatrix");
@@ -27,7 +27,7 @@ struct PointLightProgram {
 
     PointLightProgram(const glimac::FilePath& applicationPath):
         m_Program(loadProgram(applicationPath.dirPath() + "../assets/shaders/3D.vs.glsl",
-                              applicationPath.dirPath() + "../assets/shaders/lightShader/cubeLightedpoint.fs.glsl")) {
+                              applicationPath.dirPath() + "../assets/shaders/lightShader/pointLight.fs.glsl")) {
         uMVPMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVPMatrix");
         uMVMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVMatrix");
         uNormalMatrix = glGetUniformLocation(m_Program.getGLId(), "uNormalMatrix");

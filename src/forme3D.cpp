@@ -170,7 +170,6 @@ void forme3D::moveDepth(float delta)
     {
         this->f_vertices[i].position.z += delta;
     }
-    std::cout << "moveDepth axe z" << std::endl;
     this->f_center.z += delta;
 }
 

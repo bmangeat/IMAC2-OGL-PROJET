@@ -59,7 +59,7 @@
     }
 
 
-    void Cursor::draw( glm::mat4 MVMatrix, glm::mat4 ProjMatrix, glimac::Program curProg){
+    void Cursor::draw( glm::mat4 MVMatrix, glm::mat4 ProjMatrix, glimac::Program &curProg){
         curProg.use();
         glDisable(GL_DEPTH_TEST);
         if (this->cursorDisplay == true) {
@@ -89,11 +89,9 @@
     void Cursor::selectCase() {
         if (this->select == true) {
             this->select = false;
-            std::cout << "false = " << this->select << std::endl;
         }
         else {
             this->select = true;
-            std::cout << "true = " << this->select << std::endl;
         }
     }
 

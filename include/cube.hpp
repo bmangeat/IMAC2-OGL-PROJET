@@ -28,4 +28,4 @@ class Cube : public forme3D
 };
 
     //Draw all existing cubes stocked in the attribute stockCube of Grid Class
-    const void DrawAllCube(std::vector<Cube> &stockCube, glm::mat4 MVMatrix, glm::mat4 ProjMatrix, glm::mat4 ViewMatrix, glimac::Program m_Program);
+    const void DrawAllCube(std::vector<Cube> &stockCube, glm::mat4 MVMatrix, glm::mat4 ProjMatrix, glm::mat4 ViewMatrix, glimac::Program &m_Program);

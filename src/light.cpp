@@ -1,49 +1,33 @@
 #include "../include/light.hpp"
 
-    Light::Light(
-      glm::vec3 Kd,
-      glm::vec3 Ks,
-      float Shininess,
-      glm::vec3 LightDir,
-      glm::vec3 LightIntensity) :
-    //set up the initial parameter of the light
-      l_Kd(Kd),
-      l_Ks(Ks),
-      l_Shininess(Shininess),
-      l_LightDir(LightDir),
-      l_LightIntensity(LightIntensity) 
+void Light::lightInitUniVariable(glimac::Program &m_Program, glm::mat4 ViewMatrix)
+{
+    m_Program.use();
+    GLint uKd = glGetUniformLocation(m_Program.getGLId(), "uKd");
+    GLint uKs = glGetUniformLocation(m_Program.getGLId(), "uKs");
+    GLint uShininess = glGetUniformLocation(m_Program.getGLId(), "uShininess");
+    GLint uLightDir_vs = glGetUniformLocation(m_Program.getGLId(), "uLightDir_vs");
+    GLint uLightIntensity = glGetUniformLocation(m_Program.getGLId(), "uLightIntensity");
+    glUniform3fv(uKd, 1, glm::value_ptr(this->l_Kd));
+    glUniform3fv(uKs, 1, glm::value_ptr(this->l_Ks));
+    glUniform1f(uShininess, this->l_Shininess);
+    glUniform3fv(uLightDir_vs, 1, glm::value_ptr(glm::mat3(ViewMatrix) * this->l_LightDir));
+    glUniform3fv(uLightIntensity, 1, glm::value_ptr(this->l_LightIntensity));
+}
 
-      {
-      }
+const int &Light::getmodeLight()
+{
+    return modeLight;
+}
 
-    void Light::moveUp(float delta) {
-        this->l_LightDir.x += delta;
-    }
+void Light::changemodeLight()
+{
+    if (modeLight == 0)
+        this->modeLight = 1;
+    else if (modeLight == 1)
+        this->modeLight = 2;
+    else if (modeLight == 2)
+        this->modeLight = 0;
+}
 
-    void Light::moveLeft(float delta) {
-        this->l_LightDir.z += delta;
-    }
-
-    void Light::moveDepth(float delta) {
-        this->l_LightDir.y += delta;
-    }
-
-    void Light::lightInitUniVariable(glimac::Program m_Program) {
-        m_Program.use();
-        this->l_uKd = glGetUniformLocation(m_Program.getGLId(), "uKd");
-        this->l_uKs = glGetUniformLocation(m_Program.getGLId(), "uKs");
-        this->l_uShininess = glGetUniformLocation(m_Program.getGLId(), "uShininess");
-        this->l_uLightDir_vs = glGetUniformLocation(m_Program.getGLId(), "uLightDir_vs");
-        this->l_uLightIntensity = glGetUniformLocation(m_Program.getGLId(), "uLightIntensity");
-    }
-    
-    void Light::lightApplication(glm::mat4 ViewMatrix) {
-            glUniform3fv(this->l_uKd, 1, glm::value_ptr(this->l_Kd));
-            glUniform3fv(this->l_uKs, 1, glm::value_ptr(this->l_Ks));
-            glUniform1f(this->l_uShininess, this->l_Shininess);
-            glUniform3fv(this->l_uLightDir_vs, 1, glm::value_ptr(glm::mat3(ViewMatrix)*this->l_LightDir));
-            glUniform3fv(this->l_uLightIntensity, 1, glm::value_ptr(this->l_LightIntensity));         
-    }
-
-    Light::~Light() {};
 

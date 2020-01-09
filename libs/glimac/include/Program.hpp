@@ -13,7 +13,7 @@ public:
 	}
 
 	~Program() {
-		//glDeleteProgram(m_nGLId);
+		glDeleteProgram(m_nGLId);
 	}
 	
 
