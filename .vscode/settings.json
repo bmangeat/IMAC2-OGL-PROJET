@@ -48,6 +48,10 @@
         "cinttypes": "cpp",
         "typeinfo": "cpp",
         "list": "cpp",
-        "numeric": "cpp"
+        "numeric": "cpp",
+        "chrono": "cpp",
+        "random": "cpp",
+        "ratio": "cpp",
+        "dense": "cpp"
     }
 }
