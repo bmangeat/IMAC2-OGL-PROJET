@@ -60,7 +60,7 @@ struct CursorProgram {
 
 int main(int argc, char **argv) {
     // Initialize SDL and open a window
-    SDLWindowManager windowManager(800, 600, "GLImac");
+    SDLWindowManager windowManager(800, 600, "WorldIMaker");
 
     // Initialize glew for OpenGL3+ support
     GLenum glewInitError = glewInit();
@@ -74,7 +74,7 @@ int main(int argc, char **argv) {
 
 
     // Declaration of ImGui Interface
-    Interface imGuiInterface(windowManager.window, &windowManager.openglContext);
+    //Interface imGuiInterface(windowManager.window, &windowManager.openglContext);
 
 
     //Loading shaders
@@ -103,6 +103,7 @@ int main(int argc, char **argv) {
     //Creation Grid
     Grid worldGrid;
 
+    Save save;
 
     worldGrid.AddCube(vec3(0, 0, 0), vec3(0.1, 0.2, 0.4));
     worldGrid.AddCube(vec3(-2, 0, 0), vec3(0.8, 0.4, 0.7));
@@ -217,9 +218,7 @@ int main(int argc, char **argv) {
                         attribColor = worldGrid.getVectorColor()[2];
                     }
                     if (e.key.keysym.sym == SDLK_k) {
-                        Save save;
-                        std::string test = "myScene";
-                        save.saveScene(test, worldGrid.getVectorCube());
+                        save.saveScene( worldGrid.getVectorCube());
                     }
                     if (e.key.keysym.sym == SDLK_j) {
                         // RBF Générator
@@ -228,9 +227,7 @@ int main(int argc, char **argv) {
                     }
 
                     if (e.key.keysym.sym == SDLK_l) {
-                        Save save;
-                        std::string test = "myScene";
-                        save.loadScene(test, worldGrid);
+                        save.loadScene(worldGrid);
                         //DrawAllCube(worldGrid.getVectorCube(), MVMatrix, ProjMatrix, camera.getViewMatrix(), SceneProgram.m_Program);
 
                     }
@@ -262,7 +259,10 @@ int main(int argc, char **argv) {
          *********************************/
 
         //Clear the window
+        //imGuiInterface.CreateInterface(windowManager.window);
+        //imGuiInterface.DrawInterface(windowManager.window, worldCursor, worldGrid, attribColor, save);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        //imGuiInterface.RenderInterface();
 
         MVMatrix = camera.getViewMatrix();
         testLight.lightApplication(ViewMatrix);
@@ -275,9 +275,6 @@ int main(int argc, char **argv) {
         SceneProgram.m_Program.use();
         DrawAllCube(worldGrid.getVectorCube(), MVMatrix, ProjMatrix, camera.getViewMatrix(), SceneProgram.m_Program);
 
-        imGuiInterface.CreateInterface(windowManager.window);
-        imGuiInterface.DrawInterface(windowManager.window, worldCursor, worldGrid, attribColor);
-        imGuiInterface.RenderInterface();
         // Update the display
         windowManager.swapBuffers();
     }

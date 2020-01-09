@@ -1,7 +1,11 @@
 #include "../include/Save.hpp"
 
 
-void Save::saveScene(std::string &nameFile, std::vector<Cube> vectorCube) {
+void Save::saveScene(std::vector<Cube> vectorCube) {
+
+    std::string nameFile;
+    std::cout << "Veuillez entrer le nom du fichier à enregistrer ?";
+    std::cin >> nameFile;
 
     std::ofstream outfile;
     outfile.open("./bin/" + nameFile, std::ios::out | std::ios::binary);
@@ -25,7 +29,12 @@ void Save::saveScene(std::string &nameFile, std::vector<Cube> vectorCube) {
 
 }
 
-void Save::loadScene(std::string &nameFile, Grid &grid) {
+void Save::loadScene(Grid &grid) {
+
+    std::string nameFile;
+    std::cout << "Quelle scène voulez-vous enregistrer ?";
+    std::cin >> nameFile;
+
     std::ifstream infile;
     infile.open("./bin/" + nameFile, std::ios::out | std::ios::binary);
 

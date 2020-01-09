@@ -31,7 +31,7 @@ void Interface::CreateInterface(SDL_Window *window) const {
     ImGui::NewFrame();
 }
 
-void Interface::DrawInterface(SDL_Window *window, Cursor &worldCursor, Grid &worldGrid, glm::vec3 attribColor) const {
+void Interface::DrawInterface(SDL_Window *window, Cursor &worldCursor, Grid &worldGrid, glm::vec3 attribColor, Save &save) const {
 
 
     static bool popup_save = false;
@@ -42,6 +42,9 @@ void Interface::DrawInterface(SDL_Window *window, Cursor &worldCursor, Grid &wor
     ImGuiIO &io = ImGui::GetIO();
     ImGuiStyle &style = ImGui::GetStyle();
     ImGuiWindowFlags window_flags = 0;
+
+    static char fileName[128] = "";
+
 
 
     if (ImGui::BeginMainMenuBar())
@@ -62,6 +65,15 @@ void Interface::DrawInterface(SDL_Window *window, Cursor &worldCursor, Grid &wor
     // Main body of the Demo window starts here.
     if (ImGui::Begin("Editor", NULL, window_flags))
     {
+
+        /*bool input = ImGui::InputTextWithHint("", "enter file name", fileName, sizeof(fileName), ImGuiInputTextFlags_EnterReturnsTrue);
+        if (ImGui::Button("Load scene") || input) {
+            std::string fileNameStg(fileName);
+            save.loadScene(fileName, worldGrid);
+
+        }*/
+
+
         if (ImGui::Button("Add/delete"))
         {
             if (worldCursor.getSelect() == 1) {

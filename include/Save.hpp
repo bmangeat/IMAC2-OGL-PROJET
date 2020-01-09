@@ -20,13 +20,13 @@ public:
       \param vectorCube Get all color's cubes created in our scene
 
     */
-    void saveScene(std::string &nameFile, std::vector<Cube> vectorCube);
+    void saveScene( std::vector<Cube> vectorCube);
 
     //! Load the queen
     /*!
       \param fpath Send path of your file in your computer
     */
-    void loadScene(std::string &nameFile, Grid &Grid);
+    void loadScene(Grid &Grid);
 
 };
 

@@ -6,6 +6,7 @@
 #include "SDL.h"
 #include "cursor.hpp"
 #include "Grid.hpp"
+#include "Save.hpp"
 
 
 class Interface {
@@ -43,7 +44,7 @@ public:
       \param attribColor Vector of colors
 
     */
-    void DrawInterface(SDL_Window* window, Cursor &worldCursor, Grid &worldGrid, glm::vec3 attribColor) const;
+    void DrawInterface(SDL_Window* window, Cursor &worldCursor, Grid &worldGrid, glm::vec3 attribColor, Save &save) const;
 
     //! Draw Initiliazer
     /*!
