@@ -20,9 +20,11 @@
 /// \li Select your cube : Right click - Mouse
 /// \li Apply some color to your cube : Press R, G or B - Keyboard
 /// \li Create or Delete Cube selected : Press Space - Keyboard
+/// \li Extrude cube : Press Space - Press W - Keyboard
+/// \li Dig cube : Press Space - Press X - Keyboard
 /// \li Generate random scene : Press J - Keyboard
-/// \li Switch on/off the point light : Press W - Keyboard
-/// \li Switch on/off the directional light : Press X - Keyboard
+/// \li Switch on/off the point light : Press V - Keyboard
+/// \li Refresh the scene : Press C - Keyboard
 
 
 /// \subsection features_additional Additional Features

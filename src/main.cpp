@@ -217,7 +217,7 @@ int main(int argc, char **argv) {
                                     worldGrid.digCube(worldCursor.getCenter());
                         }
 
-                        if (e.key.keysym.sym == SDLK_c) {
+                        if (e.key.keysym.sym == SDLK_v) {
                             Light.changemodeLight();
                         }
 
