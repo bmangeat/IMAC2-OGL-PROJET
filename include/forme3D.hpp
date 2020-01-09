@@ -23,10 +23,7 @@ class forme3D {
     public :
         //constructor
         forme3D(const forme3D&) = default;
-        // forme3D &operator=(const forme3D& m_forme) {
-        //     forme3D result = m_forme;
-        //     return result;
-        // };
+
         forme3D() {};
         const glm::vec3 &getCenter();
         const glm::vec3 &getColor();

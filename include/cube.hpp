@@ -17,7 +17,6 @@ class Cube : public forme3D
     public:
         //constructor 
         Cube(const Cube&) = default;
-	    Cube &operator=(const Cube&) const {};
 
         Cube(glm::vec3 cursorPos, glm::vec3 color);
         

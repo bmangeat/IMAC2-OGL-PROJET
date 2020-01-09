@@ -33,9 +33,9 @@
             int z=static_cast<int>(position.z) + 5;
             std::cout << " x, y z = " << x << " " << y << " " << z << std::endl;
             if (this->g_location[x][y][z] != 0) {
-                for (int i=0; i < 20; i++) {
-                    for (int j=0; j<20; j++) {
-                        for (int k=0; k<10; k++) {
+                for (int i=0; i < 20; ++i) {
+                    for (int j=0; j<20; ++j) {
+                        for (int k=0; k<10; ++k) {
                             if (this->g_location[i][j][k] > this->g_location[x][y][z]) {
                                 this->g_location[i][j][k] -= 1 ;
                                 std::cout << " ijk " << this->g_location[i][j][k] << std::endl;
@@ -45,7 +45,7 @@
                 }
                 std::cout << "n = " << this->g_location[x][y][z] << std::endl;
                 this->stockCube.erase( this->stockCube.cbegin() + (this->g_location[x][y][z] - 1));
-                this->g_location[x][y][z] = 0;;
+                this->g_location[x][y][z] = 0;
                 std::cout << "n aft = " << this->g_location[x][y][z] << std::endl;
             }
             else std::cout<< "Il n'y a pas de cube" << std::endl;
