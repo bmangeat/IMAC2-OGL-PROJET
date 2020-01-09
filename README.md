@@ -92,7 +92,30 @@ Find the executable in the folder *build/bin*. You can open it thanks to the nex
 ./bin/WorldIMaker
 ```
 <a name="lets-play"></a>
-## Let's play ! 
+## Let's play ! How to use it ?
 
-**To be continued ...**
+###Basis Command
+* Movement of camera on x-axis and y-axis : Left click down and drag - Mouse
+* Movement of camera on z-axis | Zoom-in and Zoom-out : Scroll click - Mouse
+* Move the cursor to the left : Press Q - Keyboard
+* Move the cursor to the right : Press D - Keyboard
+* Move the cursor to the top : Press Z - Keyboard
+* Move the cursor to the bottom : Press S - Keyboard
+* Move the cursor to the front : Press A - Keyboard
+* Move the cursor to the back : Press E - Keyboard
+
+###Main Features
+* Select your cube : Right click - Mouse
+* Apply some color to your cube : Press R, G or B - Keyboard
+* Create or Delete Cube selected : Press Space - Keyboard
+* Extrude cube : Press Space - Press W - Keyboard
+* Dig cube : Press Space - Press X - Keyboard
+* Generate random scene : Press J - Keyboard
+* Switch on/off the point light : Press V - Keyboard
+* Refresh the scene : Press C - Keyboard
+
+
+###Additional Features
+* Save your world : Press K - Keyboard
+* Open saved world : Press L - Keyboard
 
