@@ -50,6 +50,17 @@ int &Grid::getIndexCube(const glm::vec3 &position)
     return this->g_location[x][y][z];
 }
 
+//To had the first third layer of cube
+void Grid::firstFloor() {
+    for (int i=0; i<20; i++) {
+        for(int j=0; j<20; j++) {
+            for (int k=-3; k<0; k++) {
+                AddCube(glm::vec3(i-10,k,j-10), glm::vec3(0.4,0.8,0.45));
+            }
+        }
+    }
+}
+
 void Grid::AddCube(const glm::vec3 &position, const glm::vec3 &color)
 {
     int x = static_cast<int>(position.x) + 10;
@@ -85,18 +96,20 @@ void Grid::deleteCube(const glm::vec3 &position)
     this->g_location[x][y][z] = 0;
 }
 
-Grid::~Grid() {}
-
 void Grid::refreshGrid()
-{
-    for (int i = -9; i < 10; ++i)
+{   
+    for (int i = 0; i < 20; ++i)
     {
-        for (int j = -9; j < 10; ++j)
+        for (int j = 0; j < 20; ++j)
         {
-            for (int k = -4; k < 5; ++k)
+            for (int k = 0; k < 10; ++k)
             {
-                deleteCube(glm::vec3(i, j, k));
+                 this->g_location[i][j][k] =0;
             }
         }
     }
+    stockCube.clear();
 }
+
+Grid::~Grid() {}
+

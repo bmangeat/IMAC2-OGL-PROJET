@@ -14,7 +14,7 @@ class Grid {
         //Determine a fixed size to the world ( Width*Depth*Height = 20*20*10)
         int width = 20;
         int height = 20;
-        int depth = 10;
+        int depth = 20;
         int g_location[20][20][20] = {0};
         std::vector<Cube> stockCube;
         std::vector<glm::vec3> stockColor = {glm::vec3(1.0,0.2,0.3), glm::vec3(0.2,1.0,0.4), glm::vec3(0.3,0.1,1.0)};
@@ -41,7 +41,8 @@ class Grid {
 
         //void displayGrid();
         void refreshGrid();
-        
+
+        void firstFloor();
 
         ~Grid();
         

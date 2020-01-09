@@ -119,7 +119,7 @@ void Interpolation::generateCubes(Grid &grid) {
 
     for (int i = -9; i < 10; ++i) {
         for (int j = -9; j < 10; ++j) {
-            for (int k = -4; k < 5; ++k) {
+            for (int k = -9; k < 10; ++k) {
                 glm::vec3 currentPoint(i, j, k);
                 double weightPoint = evaluatePoint(currentPoint);
 

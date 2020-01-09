@@ -71,13 +71,9 @@ int main(int argc, char **argv) {
 
     //Creation Grid
     Grid worldGrid;
+    worldGrid.firstFloor();
 
     Save save;
-
-    worldGrid.AddCube(vec3(0, 0, 0), vec3(0.1, 0.2, 0.4));
-    worldGrid.AddCube(vec3(-2, 0, 0), vec3(0.8, 0.4, 0.7));
-    worldGrid.AddCube(vec3(2, 0, 0), vec3(0.7, 0.9, 0.3));
-    worldGrid.AddCube(vec3(0, 2, 0), vec3(0.4, 0.8, 0.5));
 
     // RBF Générator
     Interpolation RBF(3);
@@ -185,8 +181,19 @@ int main(int argc, char **argv) {
                         if (e.key.keysym.sym == SDLK_b) {
                             attribColor = worldGrid.getVectorColor()[2];
                         }
-                        // cout <<"position curseur " << worldCursor.getCenter() << endl;
+                        if (e.key.keysym.sym == SDLK_k) {
+                            save.saveScene( worldGrid.getVectorCube());
+                        }
+                        if (e.key.keysym.sym == SDLK_j) {
+                            // RBF Générator
+                            RBF.generateCubes(worldGrid);
 
+                        }
+                        if (e.key.keysym.sym == SDLK_l) {
+                            save.loadScene(worldGrid);
+                            //DrawAllCube(worldGrid.getVectorCube(), MVMatrix, ProjMatrix, camera.getViewMatrix(), SceneProgram.m_Program);
+
+                        }
 
                         //Tool to create and delete a cube
                         if (e.key.keysym.sym == SDLK_SPACE) {
@@ -210,9 +217,12 @@ int main(int argc, char **argv) {
                                     worldGrid.digCube(worldCursor.getCenter());
                         }
 
-                        if (e.key.keysym.sym == SDLK_l) {
+                        if (e.key.keysym.sym == SDLK_c) {
                             Light.changemodeLight();
-                            cout << " modelight = " << Light.getmodeLight() << endl;
+                        }
+
+                        if (e.key.keysym.sym == SDLK_c) {
+                            worldGrid.refreshGrid();
                         }
                     break;
 
