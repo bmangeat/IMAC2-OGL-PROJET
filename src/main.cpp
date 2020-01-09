@@ -21,51 +21,20 @@
 #include "../include/cursor.hpp"
 #include "../include/Grid.hpp"
 #include "../include/Save.hpp"
+#include "../include/imakerProgram.hpp"
 
 
 using namespace glimac;
 using namespace glm;
 using namespace std;
 
-struct SceneProgram {
-    Program m_Program;
-
-    GLint uMVPMatrix;
-    GLint uMVMatrix;
-    GLint uNormalMatrix;
-
-    SceneProgram(const FilePath &applicationPath) :
-            m_Program(loadProgram(applicationPath.dirPath() + "../assets/shaders/3D.vs.glsl",
-                                  applicationPath.dirPath() + "../assets/shaders/lightShader/cubeLighted.fs.glsl")) {
-        uMVPMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVPMatrix");
-        uMVMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVMatrix");
-        uNormalMatrix = glGetUniformLocation(m_Program.getGLId(), "uNormalMatrix");
-    }
-};
-
-struct CursorProgram {
-    Program m_Program;
-
-    GLint uMVPMatrix;
-    GLint uMVMatrix;
-    GLint uNormalMatrix;
-
-    CursorProgram(const FilePath &applicationPath) :
-            m_Program(loadProgram(applicationPath.dirPath() + "../assets/shaders/3D.vs.glsl",
-                                  applicationPath.dirPath() + "../assets/shaders/cursorShader/cursorEdges.fs.glsl")) {
-        uMVPMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVPMatrix");
-        uMVMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVMatrix");
-        uNormalMatrix = glGetUniformLocation(m_Program.getGLId(), "uNormalMatrix");
-    }
-};
-
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
     // Initialize SDL and open a window
-    SDLWindowManager windowManager(800, 600, "WorldIMaker");
+    SDLWindowManager windowManager(800, 600, "GLImac");
 
     // Initialize glew for OpenGL3+ support
     GLenum glewInitError = glewInit();
-    if (GLEW_OK != glewInitError) {
+    if(GLEW_OK != glewInitError) {
         cerr << glewGetErrorString(glewInitError) << endl;
         return EXIT_FAILURE;
     }
@@ -74,8 +43,6 @@ int main(int argc, char **argv) {
     TrackballCamera camera = TrackballCamera();
     
 
-    // Declaration of ImGui Interface
-    //Interface imGuiInterface(windowManager.window, &windowManager.openglContext);
 
     //Loading shaders
     FilePath applicationPath(argv[0]);
@@ -102,16 +69,13 @@ int main(int argc, char **argv) {
 
     //Creation Grid
     Grid worldGrid;
+    worldGrid.AddCube(vec3(0,2,0), vec3(0.4,0.8,0.5));
+    worldGrid.AddCube(vec3(0,0,0), vec3(0.1,0.2,0.4));
+    worldGrid.AddCube(vec3(-2,0,0), vec3(0.8,0.4,0.7));
+    worldGrid.AddCube(vec3(2,0,0),vec3(0.7,0.9,0.3));
+    
 
-    Save save;
-
-    worldGrid.AddCube(vec3(0, 0, 0), vec3(0.1, 0.2, 0.4));
-    worldGrid.AddCube(vec3(-2, 0, 0), vec3(0.8, 0.4, 0.7));
-    worldGrid.AddCube(vec3(2, 0, 0), vec3(0.7, 0.9, 0.3));
-    worldGrid.AddCube(vec3(0, 2, 0), vec3(0.4, 0.8, 0.5));
-
-    // RBF Générator
-    Interpolation RBF(3);
+    cout << "Taille stockCube = " << worldGrid.getVectorCube().size() << endl;
 
     //Creation Cursor
     Cursor worldCursor;
@@ -175,7 +139,7 @@ int main(int argc, char **argv) {
                         break;
 
                     case SDL_MOUSEWHEEL:
-
+                    
                         if(e.wheel.y > 0) // scroll up
                         {
                             camera.moveFront(5.f);
@@ -215,30 +179,29 @@ int main(int argc, char **argv) {
                         if (e.key.keysym.sym == SDLK_b) {
                             attribColor = worldGrid.getVectorColor()[2];
                         }
-                        if (e.key.keysym.sym == SDLK_k) {
-                            save.saveScene( worldGrid.getVectorCube());
-                        }
-                        if (e.key.keysym.sym == SDLK_j) {
-                            // RBF Générator
-                            RBF.generateCubes(worldGrid);
-
-                        }
-
-                        if (e.key.keysym.sym == SDLK_l) {
-                            save.loadScene(worldGrid);
-                            //DrawAllCube(worldGrid.getVectorCube(), MVMatrix, ProjMatrix, camera.getViewMatrix(), SceneProgram.m_Program);
-
-                        }
                         // cout <<"position curseur " << worldCursor.getCenter() << endl;
 
 
                         //Tool to create and delete a cube
                         if (e.key.keysym.sym == SDLK_SPACE) {
                             if (worldCursor.getSelect() == true) {
-                                worldGrid.AddCube(worldCursor.getCenter(),attribColor);
-                                // cout << "select = " << worldCursor.getSelect() << endl;
-                                // cout << "new size = " << worldGrid.getVectorCube().size() << endl;
+                                if (worldGrid.getIndexCube(worldCursor.getCenter()) == 0)
+                                    worldGrid.AddCube(worldCursor.getCenter(),attribColor);
+                                else
+                                {
+                                    worldGrid.deleteCube(worldCursor.getCenter());
+                                }
                             }
+                        }
+
+                        if (e.key.keysym.sym == SDLK_w) {
+                            if (worldCursor.getSelect() == true) 
+                                worldGrid.extrudCube(worldCursor.getCenter(),attribColor);
+                        }
+                        if (e.key.keysym.sym == SDLK_x) {
+                            if (worldCursor.getSelect() == true)
+                                if (worldGrid.getIndexCube(worldCursor.getCenter()) != 0)
+                                    worldGrid.digCube(worldCursor.getCenter());
                         }
                     break;
 
@@ -250,15 +213,11 @@ int main(int argc, char **argv) {
          *********************************/
 
         //Clear the window
-        //imGuiInterface.CreateInterface(windowManager.window);
-        //imGuiInterface.DrawInterface(windowManager.window, worldCursor, worldGrid, attribColor, save);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glClearColor(0.2,0.2,0.2,0.5);
-        //imGuiInterface.RenderInterface();
-
 
         MVMatrix = camera.getViewMatrix();
-
+        
 
         SceneProgram.m_Program.use();
         DrawAllCube(worldGrid.getVectorCube(), MVMatrix, ProjMatrix, camera.getViewMatrix(), SceneProgram.m_Program);
@@ -272,6 +231,6 @@ int main(int argc, char **argv) {
         windowManager.swapBuffers();
     }
     worldCursor.deleteBuffer();
-
+    
     return EXIT_SUCCESS;
 }
