@@ -16,9 +16,9 @@ void Save::saveScene(std::vector<Cube> vectorCube) {
 
     outfile << vectorCube.size() << std::endl;
     for (size_t i = 0; i < vectorCube.size(); ++i) {
-        outfile << vectorCube[i].getPos().x << " ";
-        outfile << vectorCube[i].getPos().y << " ";
-        outfile << vectorCube[i].getPos().z << " ";
+        outfile << vectorCube[i].getCenter().x << " ";
+        outfile << vectorCube[i].getCenter().y << " ";
+        outfile << vectorCube[i].getCenter().z << " ";
         outfile << vectorCube[i].getColor().r << " ";
         outfile << vectorCube[i].getColor().g << " ";
         outfile << vectorCube[i].getColor().b << " ";

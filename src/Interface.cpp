@@ -77,7 +77,7 @@ void Interface::DrawInterface(SDL_Window *window, Cursor &worldCursor, Grid &wor
         if (ImGui::Button("Add/delete"))
         {
             if (worldCursor.getSelect() == 1) {
-                worldGrid.AddCube(worldCursor.getCursorPosition(), attribColor);
+                //worldGrid.AddCube(worldCursor.getCursorPosition(), attribColor);
             }
         }
         ImGui::SameLine();
