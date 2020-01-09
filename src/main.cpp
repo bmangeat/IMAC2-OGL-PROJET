@@ -15,6 +15,7 @@
 #include "../include/Interpolation.h"
 #include <Eigen/Dense>
 
+#include "../include/imakerProgram.hpp"
 #include "../include/forme3D.hpp"
 #include "../include/cube.hpp"
 #include "../include/light.hpp"
@@ -27,37 +28,6 @@ using namespace glimac;
 using namespace glm;
 using namespace std;
 
-struct SceneProgram {
-    Program m_Program;
-
-    GLint uMVPMatrix;
-    GLint uMVMatrix;
-    GLint uNormalMatrix;
-
-    SceneProgram(const FilePath &applicationPath) :
-            m_Program(loadProgram(applicationPath.dirPath() + "../assets/shaders/3D.vs.glsl",
-                                  applicationPath.dirPath() + "../assets/shaders/lightShader/cubeLighted.fs.glsl")) {
-        uMVPMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVPMatrix");
-        uMVMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVMatrix");
-        uNormalMatrix = glGetUniformLocation(m_Program.getGLId(), "uNormalMatrix");
-    }
-};
-
-struct CursorProgram {
-    Program m_Program;
-
-    GLint uMVPMatrix;
-    GLint uMVMatrix;
-    GLint uNormalMatrix;
-
-    CursorProgram(const FilePath &applicationPath) :
-            m_Program(loadProgram(applicationPath.dirPath() + "../assets/shaders/3D.vs.glsl",
-                                  applicationPath.dirPath() + "../assets/shaders/cursorShader/cursorEdges.fs.glsl")) {
-        uMVPMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVPMatrix");
-        uMVMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVMatrix");
-        uNormalMatrix = glGetUniformLocation(m_Program.getGLId(), "uNormalMatrix");
-    }
-};
 
 int main(int argc, char **argv) {
     // Initialize SDL and open a window
@@ -81,14 +51,13 @@ int main(int argc, char **argv) {
     FilePath applicationPath(argv[0]);
     SceneProgram SceneProgram(applicationPath);
     CursorProgram CursorProgram(applicationPath);
+    DirLightProgram dirLightProgram(applicationPath);
+    PointLightProgram pointLightProgram(applicationPath);
 
-    // Test light
-    vec3 Kd = vec3(linearRand (0.0,1.0),linearRand (0.0,1.0),linearRand (0.0,1.0));
-    vec3 Ks = vec3(linearRand (0.0,1.0),linearRand (0.0,1.0),linearRand (0.0,1.0));
-    float Shininess = linearRand (0.0,10.0);
-    vec3 LightDir= vec3(1.0,1.0,1.0);
-    vec3 LightIntensity = vec3(0.50,0.50,0.50);
-    Light testLight(Kd, Ks, Shininess, LightDir, LightIntensity);
+
+    Light Light;
+
+
 
     cout << "OpenGL Version : " << glGetString(GL_VERSION) << endl;
     cout << "GLEW Version : " << glewGetString(GLEW_VERSION) << endl;
@@ -98,7 +67,7 @@ int main(int argc, char **argv) {
      *********************************/
 
     //definition locations variables uniformes
-    testLight.lightInitUniVariable(SceneProgram.m_Program);
+    
 
     //Creation Grid
     Grid worldGrid;
@@ -131,6 +100,7 @@ int main(int argc, char **argv) {
     bool mouseScrollDown;
     bool mouseLeftDown;
     glm::vec3 attribColor;
+
 
     // Application loop:
     bool done = false;
@@ -175,7 +145,7 @@ int main(int argc, char **argv) {
                         break;
 
                     case SDL_MOUSEWHEEL:
-
+                    
                         if(e.wheel.y > 0) // scroll up
                         {
                             camera.moveFront(5.f);
@@ -215,30 +185,34 @@ int main(int argc, char **argv) {
                         if (e.key.keysym.sym == SDLK_b) {
                             attribColor = worldGrid.getVectorColor()[2];
                         }
-                        if (e.key.keysym.sym == SDLK_k) {
-                            save.saveScene( worldGrid.getVectorCube());
-                        }
-                        if (e.key.keysym.sym == SDLK_j) {
-                            // RBF Générator
-                            RBF.generateCubes(worldGrid);
-
-                        }
-
-                        if (e.key.keysym.sym == SDLK_l) {
-                            save.loadScene(worldGrid);
-                            //DrawAllCube(worldGrid.getVectorCube(), MVMatrix, ProjMatrix, camera.getViewMatrix(), SceneProgram.m_Program);
-
-                        }
                         // cout <<"position curseur " << worldCursor.getCenter() << endl;
 
 
                         //Tool to create and delete a cube
                         if (e.key.keysym.sym == SDLK_SPACE) {
                             if (worldCursor.getSelect() == true) {
-                                worldGrid.AddCube(worldCursor.getCenter(),attribColor);
-                                // cout << "select = " << worldCursor.getSelect() << endl;
-                                // cout << "new size = " << worldGrid.getVectorCube().size() << endl;
+                                if (worldGrid.getIndexCube(worldCursor.getCenter()) == 0)
+                                    worldGrid.AddCube(worldCursor.getCenter(),attribColor);
+                                else
+                                {
+                                    worldGrid.deleteCube(worldCursor.getCenter());
+                                }
                             }
+                        }
+
+                        if (e.key.keysym.sym == SDLK_w) {
+                            if (worldCursor.getSelect() == true) 
+                                worldGrid.extrudCube(worldCursor.getCenter(),attribColor);
+                        }
+                        if (e.key.keysym.sym == SDLK_x) {
+                            if (worldCursor.getSelect() == true)
+                                if (worldGrid.getIndexCube(worldCursor.getCenter()) != 0)
+                                    worldGrid.digCube(worldCursor.getCenter());
+                        }
+
+                        if (e.key.keysym.sym == SDLK_l) {
+                            Light.changemodeLight();
+                            cout << " modelight = " << Light.getmodeLight() << endl;
                         }
                     break;
 
@@ -248,7 +222,6 @@ int main(int argc, char **argv) {
         /*********************************
          * HERE SHOULD COME THE RENDERING CODE
          *********************************/
-
         //Clear the window
         //imGuiInterface.CreateInterface(windowManager.window);
         //imGuiInterface.DrawInterface(windowManager.window, worldCursor, worldGrid, attribColor, save);
@@ -260,10 +233,22 @@ int main(int argc, char **argv) {
         MVMatrix = camera.getViewMatrix();
 
 
-        SceneProgram.m_Program.use();
-        DrawAllCube(worldGrid.getVectorCube(), MVMatrix, ProjMatrix, camera.getViewMatrix(), SceneProgram.m_Program);
-        testLight.lightApplication(ViewMatrix);
-
+        if (Light.getmodeLight() == 0) 
+        {
+            DrawAllCube(worldGrid.getVectorCube(), MVMatrix, ProjMatrix, camera.getViewMatrix(), SceneProgram.m_Program);
+        }
+        if (Light.getmodeLight() == 1)
+        {
+            dirLightProgram.m_Program.use();
+            Light.lightInitUniVariable(dirLightProgram.m_Program,ViewMatrix);
+            DrawAllCube(worldGrid.getVectorCube(), MVMatrix, ProjMatrix, camera.getViewMatrix(), dirLightProgram.m_Program);
+        }
+        if (Light.getmodeLight() == 2)
+        {
+            pointLightProgram.m_Program.use();
+            Light.lightInitUniVariable(pointLightProgram.m_Program,ViewMatrix);
+            DrawAllCube(worldGrid.getVectorCube(), MVMatrix, ProjMatrix, camera.getViewMatrix(), pointLightProgram.m_Program);
+        }
         //worldCursor.CursorProgram.use();
         worldCursor.actualizeVertex();
         worldCursor.draw( MVMatrix, ProjMatrix, CursorProgram.m_Program);

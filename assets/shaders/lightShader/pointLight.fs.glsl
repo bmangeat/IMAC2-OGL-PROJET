@@ -14,6 +14,7 @@ uniform float uShininess;
 //Working in the view space = product(vec3, ViewMatrix)
 uniform vec3 uLightPos_vs; //wi =  normalize (uLightPos_vs)
 uniform vec3 uLightIntensity;
+uniform vec3 uColor;
 
 vec3 blinnPhong(vec3 Kd, vec3 Ks, float Shininess, vec3 LightPos_vs, vec3 LightIntensity) {
     vec3 wi = normalize(LightPos_vs - vPosition_vs);
@@ -24,5 +25,5 @@ vec3 blinnPhong(vec3 Kd, vec3 Ks, float Shininess, vec3 LightPos_vs, vec3 LightI
 }
 
 void main() {
-  fFragColor = blinnPhong(uKd, uKs, uShininess, uLightPos_vs, uLightIntensity);
+  fFragColor = uColor + blinnPhong(uKd, uKs, uShininess, uLightPos_vs, uLightIntensity);
 };

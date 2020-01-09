@@ -32,7 +32,7 @@ class Cursor : public forme3D
         void changeDisplay();
         
         //To draw the cursor, function used in displayCursro()
-        void draw(glm::mat4 MVMatrix, glm::mat4 ProjMatrix, glimac::Program curProg) ;
+        void draw(glm::mat4 MVMatrix, glm::mat4 ProjMatrix, glimac::Program &curProg) ;
         
         //Modify the status of the attribute "select"
         void selectCase();

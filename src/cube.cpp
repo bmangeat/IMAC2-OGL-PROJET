@@ -33,7 +33,7 @@
         glBindVertexArray(0);
     }
 
-    const void DrawAllCube(std::vector<Cube> &stockCube, glm::mat4 MVMatrix, glm::mat4 ProjMatrix, glm::mat4 ViewMatrix, glimac::Program m_Program) {
+    const void DrawAllCube(std::vector<Cube> &stockCube, glm::mat4 MVMatrix, glm::mat4 ProjMatrix, glm::mat4 ViewMatrix, glimac::Program &m_Program) {
         m_Program.use();
         for (int i=0; i < stockCube.size(); i++) {
             GLint uColor = glGetUniformLocation(m_Program.getGLId(), "uColor");

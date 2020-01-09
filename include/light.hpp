@@ -3,13 +3,7 @@
 #include "../libs/glimac/include/glm.hpp"
 #include "../libs/glimac/include/Program.hpp"
 #include "../libs/glimac/include/FilePath.hpp"
-#include "../libs/glimac/include/SDLWindowManager.hpp"
-#include "../libs/glimac/include/FilePath.hpp"
-#include "../libs/glimac/include/common.hpp"
-#include <vector>
-#include <string>
 #include <iostream>
-#include <cmath>
 #include <GL/glew.h>
 #include "../libs/glimac/include/Program.hpp"
 #include "../libs/glimac/include/FilePath.hpp"
@@ -17,31 +11,21 @@
 class Light {
     private:
         //concrete value to illumate the scene
-        glm::vec3 l_Kd;
-        glm::vec3 l_Ks;
-        float l_Shininess;
-        glm::vec3 l_LightDir;
-        glm::vec3 l_LightIntensity;
-
-        //Link to shader
-        GLuint l_uKd;
-        GLuint l_uKs;
-        GLuint l_uShininess;
-        GLuint l_uLightDir_vs;
-        GLuint l_uLightIntensity;
-
+        glm::vec3 l_Kd = glm::vec3(0.1,0.1,0.1);
+        glm::vec3 l_Ks = glm::vec3(0.1,0.2,0.3);
+        float l_Shininess = 0.1;
+        glm::vec3 l_LightDir= glm::vec3(1.0,10.0,1.0);
+        glm::vec3 l_LightIntensity = glm::vec3(0.50,0.50,0.50);
+        int modeLight =0;
+        
     public:
-        glimac::Program lightProgram;
         //constructor 
         Light(const Light&) = default;
-        Light(glm::vec3 Kd, glm::vec3 Ks, float Shininess, glm::vec3 LightDir, glm::vec3 LightIntensity);
-        //To move the cube in the space
-        void moveLeft(float delta);
-        void moveUp(float delta);
-        void moveDepth(float delta);
+        Light() {};
+        const int &getmodeLight();
+        void changemodeLight();
         //Apply light on the elements of the scene
-        void lightInitUniVariable(glimac::Program m_Program);
-        void lightApplication(glm::mat4 ViewMatrix);
-        ~Light();
+        void lightInitUniVariable(glimac::Program &m_Program, glm::mat4 ViewMatrix);
+        ~Light() {} ;
 
 };
